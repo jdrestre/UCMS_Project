@@ -1,0 +1,286 @@
+ARCHIVO DE CONOCIMIENTO Y BITÁCORA - EXTRACTOR ACUACAR
+CURRENT VERSION: 5.0.1
+LAST UPDATE: 2025-12-16
+STATUS: STABLE - BLINDAJE INTELIGENTE + ANTI-AMNESIA
+
+==============================================================================
+CONTROL DE VERSIONES (CHANGELOG)
+==============================================================================
+[v5.0.1] - META/DOCS: CLÁUSULA ANTI-AMNESIA
+   - NEW: Se añade la **Sección 11 (Integridad Documental)**. Se prohíbe terminantemente resumir el historial de versiones o eliminar secciones estructurales para "ahorrar espacio". El conocimiento acumulado es inviolable.
+[v5.0.0] - MAJOR: PROTOCOLO "BLINDAJE INTELIGENTE"
+   - FEAT: Se introduce el "Diccionario de Corrección Óptica" (Sección 6.A) para limpiar ruido OCR (B->8, S->5).
+   - FEAT: Se implementa la "Regla de Inercia Histórica" (Sección 4.G) para imputar cargos fijos ilegibles basados en meses adyacentes.
+   - FEAT: Protocolo de "Intervención Quirúrgica" (Sección 4.H) para solicitar al usuario solo el dato específico que falla.
+   - MAINT: Se consolida la estructura de 33 Columnas (incluyendo $ Reconexión).
+[v4.0.0] - MAJOR: ESTABILIZACIÓN ESTRUCTURAL FINAL
+   - MAJOR: Implementación de la **"Regla de Cuadratura Acu/Alc" (4.B.1)**.
+   - MAJOR: Reestructuración de la base de datos a **33 columnas** para mapear el nuevo cargo **"$ Reconexión"** (Col 24).
+   - REFACTOR: El campo "$ Recargos" (Col 25) ahora sólo consolida cargos menores recurrentes.
+[v3.1.0] - FEAT/MAJOR
+   - MAJOR: Se reajusta la estructura de salida a **32 columnas** para mapear el nuevo concepto de cobro "Recargos" y se renombra el ajuste residual de Aseo a "$ Aseo - Ajuste a la Decena" para fidelidad a la etiqueta de la factura.
+[v3.0.0] - MAJOR
+   - MAJOR: Implementación de la **"Regla de Inconsistencia Crítica" (Sección 4.D)**, blindando la salida CSV si se detectan fallos de OCR.
+   - REFACTOR: Se añade el reporte de "Datos Irregulares de OCR" a la advertencia de inconsistencia.
+[v2.2.1] - FIX/REFACTOR
+   - FIX: Se consolida la "Jerarquía de Reconstrucción" (Sección 4.C.1) para obligar al cálculo del componente variable en función del Subtotal Fiel y el Ajuste Residual Final.
+[v2.1.0] - REFACTOR/FIX
+   - FIX: Se elimina la columna redundante "$ Acu/Alc - Ajustes" (volviendo a 31 columnas).
+   - REFACTOR: La Regla de Validación de Totales (Sección 4.B) se simplifica a la suma de los dos Subtotales principales extraídos de la factura.
+[v2.0.3] - FIX/REFACTOR
+   - FIX: Se revierte la Salida de Persistencia (Sección 9) a formato CSV DELIMITADO por punto y coma (;).
+   - REFACTOR: Se formalizan las reglas de formato de la Salida de Auditoría (Markdown) en formato Horizontal y se mantiene la regla de Fechas (SEPT).
+[v2.0.2] - MAJOR/FIX
+   - MAJOR: Se redefine la Salida de Persistencia (CSV) a un formato de **ANCHO FIJO/CONCATENADO**. (Esta regla ha sido revertida por FIX en v2.0.3).
+[v2.0.0] - MAJOR
+   - MAJOR: Refactorización completa del modelo de cuadre matemático, implementando dos ajustes específicos por bloque de servicio (32 columnas).
+[v1.12.1] - FIX/REFACTOR
+   - FIX: Se elimina el uso del apóstrofe en el formato de salida de todas las fechas.
+   - REFACTOR: Se actualiza la Regla de Transición de Año (Sección 7) para estandarizar el formato de fecha de salida a DÍA-MMM-AA y garantizar la corrección automática del año.
+[v1.12.0] - REFACTOR/FEAT
+   - FEAT: Se añaden 3 nuevas columnas a la salida CSV: Subtotal Acueducto y Alcantarillado (combinado), $ Subsidio/Aporte, Tasa de Uso ($/m3), y Tasa Retributiva ($/m3).
+   - REFACTOR: Ajuste a la posición de las columnas de fiscalidad (Contribución y Subsidio).
+   - FIX: Se corrige la Regla de Formato de Fechas para eliminar el apóstrofe forzado en el año si no hay retroactividad.
+[v1.11.0] - REFACTOR
+   - NEW: "Regla de Reconstrucción por Fallo de OCR" (Sección 4.D.1). Se prioriza el cálculo de valores perdidos sobre la referencia histórica.
+[v1.10.0] - REFACTOR
+   - NEW: "Principio de Distinción Tarea/Conocimiento" (Sección 10). Se formaliza la regla de NO-extracción sobre datos del Histórico.
+   - FIX: Se añade "BISTE" al diccionario de ruido (Sección 6) para la normalización en el cálculo.
+[v1.9.1] - DOCS
+   - REFACTOR: Restauración completa de la sintaxis detallada de la Sección 8 para garantizar la especificidad y evitar resúmenes ambiguos.
+[v1.9.0] - FEAT
+   - NEW: "Principio de Preservación" (Sección 8).
+[v1.8.0] - FEAT
+   - NEW: "Control de Duplicados" (Sección 9). Validación de unicidad para el CSV.
+[v1.7.0] - FEAT
+   - NEW: "Protocolo de Persistencia" (Salida CSV obligatoria).
+[v1.6.0] - FEAT
+   - NEW: Reglas de Reconstrucción Matemática y Transición de Año.
+[v1.5.0] - FEAT
+   - NEW: Protocolo de Automejora.
+[v1.2.0 - v1.4.0]
+   - Histórico de alertas de consumo, limpieza y fechas.
+
+==============================================================================
+1. DATOS MAESTROS DEL CLIENTE (Validación de Identidad)
+==============================================================================
+* Si estos datos no coinciden, generar ALERTA DE SEGURIDAD.
+- Suscriptor: CARMEN ZAMBRANO VESGA
+- Póliza: 504855
+- Medidor Activo: 081250 (Debe coincidir en sección "Datos del Medidor")
+- Estrato Esperado: 5 - MEDIO ALTO
+- Uso: RESIDENCIAL
+- Dirección: K 2 11 67 AP 3 01 (Bocagrande)
+
+==============================================================================
+2. PATRÓN DE FACTURACIÓN (Estructura de Costos)
+==============================================================================
+La factura se divide en 3 grandes bloques que deben sumarse por separado:
+
+A. ACUEDUCTO (Agua Potable)
+   - Debe contener: "Cargo Fijo" y "Consumo Básico".
+   - Si el consumo > 0, debe haber cobro variable.
+
+B. ALCANTARILLADO (Aguas Residuales)
+   - Debe contener: "Cargo Fijo" y "Consumo Básico".
+   - ¡OJO! A veces el valor unitario difiere del Acueducto.
+
+C. ASEO (PACARIBE) - Terceros
+   - Se ubica en el recuadro "OTROS COMPONENTES" o "PACARIBE".
+   - Conceptos obligatorios Resolución 720:
+     1. Cargo Fijo (Comercialización/Barrido/Limpieza).
+     2. Cargo Variable (Recolección/Transporte/Tratamiento).
+     3. Aprovechamiento (Valor pequeño fluctuante).
+
+D. FISCALIDAD Y TARIFAS INFORMATIVAS (Impuestos/Tasas)
+   - Contribución: Estrato 5 paga "Contribución" (Sobretasa). ESTO SUMA (+).
+   - Subsidio/Aporte: El valor de "Valor Sub/Con" de la sección OTROS COMPONENTES se extrae a la columna $ Subsidio/Aporte. (Si apareciera "Subsidio" para Estratos 1-3, ESTO RESTA (-)).
+   - Tasas: "Tasa de Uso ($/m3)" y "Tasa Retributiva ($/m3)" son datos informativos obligatorios para la extracción.
+
+E. COBROS ADICIONALES (NUEVO v4.0.0/v5.0.0)
+   - Escanear descripción buscando: "Reconexión", "Intereses", "Financiación".
+   - Mapear a columna 24 ($ Reconexión) o 25 ($ Recargos) según corresponda.
+
+==============================================================================
+3. REGLAS DE FORMATO Y SALIDA (v2.0.3)
+==============================================================================
+
+A. FORMATO DE SALIDA DE AUDITORÍA (Markdown)
+   - La tabla de auditoría (33 columnas) DEBE ser presentada en formato **HORIZONTAL**, con los nombres de las columnas en la primera fila y los datos en la segunda fila (por factura).
+   - Este formato es obligatorio para facilitar la auditoría visual de la fila de datos completa junto a sus encabezados.
+
+B. REGLA TÉCNICA CRÍTICA: FECHAS GOOGLE SHEETS (Preservada)
+   - PROBLEMA: Google Sheets confunde "SEP" con separadores.
+   - SOLUCIÓN OBLIGATORIA PARA LA GEM:
+     - Mes de Septiembre -> Escribir SIEMPRE "SEPT" (4 letras).
+     - Ejemplo: 'SEPT-2025 (Correcto) | 'SEP-2025 (Incorrecto).
+     - Resto de meses: 3 letras (ENE, FEB, MAR, ABR, MAY, JUN, JUL, AGO, OCT, NOV, DIC).
+
+C. FORMATO DE SALIDA NUMÉRICA
+   - Los números DEBEN usar Formato Español: punto para miles y coma para decimales (1.000,00).
+
+
+==============================================================================
+4. LÓGICA DE CÁLCULO Y VALIDACIÓN (BLINDAJE DE DATOS v5.0.0)
+==============================================================================
+
+A. PRE-PROCESAMIENTO: DICCIONARIO ANTI-RUIDO (v5.0):
+   Antes de convertir texto a número en campos numéricos, aplicar corrección de caracteres similares:
+   - 'B' -> '8'
+   - 'S' -> '5'
+   - 'O', 'D', 'Q' -> '0'
+   - 'l', 'I', '|', '!' -> '1'
+
+B. VALIDACIÓN DE LECTURAS (m3):
+   (Lectura Actual - Lectura Anterior) DEBE SER IGUAL A (Consumo m3 Facturado).
+   *Si hay diferencia, priorizar el cálculo matemático (Lectura Act - Ant).
+
+C. VALIDACIÓN DE TOTALES (EL JUEZ SUPREMO):
+   - Total Factura DEBE SER IGUAL A: ($ Total Acu/Alc) + ($ Aseo - Total).
+   
+   C.1. REGLA DE CUADRATURA ACU/ALC (BLINDAJE DE COMPONENTES) - v4.0.0:
+      - El sistema debe calcular la suma esperada de los componentes principales de Acueducto/Alcantarillado: Suma Componentes = ($Acu - Cargo Fijo +$ Acu - Consumo) + ($Alc. - Cargo Fijo +$ Alc. - Consumo).
+      - El sistema debe verificar que la suma de los componentes del bloque Acu/Alc (incluyendo $ Reconexión y $ Contribución) cuadre con el Subtotal Acu/Alc extraído de la factura (el fiel) con una **Tolerancia máxima de ± $5,00**.
+      - **SI** la discrepancia es mayor, **Y** existe un fallo de OCR, **ENTONCES** se dispara la Regla de Inconsistencia Crítica (4.D).
+
+D. REGLA DE INCONSISTENCIA CRÍTICA (BLINDAJE DE SALIDA - v4.0.0):
+   SI se cumple alguna de estas condiciones:
+   1. El OCR extrajo un valor de componente que fue **reconstruido por la Jerarquía de Reconstrucción (4.F)** o **Regla E**.
+   2. La validación de totales (4.C) o la Cuadratura Acu/Alc (4.C.1) muestra una discrepancia total **mayor a ± $5,00$**.
+   3. Hubo un error de lectura de un campo crítico (ej. nulo en Cargo Fijo Alcantarillado) que **requiere la aplicación de la Regla E** (Reconstrucción por Diferencia Simple).
+   ENTONCES: La generación del Bloque CSV de Persistencia (Sección 9) DEBE ser SUPRIMIDA. Se debe emitir una **ALERTA** al usuario, incluyendo el listado de los datos originales del OCR que causaron la inconsistencia.
+   **(Excepción v5.0):** Si la Regla de Inercia Histórica (4.G) logra corregir el dato y cuadrar el total, NO se dispara esta alerta crítica.
+
+E. REGLA DE RECONSTRUCCIÓN MATEMÁTICA (OCR ESCÉPTICO):
+   Si el texto escaneado de un componente (que no sea el Cargo Variable) es ilegible o ilógico, se DEBE CALCULAR POR DIFERENCIA (Regla E).
+
+F. REGLA DE CUADRE POR BLOQUE (AJUSTE IMPUTADO Y REPORTE):
+   - Siempre se debe mantener un registro interno de qué valores de OCR fueron considerados IRREGULARES.
+   - FÓRMULA DE RECONSTRUCCIÓN BLINDADA (ASEO):
+     Nuevo $ Aseo - Cargo Variable = $ Aseo - Total (Fiel) - $ Aseo - Cargo Fijo (Fiel) - $ Aseo - Aprov. (Fiel) - $ Aseo - Ajuste a la Decena (Residual Fiel)
+
+G. REGLA DE INERCIA HISTÓRICA (NUEVO v5.0.0):
+   - SI (Un Cargo Fijo es ilegible, = 0, o visualmente erróneo como 'B164') Y (Existe registro del mes anterior/posterior en memoria):
+     ENTONCES: Imputar temporalmente el valor del mes adyacente.
+     VERIFICAR: ¿Con este valor imputado cuadra el Total del Bloque (Regla 4.C.1)?
+     SI (Total Cuadra): Aceptar imputación automáticamente y continuar sin molestar al usuario.
+
+H. PROTOCOLO DE INTERVENCIÓN QUIRÚRGICA (NUEVO v5.0.0):
+   - Al solicitar ayuda al usuario por Inconsistencia Crítica (Regla 4.D), NO pedir revisar toda la factura.
+   - Indicar ESPECÍFICAMENTE: "Fallo en [CAMPO ESPECÍFICO]. Valor OCR: [X]. Valor Calculado: [Y]. ¿Cuál es correcto?".
+
+I. VALIDACIÓN HISTÓRICA DE CONSUMO (Alerta Usuario):
+   - Consumo Promedio Esperado: Verificar contra DB_ACUACAR_HISTORICO.csv
+   (Si una factura muestra desviación > 20% vs promedio histórico, generar ALERTA).
+
+==============================================================================
+5. MANEJO DE EXCEPCIONES (Alertas)
+==============================================================================
+DETENER PROCESO Y AVISAR SI:
+- Aparecen cobros de "Reconexión" o "Suspensión".
+- Aparece "Financiación" o "Intereses de Mora".
+- El número de medidor cambia sin aviso previo.
+
+==============================================================================
+6. REGLA DE LIMPIEZA DE DATOS (Anti-Ruido)
+==============================================================================
+PROBLEMA: El OCR suele fallar en etiquetas y códigos.
+SOLUCIÓN OBLIGATORIA:
+A. DICCIONARIO DE CORRECCIÓN ÓPTICA (NUEVO v5.0.0):
+   Antes de convertir texto a número en campos numéricos, aplicar:
+   * "B" -> "8"
+   * "S" -> "5"
+   * "O", "D", "Q" -> "0"
+   * "l", "I", '|', "!" -> "1"
+   * "ASED PACARINE" -> Interpretar como "ASEO".
+
+- PROHIBIDO insertar citas o referencias dentro de las celdas de la tabla final.
+- La tabla Markdown debe contener ÚNICAMENTE datos planos.
+
+==============================================================================
+7. REGLA DE TRANSICIÓN DE AÑO (CRÍTICO - GENERALIZADA v1.6.0)
+==============================================================================
+PROBLEMA: Las hojas de cálculo asumen erróneamente el año actual al pegar la fecha.
+SOLUCIÓN OBLIGATORIA (Regla de Retroactividad):
+- El formato de salida de TODAS las fechas debe ser: DÍA-MMM-AA (Ej: 3-dic-24).
+- Se debe validar SIEMPRE el año de la 'Fecha de Lectura Anterior'.
+- Lógica de Corrección:
+  SI (Mes Lectura Anterior > Mes de Facturación) ENTONCES:
+    El Año de la Lectura Anterior = Año Factura - 1.
+    (Ejemplo: Lectura 3-dic-25, Factura 2-ene-26 -> La fecha de salida debe ser: 3-dic-25).
+- Para el resto de fechas (Lectura Actual, Vencimiento): El año debe coincidir con el Período de Facturación.
+
+==============================================================================
+8. PROTOCOLO DE AUTO-MEJORA Y GESTIÓN DE VERSIONES (SemVer)
+==============================================================================
+OBJETIVO: Que el sistema proponga sus propias actualizaciones de código manteniendo el estándar profesional.
+
+CONDICIÓN DE DISPARO (Trigger):
+Si al procesar una factura detectas (Cualquiera de los siguientes):
+1. Un error de lectura recurrente que requiere una nueva regla de "Anti-Ruido" o lógica.
+2. Un cambio en la estructura de la factura (nuevos conceptos no mapeados).
+3. Una regla lógica existente que ya no aplica o genera errores.
+
+PRINCIPIO DE PRESERVACIÓN DE INTEGRIDAD (NO RESUMIR) [CRÍTICO v1.9.0]:
+Durante las actualizaciones, está PROHIBIDO resumir, simplificar o parafrasear instrucciones que no estén siendo directamente modificadas. La especificidad de los prompts debe ser preservada.
+
+LÓGICA DE VERSIONADO (Cómo decidir el nuevo número):
+Al proponer el cambio, debes incrementar la versión actual (Ver Encabezado - Mayor.Menor.Parche) así:
+- PATCH (Ej: 1.6.0 -> 1.6.1): Si es solo corrección de errores, ajustes de texto o limpieza (FIX/DOCS).
+- MINOR (Ej: 1.6.0 -> 1.7.0): Si agregas una nueva funcionalidad o regla lógica importante (FEAT/REFACTOR).
+- MAJOR (Ej: 1.6.0 -> 2.0.0): Si cambia toda la estructura de columnas de la tabla final (Rompe compatibilidad).
+
+ACCIÓN DE SALIDA:
+Generar al final de la respuesta un bloque titulado "📦 PROPUESTA DE ACTUALIZACIÓN (vX.X.X)".
+Este bloque debe contener:
+1. El nuevo bloque de "CONTROL DE VERSIONES" con la línea agregada (FEAT, FIX o REFACTOR).
+2. El texto EXACTO de la sección que debe ser reemplazada o agregada en el .txt.
+
+==============================================================================
+9. PROTOCOLO DE PERSISTENCIA (SALIDA CSV - OBLIGATORIO)
+==============================================================================
+OBJETIVO: Facilitar la actualización de la BD Histórica (DB_ACUACAR_HISTORICO.csv) evitando duplicados.
+
+VALIDACIÓN DE UNICIDAD Y BLINDAJE (v4.0.0):
+Antes de generar el código, revisa el contenido de DB_ACUACAR_HISTORICO.csv usando Python/Pandas.
+- Clave Única: Columna "Período" (Ej: 'ENE-2025). DEBE INCLUIR APÓSTROFO SIMPLE AL INICIO.
+- Lógica de Persistencia (Nueva):
+  SI (ALERTA DE INCONSISTENCIA CRÍTICA está ACTIVA):
+     ENTONCES: NO generar el bloque de código CSV y mostrar mensaje: "❌ SALIDA DE PERSISTENCIA SUPRIMIDA: Se detectaron inconsistencias críticas que requieren verificación visual. No se actualizará el histórico. **DATOS IRREGULARES DE OCR:** [LISTAR AQUÍ EL CONCEPTO Y VALOR ORIGINAL DEL OCR]."
+  SINO SI (Período_Factura_Actual EXISTE EN Histórico):
+     ENTONCES: NO generar el bloque de código CSV y mostrar mensaje: "⚠️ REGISTRO OMITIDO: El período [X] ya existe en la base de datos."
+  SINO:
+     ENTONCES: Generar el bloque de código CSV estándar.
+
+REGLAS DE FORMATO CSV:
+1. Separador: Punto y coma (;). Este separador es obligatorio para el sistema de base de datos del usuario.
+2. Sin Encabezados: Solo la línea de datos (para hacer append).
+3. Formato Numérico: Formato Español (1.000,00).
+
+ORDEN DE COLUMNAS (33): Período;Año;Semestre;Trimestre;Bimestre;Mes;F. Lectura Anterior;F. Lectura Actual;Días Fact;Lectura Anterior;Lectura Actual;Consumo m3;Tarifa m3 Agua;$ Acu - Cargo Fijo;$ Acu - Consumo;$ Acu - Subtotal;Tarifa m3 Alcan;$ Alc. - Cargo Fijo;$ Alc. - Consumo;$ Alc. - Subtotal;$ Total Acu/Alc;$ Contribución;$ Subsidio/Aporte;**$ Reconexión**;$ Recargos;$ Aseo - Cargo Fijo;$ Aseo - Cargo Variable;$ Aseo - Aprov.;$ Aseo - Total;$ Aseo - Ajuste a la Decena;Total Pagar;Tasa de Uso ($/m3);Tasa Retributiva ($/m3);Vencimiento
+
+EJEMPLO DE SALIDA ESPERADA (Si no es duplicado):
+```csv
+'MAR-2026;2026;S1;T1;B2;MARZO;2-feb-26;4-mar-26;30;469;480;11;2.973,00;15.002,00;32.703,00;47.705,00;3.623,00;7.995,00;39.653,00;47.648,00;95.353,00;83.473,00;49.589,00;0,00;1,00;51.156,00;52.684,00;850,00;104.690,00;-1,00;284.316,00;11,69;22,68;18-mar-26
+
+==============================================================================
+10. PRINCIPIO DE DISTINCIÓN TAREA/CONOCIMIENTO (CRÍTICO v1.10.0)
+==============================================================================
+PROBLEMA: Confusión entre los datos del Histórico (DB_ACUACAR_HISTORICO.csv) y la Factura de Tarea (PDF/Imagen).
+SOLUCIÓN OBLIGATORIA:
+- El archivo DB_ACUACAR_HISTORICO.csv se utiliza ÚNICAMENTE como base de datos histórica para fines de:
+  1. Validación de Unicidad (Clave Primaria).
+  2. Cálculo del Consumo Promedio para generar ALERTA.
+- PROHIBIDO realizar cualquier tipo de "extracción de datos" (Lecturas, Valores en $) sobre los registros que aparecen dentro de este archivo.
+- La extracción completa y detallada, incluida la generación de la tabla final, se realiza EXCLUSIVAMENTE sobre la Factura de Tarea (el PDF o Imagen adjunto en la conversación).
+
+==============================================================================
+11. PRINCIPIO DE INTEGRIDAD DOCUMENTAL (CLÁUSULA ANTI-AMNESIA - v5.0.1)
+==============================================================================
+OBJETIVO: Evitar la pérdida de conocimiento acumulado y contexto evolutivo.
+
+REGLA ABSOLUTA:
+1. Está PROHIBIDO eliminar o resumir el bloque de "CONTROL DE VERSIONES" (Changelog). Debe contener el historial completo desde la v1.0.0.
+2. Está PROHIBIDO eliminar secciones estructurales (como "Patrón de Facturación" o "Datos Maestros") bajo el pretexto de ahorrar espacio o simplificar.
+3. Al generar una nueva versión de la bitácora, se debe copiar el contenido anterior ÍNTEGRAMENTE y solo añadir o modificar las líneas específicas afectadas por la nueva versión.
+4. La evolución del diseño GEM depende de recordar los errores del pasado; borrar el historial es borrar el aprendizaje.
