@@ -1,9 +1,21 @@
 # ESTÁNDAR DE SALIDA UNIVERSAL (UCMS)
-**Versión:** 2.1.1 (Arquitectura Core + Vertical + Total Condicional)
+**Versión:** 2.1.3 (Soporte Regional COL + Blindaje de Datos)
 **Estado:** VIGENTE
-**Fecha:** 28-Dic-2025
+**Fecha:** 29-Dic-2025
 
 Todas las GEMs Spokes deben generar su extracción en DOS BLOQUES vinculados por el `ID_Unico`.
+
+---
+
+### REGLAS DE FORMATO TRANSVERSALES (v2.1.3)
+1. **Números (Localización COL):**
+   - **Separador Decimal:** Siempre COMA (`,`).
+   - **Separador de Miles:** PROHIBIDO (No usar ni punto ni espacio).
+   - *Ejemplo:* `1250600,50`
+2. **Periodo (Protección de Celda):**
+   - **Formato:** `'` + 3 Letras Mes (MAY) + `-` + Año (AAAA).
+   - *Ejemplo:* `'ENE-2025`
+3. **IDs Únicos:** Deben iniciar con apóstrofe si se pegan en hojas de cálculo para mantener la integridad de la cadena.
 
 ---
 
@@ -13,38 +25,31 @@ Todas las GEMs Spokes deben generar su extracción en DOS BLOQUES vinculados por
 
 | # | ID Columna | Descripción |
 |:---|:---|:---|
-| 1 | **ID_Unico** | `PERIODO` + `_` + `PROVEEDOR` + `_` + `CONTRATO` [+ `_SERVICIO` si aplica] |
-| 2 | **Periodo** | `'` + 3 letras Mes (MAY) + Año. Septiembre es `'SEPT`. (Ej: `'OCT2025`) |
+| 1 | **ID_Unico** | `'` + `PERIODO` + `_` + `PROVEEDOR` + `_` + `CONTRATO` [+ `_SERVICIO`] |
+| 2 | **Periodo** | `'MMM-AAAA` (Ej: `'OCT-2025`) |
 | 3 | **Año** | AAAA (Ej: `2025`) |
 | 4 | **Mes** | Nombre completo (Ej: `Octubre`) |
 | 5 | **Ciudad** | (Ej: `Cartagena`, `Medellín`) |
-| 6 | **Servicio** | `Energía`, `Gas`, `Agua`, `Telecomunicaciones`, `Aseo`, `TOTAL_FACTURA` |
-| 7 | **Proveedor** | (Ej: `Afinia`, `EPM`, `Tigo`) |
+| 6 | **Servicio** | `Energía`, `Gas`, `Agua`, `Alcantarillado`, `Aseo`, `TOTAL_FACTURA` |
+| 7 | **Proveedor** | (Ej: `EPM`, `Tigo`, `Afinia`) |
 | 8 | **Contrato** | Número de suscriptor |
-| 9 | **Fecha_Inicio** | `dmmm` (Ej: `1oct`) |
-| 10 | **Fecha_Fin** | `dmmm` (Ej: `31oct`) |
+| 9 | **Fecha_Inicio** | `d-mmm` (Ej: `1-oct`) |
+| 10 | **Fecha_Fin** | `d-mmm` (Ej: `31-oct`) |
 | 11 | **Dias_Fact** | Número entero |
 | 12 | **Consumo_Cant** | Cantidad consumida o "1" (fijo) |
 | 13 | **Unidad_Medida**| `kWh`, `m3`, `Plan`, `GLOBAL` |
-| 14 | **Valor_Unitario**| Precio unidad o Valor Plan Base |
-| 15 | **Costo_Consumo** | `Consumo` * `Unitario` |
-| 16 | **Variables_Extra**| Otros cobros (Alumbrado, Netflix, Aseo) |
-| 17 | **Deducciones** | Valor POSITIVO de subsidios/descuentos |
-| 18 | **Total_Pagar** | Valor final |
+| 14 | **Valor_Unitario**| (Float con coma) Precio unidad o Valor Plan Base |
+| 15 | **Costo_Consumo** | (Float con coma) `Consumo` * `Unitario` |
+| 16 | **Variables_Extra**| (Float con coma) Otros cobros (Alumbrado, Netflix) |
+| 17 | **Deducciones** | (Float con coma) Valor POSITIVO de subsidios o negativo para ajustes |
+| 18 | **Total_Pagar** | (Float con coma) Valor final |
 | 19 | **Estado_Pago** | `Al día`, `En Mora`, `Pendiente` |
-| 20 | **Fecha_Limite** | `dmmm` (Vencimiento) |
+| 20 | **Fecha_Limite** | `d-mmm-aaaa` (Vencimiento) |
 | 21 | **Lectura_Plan** | Lectura medidor o Velocidad Plan |
 | 22 | **Alertas_Novedades**| Inteligencia Predictiva o "Normal" |
-
-**Regla de la Fila Total:**
-* **Facturas Multi-Servicio (EPM):** OBLIGATORIO generar una fila final con sufijo `_TOTAL` y servicio `TOTAL_FACTURA`.
-* **Facturas Mono-Servicio (Tigo/Gas):** NO generar fila total (es redundante).
 
 ---
 
 ### BLOQUE B: EXTENSIÓN TÉCNICA (VERTICAL)
-**Destino:** Hojas Específicas (`EXT_EPM`, `EXT_TIGO`, etc.)
-**Objetivo:** Datos profundos que no caben en el Core.
-
-* **Requisito:** Debe incluir siempre la columna `ID_Unico` para cruzar con el Bloque A.
-* **Contenido:** Libre según la necesidad de la Spoke (Ej: Estrato, Factores de corrección, Detalle de Apps).
+**Destino:** Hojas de detalle específicas (ej: `EXT_EPM`).
+**Regla:** El `ID_Unico` debe coincidir exactamente con el del Bloque A. Los formatos numéricos siguen la regla de la coma decimal.
