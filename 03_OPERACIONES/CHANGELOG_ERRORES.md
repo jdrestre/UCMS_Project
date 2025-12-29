@@ -12,3 +12,4 @@
 2025-12-28,Surtigas,v2.1.0,Feat,Migración a Arquitectura Core + Vertical.
 2025-12-28,Acuacar,v2.1.0,Feat,Migración a Arquitectura Core + Vertical.
 2025-12-28,Sistema,v2.1.0,Milestone,Hito de Migración Completa: 100% de GEMs operando en Arquitectura Relacional.
+Fecha: 2025-12-28 | GEM: EPM | Versión: v2.1.2 | Tipo: Fix | Cambio: Estandarización de Periodo con apóstrofe forzado ('MES-AAAA) y valores numéricos en formato Float puro (sin separadores de miles) para compatibilidad universal.
