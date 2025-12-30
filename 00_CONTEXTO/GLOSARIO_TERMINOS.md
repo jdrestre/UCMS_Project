@@ -26,11 +26,11 @@
 │   └── `OUTPUT_UNIVERSAL.md`        # [LEY SUPREMA] Definición de columnas y reglas de formato.
 │
 ├── **02_SPOKES_PROMPTS/** # "Cerebros" autónomos de los Agentes.
-│   ├── `PROMPT_EPM.md`              # Spoke Multiservicio (Estable v2.3.0).
+│   ├── `PROMPT_EPM.md`              # Spoke Multiservicio (Estable v2.3.2).
 │   ├── `PROMPT_TIGO.md`             # Spoke Telecom (Pendiente actualización).
 │   ├── `PROMPT_AFINIA.md`           # Spoke Energía (Pendiente actualización).
-│   ├── `PROMPT_SURTIGAS.md`
-│   └── `PROMPT_ACUACAR.md`         # Spoke Gas (Pendiente actualización).
+│   ├── `PROMPT_SURTIGAS.md`         # Spoke Gas (Pendiente actualización).
+│   └── `PROMPT_ACUACAR.md`          # Spoke Agua (Pendiente actualización).
 │
 ├── **03_OPERACIONES/**
 │   ├── `CHANGELOG_ERRORES.md`       # Bitácora de cambios y fixes.
@@ -56,7 +56,7 @@ Manejo agnóstico del estrato socioeconómico en la columna `Valor_Subsidio`.
 
 #### C. Fila Total Condicional
 * **Multiservicio (EPM):** Obligatorio generar una fila `_TOTAL` que consolide la factura.
-* **Monoservicio (Tigo):** Prohibido generar fila total (el servicio es el total en sí mismo).
+* **Monoservicio (Tigo/Afinia):** Prohibido generar fila total (el servicio es el total en sí mismo).
 
 #### D. Autonomía del Prompt
 Principio de diseño donde cada archivo `PROMPT_[SPOKE].md` contiene *todas* las reglas necesarias para la extracción (mapeos, fórmulas), sin depender del conocimiento base del modelo de IA ni de instrucciones externas.

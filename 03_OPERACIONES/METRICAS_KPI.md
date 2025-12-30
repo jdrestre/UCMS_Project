@@ -16,7 +16,7 @@
 ---
 
 ### 2. KPIs SPOKE EPM (MULTI-SERVICIOS)
-*Basados en la extracción profunda de componentes (v2.3.0).*
+*Basados en la extracción profunda de componentes (v2.3.0+).*
 
 #### A. Energía y Gas (Eficiencia Tarifaria)
 * **Costo Unitario Real ($CU_{real}$):**

@@ -41,7 +41,7 @@ Estado actual de los módulos de extracción:
 
 | Agente (Spoke) | Proveedor | Versión | Estado | Capacidades |
 | :--- | :--- | :--- | :--- | :--- |
-| **EPM** | Multiservicios | **v2.3.0** | 🟢 **Estable** | Soporte Estrato 6, Mapeo de Gas, JSON Regulatorio. |
+| **EPM** | Multiservicios | **v2.3.2** | 🟢 **Estable** | Soporte Estrato 6, Mapeo de Gas, Regla SEPT. |
 | **Tigo** | Telecom | v2.1.0 | 🟠 *Legacy* | Pendiente actualización a estándar v2.3. |
 | **Afinia** | Energía (Costa) | v2.1.0 | 🟠 *Legacy* | Pendiente actualización a estándar v2.3. |
 | **Surtigas** | Gas (Costa) | v2.1.0 | 🟠 *Legacy* | Pendiente actualización a estándar v2.3. |

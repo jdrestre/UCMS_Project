@@ -14,7 +14,7 @@ Todas las GEMs Spokes deben generar su extracción en DOS BLOQUES vinculados por
    - *Ejemplo:* `15400,50`
 2. **Periodo (Protección de Celda):**
    - **Formato:** `'` + 3 Letras Mes (MAY) + `-` + Año (AAAA).
-   - *Ejemplo:* `'ENE-2025`
+   - *Ejemplo:* `'ENE-2025`. (Excepción Septiembre: `'SEPT-2025`).
 3. **IDs Únicos:**
    - Deben iniciar con apóstrofe (`'`) para asegurar integridad de texto en CSV.
 
@@ -35,14 +35,14 @@ Todas las GEMs Spokes deben generar su extracción en DOS BLOQUES vinculados por
 | 6 | **Servicio** | Valores permitidos: `Energía`, `Gas`, `Agua`, `Alcantarillado`, `Aseo`, `Alumbrado`, `TOTAL_FACTURA` |
 | 7 | **Proveedor** | Empresa prestadora (Ej: `EPM`, `Tigo`, `Afinia`) |
 | 8 | **Contrato** | Número de contrato o suscriptor principal |
-| 9 | **Fecha_Inicio** | Fecha inicio periodo facturado (Texto) |
-| 10 | **Fecha_Fin** | Fecha fin periodo facturado (Texto) |
-| 11 | **Dias_Fact** | Número entero de días facturados |
+| 9 | **Fecha_Inicio** | Fecha inicio periodo facturado (Texto con Año) |
+| 10 | **Fecha_Fin** | Fecha fin periodo facturado (Texto con Año) |
+| 11 | **Dias_Fact** | Entero |
 | 12 | **Consumo_Cant** | Cantidad numérica consumida. Si es cargo fijo único, poner `1` |
 | 13 | **Unidad_Medida**| `kWh`, `m3`, `Plan`, `GLOBAL` |
 | 14 | **Valor_Unitario**| (Float con coma) Precio por unidad o Valor Plan Base |
 | 15 | **Costo_Consumo** | (Float con coma) Resultado de `Consumo` * `Unitario` |
-| 16 | **Variables_Extra**| (Float con coma) Suma de otros cobros menores (Tasas, Impuestos menores) |
+| 16 | **Variables_Extra**| (Float con coma) Suma de otros cobros menores (Tasas, Impuestos menores, Cargo Fijo) |
 | 17 | **Deducciones** | (Float con coma) Ajustes al peso o descuentos |
 | 18 | **Total_Pagar** | (Float con coma) Valor final neto a pagar por el servicio |
 | 19 | **Estado_Pago** | `Al día`, `En Mora`, `Pendiente` |
