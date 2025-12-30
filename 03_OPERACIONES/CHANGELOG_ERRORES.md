@@ -15,3 +15,4 @@
 | 2025-12-28 | Global | v2.1.3 | Fix | Estandarización regional COL: Coma decimal (,) y punto de miles prohibido. Blindaje de Periodo con apóstrofe. |
 | 2025-12-29 | Global | v2.2.0 | Major | Implementación del "Triángulo de Seguridad" en Bloque B. Desglose detallado de componentes de costo en columnas y uso de JSON para future-proofing. |
 | 2025-12-30 | EPM | v2.3.0 | Fix | Reingeniería de Prompt: Soporte para Contribuciones (Estrato 6) y Mapeo explícito de componentes de Gas. Eliminación de saludos. |
+| 2025-12-30 | EPM | v2.3.1 | Fix | Corrección de mapeo de fechas (Año heredado) y separación explícita de Cargo Fijo. Inclusión de Alertas en fila Total. |
