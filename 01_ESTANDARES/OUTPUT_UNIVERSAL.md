@@ -1,5 +1,5 @@
 # ESTÁNDAR DE SALIDA UNIVERSAL (UCMS)
-**Versión:** 2.1.3 (Soporte Regional COL + Blindaje de Datos)
+**Versión:** 2.2.0 (Triángulo de Seguridad + Desglose de Costos)
 **Estado:** VIGENTE
 **Fecha:** 29-Dic-2025
 
@@ -53,3 +53,19 @@ Todas las GEMs Spokes deben generar su extracción en DOS BLOQUES vinculados por
 ### BLOQUE B: EXTENSIÓN TÉCNICA (VERTICAL)
 **Destino:** Hojas de detalle específicas (ej: `EXT_EPM`).
 **Regla:** El `ID_Unico` debe coincidir exactamente con el del Bloque A. Los formatos numéricos siguen la regla de la coma decimal.
+**Estrategia:** "Triángulo de Seguridad".
+
+**1. HARD FIELDS (Auditoría Física):**
+Datos inmutables que validan la legalidad del cobro.
+* `Medidor_Serial`, `Lectura_Anterior`, `Lectura_Actual`, `Factor_Tecnico`.
+
+**2. STRUCTURED FIELDS (Estructura Tarifaria):**
+Desglose del Costo Unitario en columnas explícitas para análisis de variación.
+* Energía/Gas: `Comp_Generacion`, `Comp_Transmision`, `Comp_Distribucion`, `Comp_Comercializacion`, `Comp_Perdidas`, `Comp_Restricciones`.
+* Agua: `Comp_Admin`, `Comp_Operacion`, `Comp_Tasas`.
+* Aseo: `Comp_Barrido`, `Comp_Recoleccion`, `Comp_Disposicion`.
+
+**3. FLEXIBLE FIELDS (Future-Proofing):**
+Datos en formato JSON para almacenamiento de textos regulatorios y calidad.
+* `Info_Calidad_Json`: DIU, FIU, Presión, Calidad Agua.
+* `Info_Regulatoria_Json`: Justificaciones de desviación, Normativas CREG/CRA citadas.

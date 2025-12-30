@@ -5,7 +5,12 @@
 ---
 
 ### 1. ARQUITECTURA DE DATOS
-(Mantiene lógica Core + Vertical de la v2.1.1)
+**(NUEVO) ESTRATEGIA DE BLINDAJE DE DATOS (Triángulo de Seguridad):**
+Para garantizar auditoría y evitar re-procesamientos (Future-Proofing), el Bloque B se estructura en 3 niveles:
+
+1.  **HARD FIELDS (Físicos):** Datos de la infraestructura física (Medidores, Lecturas). *Propósito:* Detectar cambios de equipos o errores de lectura humana.
+2.  **STRUCTURED FIELDS (Tarifarios):** Desglose explícito en columnas de los componentes del Costo Unitario (G, T, D, C, etc.). *Propósito:* Analizar variaciones de mercado.
+3.  **FLEXIBLE FIELDS (Regulatorios):** Campo JSON (`Info_Regulatoria_Json`) para capturar textos variables, justificaciones de desviaciones y notas legales que no caben en columnas fijas.
 
 ---
 
