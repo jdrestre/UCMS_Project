@@ -1,35 +1,46 @@
-# MANUAL DE OPERACIONES UCMS
-**Versión del Sistema:** v2.1.3
-**Fecha:** 29-Dic-2025
+# MANUAL DE OPERACIONES UCMS (Sistema de Gestión de Costos)
+**Versión del Sistema:** v2.3.0
+**Fecha:** 30-Dic-2025
+**Propósito:** Definir los protocolos de reacción, arquitectura de datos y mantenimiento.
 
 ---
 
-### 1. ARQUITECTURA DE DATOS
-**(NUEVO) ESTRATEGIA DE BLINDAJE DE DATOS (Triángulo de Seguridad):**
-Para garantizar auditoría y evitar re-procesamientos (Future-Proofing), el Bloque B se estructura en 3 niveles:
+### 1. ARQUITECTURA DE DATOS (MODELO CORE + VERTICAL)
 
-1.  **HARD FIELDS (Físicos):** Datos de la infraestructura física (Medidores, Lecturas). *Propósito:* Detectar cambios de equipos o errores de lectura humana.
-2.  **STRUCTURED FIELDS (Tarifarios):** Desglose explícito en columnas de los componentes del Costo Unitario (G, T, D, C, etc.). *Propósito:* Analizar variaciones de mercado.
-3.  **FLEXIBLE FIELDS (Regulatorios):** Campo JSON (`Info_Regulatoria_Json`) para capturar textos variables, justificaciones de desviaciones y notas legales que no caben en columnas fijas.
+**A. BLOQUE A (CORE - TABLA MAESTRA):**
+* **Objetivo:** Consolidación Financiera (22 Columnas).
+* **Regla de la Fila Total (CONDICIONAL):** Obligatoria para EPM (Multiservicio), prohibida para Tigo (Monoservicio).
+
+**B. BLOQUE B (VERTICAL - EXTENSIÓN TÉCNICA):**
+* **Objetivo:** Auditoría Técnica Profunda.
+* **Estrategia de Blindaje (Triángulo de Seguridad):**
+    1.  **Hard Fields:** Datos físicos inmutables (Medidores, Lecturas).
+    2.  **Structured Fields:** Desglose de tarifa.
+    3.  **Flexible Fields (JSON):** Notas y regulaciones.
+
+**(NUEVO v2.3) ESTRATEGIA DE SUBSIDIOS Y CONTRIBUCIONES:**
+El sistema debe ser agnóstico al estrato socioeconómico.
+* **Estratos 1, 2, 3:** Generan `Subsidios` (Valores negativos que restan a la factura).
+* **Estratos 5, 6:** Generan `Contribuciones` (Valores positivos que suman a la factura).
+* **Protocolo:** La columna `Valor_Subsidio` del Bloque B almacena el valor absoluto con su signo matemático correspondiente.
 
 ---
 
-### 2. PROTOCOLOS DE MANTENIMIENTO Y ACTUALIZACIÓN (v2.1.3)
+### 2. PROTOCOLOS DE MANTENIMIENTO Y ACTUALIZACIÓN
 
-#### A. PROTOCOLO DE ACTUALIZACIÓN DIFERENCIAL (Lección Aprendida)
-* **Principio de Continuidad:** Al actualizar un PROMPT de una Spoke, el GEM Admin debe leer la versión existente en el repositorio y proponer un "Patch" o cambio incremental.
-* **Prohibición de Sobrescritura Ciega:** No se deben generar prompts desde cero si ya existe una versión funcional, para evitar la pérdida de reglas de negocio específicas ya validadas por el usuario.
+#### A. PROTOCOLO DE ACTUALIZACIÓN DIFERENCIAL
+* **Principio de Continuidad:** Al actualizar un PROMPT, basarse siempre en la versión estable anterior. Nunca sobrescribir sin leer primero la lógica existente.
 
-#### B. ESTÁNDAR REGIONAL DE INTERFAZ
-* El sistema opera por defecto para usuarios en **Colombia**.
-* La salida de datos debe ser compatible con la configuración regional de Google Sheets (Coma decimal).
+#### B. ESTÁNDAR REGIONAL (COLOMBIA)
+* **Formato Numérico:** El sistema debe entregar decimales con COMA (`,`) para compatibilidad directa con Google Sheets en configuración regional Colombia. Los separadores de miles están prohibidos.
 
-#### C. BLINDAJE DE DATOS (OBSERVACIÓN 2)
-* Toda columna de tipo "Periodo" o "ID" debe ser precedida por un apóstrofe (`'`) para forzar el tratamiento como texto en hojas de cálculo y evitar que el software de terceros altere el dato (ej: convertir "SEP-2025" en una fecha de sistema).
+#### C. PROTECCIÓN DE TIPOS DE DATOS
+* El uso del apóstrofe (`'`) al inicio de campos de ID y Periodo es obligatorio para evitar que el software de hoja de cálculo altere el dato (ej: convertir texto a fecha).
 
 ---
 
 ### 3. CATÁLOGO DE VERSIONES ESTABLES
-* **GEM Admin:** v2.1.3
-* **EPM Spoke:** v2.1.3
-* **Tigo Spoke:** v2.1.0 (Pendiente actualizar a estándar de coma decimal)
+* **GEM Admin:** v2.3.0
+* **EPM Spoke:** v2.3.0 (Soporte Estrato 6 + Mapeo Gas).
+* **Tigo Spoke:** v2.1.0 (Pendiente actualización a estándar v2.3.0).
+* **Afinia / Surtigas:** v2.1.0 (Pendiente actualización a estándar v2.3.0).

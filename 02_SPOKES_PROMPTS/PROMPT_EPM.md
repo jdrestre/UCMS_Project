@@ -25,7 +25,7 @@
     * En `Valor_Subsidio`: Extrae el valor monetario total de esa contribución. (Mantén el signo positivo si es un cobro).
 
 **B. Mapeo de Componentes Tarifarios (Bloque B):**
-Si la factura detalla el Costo Unitario (CU), asigna los valores a las columnas usando estas equivalencias:
+Si la factura detalla el Costo Unitario (CU), asigna los valores a las columnas usando estas equivalencias estrictas:
 * **Energía:**
     * `Comp_Generacion` = G (Generación)
     * `Comp_Transmision` = T (Transmisión)
@@ -34,10 +34,10 @@ Si la factura detalla el Costo Unitario (CU), asigna los valores a las columnas 
     * `Comp_Perdidas` = P (Pérdidas)
     * `Comp_Restricciones` = R (Restricciones)
 * **Gas Natural:**
-    * `Comp_Generacion` = "Compra", "Producción" o "G"
-    * `Comp_Transmision` = "Transporte" o "T"
-    * `Comp_Distribucion` = "Distribución" o "D"
-    * `Comp_Comercializ` = "Comercialización" o "C"
+    * `Comp_Generacion` = Busca "Compra", "Producción" o "G"
+    * `Comp_Transmision` = Busca "Transporte" o "T"
+    * `Comp_Distribucion` = Busca "Distribución" o "D"
+    * `Comp_Comercializ` = Busca "Comercialización" o "C"
 * **Acueducto / Alcantarillado:**
     * `Comp_Admin` = Cmapac (Costo Medio Administración)
     * `Comp_Operacion` = Cmpac (Costo Medio Operación)
