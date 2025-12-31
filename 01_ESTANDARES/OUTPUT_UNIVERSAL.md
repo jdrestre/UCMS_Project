@@ -1,26 +1,31 @@
-# ESTÁNDAR DE SALIDA UNIVERSAL UCMS (v2.5.0)
-**Estado:** VIGENTE | **Referencia de Conocimiento** (No de ejecución directa).
+# ESTÁNDAR DE SALIDA UNIVERSAL UCMS (v2.5.1)
+**Estado:** VIGENTE | **Referencia de conocimiento**
 
 ## SECCIÓN A: REGLAS MAESTRAS (GLOBALES)
-* **Formato Fecha:** DD/MM/YYYY (Excel Ready).
-* **ID Protegido:** Uso de apóstrofe (`'`) en: Contrato, Ref_Pago, ID_Producto, Medidor, ID_Unico.
-* **Separador:** Coma (`,`) para decimales.
+*Estas reglas aplican a todo el ecosistema UCMS, independientemente de la Spoke.*
+
+1. **Formato de Fecha:** El formato obligatorio es DD/MM/YYYY. No debe llevar apóstrofe para permitir el reconocimiento nativo en celdas de Google Sheet, Excel o hojas de cálculo  .
+2. **Formato Numérico:** Uso exclusivo de coma (,) como separador decimal. Está estrictamente prohibido el uso de puntos o separadores de miles.
+3. **Principio de Integridad:** Se prohíbe la redundancia de datos numéricos o técnicos dentro de campos de observación tipo JSON si dichos datos ya poseen una columna asignada en la matriz de la Spoke.
 
 ---
 
 ## SECCIÓN B: MATRIZ DE REFERENCIA - SPOKE EPM (65 COLUMNAS)
-Esta sección describe la estructura técnica que el Admin debe esperar de la Spoke EPM.
+*Estructura técnica y reglas de formato específicas para la facturación de EPM.*
 
-### B.1 Grupos y Rangos
+### B.1 Reglas de Formato Específicas (EPM)
+* **Identificadores Protegidos (IDs):** Es obligatorio el uso del prefijo apóstrofe (') al inicio de los datos para los campos: ID_Unico, Contrato, Ref_Pago, ID_Producto, Medidor e ID_Fila.
+* **Regla de No-Redundancia (EPM):** El valor de la 'Constante de Gas' debe alojarse únicamente en la Columna 44. Queda prohibida su duplicidad en la Columna 65 (Info_Reg_Json).
+
+### B.2 Grupos y Rangos (EPM)
 | Grupo | Rango | Descripción General |
 | :--- | :--- | :--- |
-| **Identidad y Tiempos** | 1 - 19 | Quién, Cuándo y Dónde. Datos de contrato y periodos. |
-| **Financiero Detallado** | 20 - 38 | Liquidación en pesos ($) desglosada por servicio vertical. |
-| **Auditoría Técnica** | 39 - 63 | Datos físicos, componentes unitarios ($) y consumos. |
-| **Observaciones** | 64 - 65 | Banderas de alerta y sustento legal (JSON). |
+| **G1: Identidad y Tiempos** | 1 - 19 | Metadatos de temporalidad, cliente y periodos de servicio. |
+| **G2: Financiero Detallado** | 20 - 38 | Liquidación en pesos ($) desglosada por servicio vertical. |
+| **G3: Auditoría Técnica** | 39 - 63 | Datos físicos, componentes unitarios ($) y consumos. |
+| **G4: Observaciones** | 64 - 65 | Banderas de alerta (Tags) e información regulatoria (JSON). |
 
-### B.2 Catálogo Detallado (Conocimiento Estructural)
-*Aquí se define qué es cada columna para auditoría manual o visual.*
+### B.3 Catálogo Detallado de Columnas (EPM v2.5.1)
 | # | Columna | Descripción Funcional |
 |:---:|:---|:---|
 | 1 | **ID_Unico** | Llave primaria: `'[PERIODO]_[CONTRATO]_[SERVICIO]`. |
@@ -33,9 +38,9 @@ Esta sección describe la estructura técnica que el Admin debe esperar de la Sp
 | 8 | **Num** | Número de mes (1..12). |
 | 9 | **Fecha_Fact** | Fecha de emisión (DD/MM/YYYY). |
 | 10 | **Fecha_Venc** | Fecha límite de pago (DD/MM/YYYY). |
-| 11 | **Contrato** | ID de cuenta: `'[NÚMERO]`. |
-| 12 | **Ref_Pago** | Referente para pago electrónico: `'[NÚMERO]`. |
-| 13 | **ID_Producto** | ID específico del servicio dentro de EPM. |
+| 11 | **Contrato** | ID de cuenta con prefijo: `'[NÚMERO]`. |
+| 12 | **Ref_Pago** | Referente para pago electrónico con prefijo: `'[NÚMERO]`. |
+| 13 | **ID_Producto** | ID específico del servicio dentro de EPM con prefijo: `'[ID]`. |
 | 14 | **Ciclo** | Ciclo de lectura de la zona. |
 | 15 | **Est** | Estrato socioeconómico (1..6). |
 | 16 | **Tipo_Servicio** | Vertical: ENERGIA, GAS, ACUE, ALCA, ASEO, ALUM, _TOTAL. |
@@ -62,11 +67,11 @@ Esta sección describe la estructura técnica que el Admin debe esperar de la Sp
 | 37 | **Saldo** | Saldo anterior / Deuda pendiente. |
 | 38 | **Total_Fila** | Suma financiera neta de la fila. |
 | 39 | **Consumo_Cant** | Cantidad consumida (kWh, m3, Ton). |
-| 40 | **Unidad_Medida** | Etiqueta de la unidad. |
-| 41 | **Medidor** | Serial del equipo: `'[SERIAL]`. |
+| 40 | **Unidad_Medida** | Etiqueta de la unidad (kWh, m3, Ton). |
+| 41 | **Medidor** | Serial del equipo con prefijo: `'[SERIAL]`. |
 | 42 | **Lect_Ant** | Lectura anterior del equipo. |
 | 43 | **Lect_Act** | Lectura actual del equipo. |
-| 44 | **Const** | Factor o constante multiplicadora. |
+| 44 | **Const** | Factor o constante multiplicadora. (EPM: Factor Medidor / Constante de Corrección Gas). |
 | 45 | **E_CU_G** | Energía: $/kWh Generación. |
 | 46 | **E_CU_T** | Energía: $/kWh Transmisión. |
 | 47 | **E_CU_D** | Energía: $/kWh Distribución. |
@@ -87,4 +92,4 @@ Esta sección describe la estructura técnica que el Admin debe esperar de la Sp
 | 62 | **Ton_Rech** | Aseo: Toneladas rechazados. |
 | 63 | **Ton_Disp** | Aseo: Toneladas disposición final. |
 | 64 | **Alertas** | Etiquetas de inteligencia (NORMAL, CAMBIO_MEDIDOR...). |
-| 65 | **Info_Reg_Json** | JSON con decretos y letra pequeña informativa. |
+| 65 | **Info_Reg_Json** | JSON con decretos e info textual. Prohibida la redundancia con datos ya mapeados en la matriz (Ejemplo: Col 44). |

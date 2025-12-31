@@ -1,81 +1,86 @@
 # ⚡ UCMS - Utility Cost Management System
 
-> **Sistema de Auditoría de Servicios Públicos basado en IA Modular.**
-> *Versión del Sistema: v2.3.0 (Estable - Soporte Estrato Alto & Triángulo de Seguridad)*
+> **Sistema de Auditoría de Servicios Públicos basado en IA Modular Dinámica.**
+> *Versión del Sistema: v2.5.1 (Estable - Foco en EPM & Cero Redundancia)*
 
 ---
 
 ## 📖 Visión General del Proyecto
 
-El **UCMS** es un ecosistema de Agentes de IA (GEMs) diseñado para la extracción, normalización y auditoría financiera de facturas de servicios públicos.
+El **UCMS** es un ecosistema de Agentes de IA (Spokes) especializado en la extracción forense, normalización y auditoría financiera de facturas de servicios públicos. 
 
-Su arquitectura **Hub & Spoke** permite procesar documentos no estructurados (PDFs de diferentes proveedores) y convertirlos en bases de datos relacionales estrictas, agnósticas al formato visual de la factura.
+En la versión **v2.5.1**, el sistema ha evolucionado hacia un modelo de **Bloque Único Dinámico**, donde la inteligencia de extracción se personaliza por proveedor, eliminando la redundancia de datos técnicos y garantizando que la información estructurada sea 100% analizable.
 
-**Capacidades Actuales (v2.3.0):**
-1.  **Auditoría Financiera Global:** Consolidación de costos en una tabla maestra estándar.
-2.  **Blindaje Técnico:** Extracción profunda de componentes tarifarios (Generación, Transmisión, etc.) y lectura de medidores físicos.
-3.  **Soporte Socioeconómico Completo:** Manejo matemático de Subsidios (Estratos 1-3) y Contribuciones/Sobrecostos (Estratos 5-6 y Comerciales).
+**Capacidades Actuales (v2.5.1):**
+1.  **Arquitectura de Bloque Único:** Fusión de datos financieros y técnicos en una matriz plana de alta densidad.
+2.  **Limpieza Técnica (No-Redundancia):** Eliminación de datos técnicos duplicados en el campo JSON para optimizar el peso de la base de datos.
+3.  **Diferenciación de Estados:** Separación clara entre agentes en Producción (v2.5.1) y agentes Legacy pendientes de migración.
+4.  **Auditoría de Conversión:** Captura de Constantes de Gas y Factores de Energía en la Columna 44 para análisis histórico.
 
 ---
 
-## 🏗️ Arquitectura de Datos (Doble Bloque)
+## 🏗️ Arquitectura de Datos
 
-El sistema opera bajo dos principios de inmutabilidad de datos:
+El sistema opera bajo un núcleo de identidad común pero con extensiones técnicas adaptables:
 
-### 1. Bloque A: Core Financiero (Horizontal)
-Tabla maestra de **22 Columnas** estandarizada para todos los servicios (Energía, Agua, Internet, Gas).
-* **Objetivo:** Comparabilidad financiera y flujo de caja.
-* **Regla:** Idéntica estructura para EPM, Tigo, Afinia, etc.
+### 1. Núcleo de Identidad (Global)
+Las columnas 1 a 19 son estándar para todas las facturas y garantizan la trazabilidad del cliente, periodo y tipo de servicio.
 
-### 2. Bloque B: Extensión Técnica (Vertical)
-Tabla de detalle específica por proveedor, diseñada bajo la estrategia de **"Triángulo de Seguridad"** para evitar obsolescencia por cambios de formato:
-* **Nivel 1 (Hard Fields):** Datos físicos auditorables (Seriales de medidor, Lecturas anterior/actual).
-* **Nivel 2 (Structured Fields):** Desglose tarifario en columnas explícitas (Comp. Generación, Distribución, Tasas).
-* **Nivel 3 (Flexible Fields):** JSON para captura de textos regulatorios, justificaciones de desviación y alertas visuales.
+### 2. Extensión Técnica Especializada (Spoke-Specific)
+A partir de la columna 20, la matriz se adapta a la complejidad del proveedor. 
+* **EPM (Piloto v2.5.1):** Matriz de 65 columnas con desglose de 6 servicios simultáneos.
+* **Política de Datos:** Uso de la **Columna 44 (Const)** para valores técnicos críticos, excluyéndolos de la **Columna 65 (JSON)**.
 
 ---
 
 ## 🤖 Catálogo de Agentes (Spokes)
 
-Estado actual de los módulos de extracción:
-
-| Agente (Spoke) | Proveedor | Versión | Estado | Capacidades |
+| Agente (Spoke) | Proveedor | Versión | Estado | Nivel de Soporte |
 | :--- | :--- | :--- | :--- | :--- |
-| **EPM** | Multiservicios | **v2.3.2** | 🟢 **Estable** | Soporte Estrato 6, Mapeo de Gas, Regla SEPT. |
-| **Tigo** | Telecom | v2.1.0 | 🟠 *Legacy* | Pendiente actualización a estándar v2.3. |
-| **Afinia** | Energía (Costa) | v2.1.0 | 🟠 *Legacy* | Pendiente actualización a estándar v2.3. |
-| **Surtigas** | Gas (Costa) | v2.1.0 | 🟠 *Legacy* | Pendiente actualización a estándar v2.3. |
-| **Acuacar** | Agua (Costa) | v2.1.0 | 🟠 *Legacy* | Pendiente actualización a estándar v2.3. |
+| **EPM** | Multiservicios | **v2.5.1** | 🟢 **PRODUCCIÓN** | Soporte Total (65 Cols / Cero Redundancia) |
+| **ACUACAR** | Agua | v2.1.0 | 🟠 **LEGACY** | Pendiente Revisión y Migración v2.5 |
+| **AFINIA** | Energía | v2.1.0 | 🟠 **LEGACY** | Pendiente Revisión y Migración v2.5 |
+| **SURTIGAS** | Gas | v2.1.0 | 🟠 **LEGACY** | Pendiente Revisión y Migración v2.5 |
+| **TIGO** | Telecom | v2.1.0 | 🟠 **LEGACY** | Pendiente Revisión y Migración v2.5 |
 
 ---
 
-## 📂 Estructura del Repositorio
+## 📂 Estructura del Repositorio (UCMS_Project)
 
-* **`00_CONTEXTO/`**: Memoria técnica.
-    * `GLOSARIO_TERMINOS.md`: Definiciones oficiales y lógica de negocio.
-    * `HISTORIA_PROYECTO.md`: Registro de decisiones arquitectónicas.
-* **`01_ESTANDARES/`**: La "Constitución" del sistema.
-    * `OUTPUT_UNIVERSAL.md`: Definición estricta de columnas y formatos.
-* **`02_SPOKES_PROMPTS/`**: Cerebros autónomos.
-    * Contiene los archivos `.md` que actúan como "System Prompt" para cada IA.
-    * *Nota v2.3:* Los prompts son autónomos y no requieren instrucciones externas.
-* **`03_OPERACIONES/`**: Mantenimiento y Análisis.
-    * `METRICAS_KPI.md`: Fórmulas de análisis financiero por Spoke.
-    * `MANUAL_OPERACIONES_UCMS.md`: Protocolos de actualización y contingencia.
-    * `CHANGELOG_ERRORES.md`: Bitácora de versionamiento.
-* **`04_DATA/`**: (Ignorado por Git) Almacén de PDFs crudos y CSVs generados.
+```text
+UCMS_Project/
+├── 00_CONTEXTO
+│   ├── GLOSARIO_TERMINOS.md
+│   └── HISTORIA_PROYECTO.md
+├── 01_ESTANDARES
+│   └── OUTPUT_UNIVERSAL.md
+├── 02_SPOKES_PROMPTS
+│   ├── PROMPT_ACUACAR.md
+│   ├── PROMPT_AFINIA.md
+│   ├── PROMPT_EPM.md
+│   ├── PROMPT_SURTIGAS.md
+│   └── PROMPT_TIGO.md
+├── 03_OPERACIONES
+│   ├── CHANGELOG_ERRORES.md
+│   └── MANUAL_OPERACIONES_UCMS.md
+├── 04_DATA
+│   ├── DB_MAESTRA_UCMS.csv
+│   ├── HISTORICO_LEGACY
+│   │   ├── ... (Archivos de soporte y bitácoras legacy)
+│   └── SAMPLE
+│       ├── ACUACAR/
+│       ├── AFINIA/
+│       ├── EPM/
+│       ├── SURTIGAS/
+│       └── TIGO_UNE/
+└── README.md
 
----
+## 🛠️ Protocolo de Mantenimiento v2.5.1
 
-## 🛠️ Protocolo de Mantenimiento
+### Reglas Maestras Globales
+1.  **Formato Universal:** Fechas en `DD/MM/YYYY` y decimales con **COMA (`,`)**. Prohibido el uso de puntos de miles.
+2.  **Protección de IDs (EPM):** Todo Identificador debe iniciar con **Apóstrofe (`'`)** para preservar la integridad en Excel.
+3.  **Integridad de Datos:** Si un dato es numérico y tiene una columna asignada, **no debe** aparecer en el JSON de la columna 65.
 
-### Reglas de Actualización (v2.3)
-1.  **Principio de Autonomía:** Al actualizar una Spoke, toda la lógica debe residir en su archivo `PROMPT_[NOMBRE].md`. No depender de instrucciones en la configuración del modelo.
-2.  **Validación Regional:** Todo dato numérico debe usar **COMA (`,`)** decimal. Todo ID debe iniciar con **Apóstrofe (`'`)**.
-3.  **Integridad Histórica:** No sobrescribir reglas de negocio probadas sin consultar `HISTORIA_PROYECTO.md`.
-
-### Cómo reportar errores
-Si una factura cambia de diseño y la extracción falla:
-1.  Identificar si es un error de **Lectura** (OCR fallido) o de **Lógica** (Columna nueva).
-2.  Actualizar el Prompt correspondiente en `02_SPOKES_PROMPTS/`.
-3.  Registrar el cambio en `CHANGELOG_ERRORES.md`.
+### Mejora Continua
+El sistema evoluciona mediante la retroalimentación del Admin. Si se detecta ruido o redundancia, el Prompt de la Spoke debe ser refactorizado inmediatamente para mantener la higiene de la base de datos.
