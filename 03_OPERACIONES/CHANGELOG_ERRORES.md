@@ -17,3 +17,4 @@
 | 2025-12-30 | EPM | v2.3.0 | Fix | Reingeniería de Prompt: Soporte para Contribuciones (Estrato 6) y Mapeo explícito de componentes de Gas. Eliminación de saludos. |
 | 2025-12-30 | EPM | v2.3.1 | Fix | Corrección de mapeo de fechas (Año heredado) y separación explícita de Cargo Fijo. Inclusión de Alertas en fila Total. |
 | 2025-12-30 | EPM | v2.3.2 | Fix | Corrección de compatibilidad fechas Google Sheets ('SEPT') y precisión de componentes Aseo (CBL/CRT).|
+31/12/2025,Global / EPM,v2.5.0,MAJOR,Migración global al modelo de Bloque Único Dinámico. Definición de la matriz de 65 columnas para Spoke EPM. Estandarización de fechas (DD/MM/YYYY) e IDs con apóstrofe (').

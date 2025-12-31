@@ -32,3 +32,11 @@ Al auditar facturas de EPM de Estrato 6 (Ene-Mar 2025), el sistema colapsó en d
     * *Flexible Fields (JSON):* Un "balde" para capturar justificaciones legales y novedades visuales sin romper la tabla.
 2.  **Agnosticismo Socioeconómico:** Se reescribió la regla de negocio para aceptar que un subsidio puede ser positivo (Contribución) o negativo (Descuento), dependiendo del estrato.
 3.  **Autonomía del Spoke:** Se eliminó la dependencia de "instrucciones implícitas" o saludos protocolarios. El Prompt v2.3.0 contiene *todas* las reglas de mapeo (ej: Gas Compra = Generación) para no depender del entrenamiento base del modelo.
+### Hito v2.5.0: Unificación y Modelo de Bloque Único (31-Dic-2025)
+**Problema:**
+La dualidad Bloque A/B (v2.3.0) generaba fricción operativa en el copiado/pegado y riesgo de desincronización de IDs. Además, la "Ceguera Técnica" impedía un seguimiento histórico fluido de componentes como Generación (G) o Pérdidas (P).
+
+**Solución Arquitectónica:**
+1. **Modelo de Bloque Único Dinámico:** Fusión de datos financieros y técnicos en una sola matriz plana. Cada servicio (Spoke) define su número de columnas bajo un núcleo común.
+2. **Matriz de 65 Columnas (Piloto EPM):** Diseño de alta precisión que desglosa componentes tarifarios, lecturas y periodos de facturación en columnas numéricas independientes.
+3. **Optimización de Formatos:** Adopción de `DD/MM/YYYY` para fechas (sin apóstrofe) y blindaje estricto con apóstrofe (`'`) para Contratos, Referentes e IDs de Producto.
