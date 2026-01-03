@@ -1,42 +1,52 @@
-# Estrategia de Versionamiento (SemVer)
-## Formato: vMAJOR.MINOR.PATCH (Ej: v1.2.0)
+# HISTORIA Y EVOLUCIÓN DEL PROYECTO UCMS
 
-### MAJOR (X.0.0): Cambio que rompe la compatibilidad.
+Este documento registra la trayectoria estratégica, los desafíos arquitectónicos y las soluciones de ingeniería que han permitido la evolución del Utility Cost Management System (UCMS).
 
-Ejemplo: Cambiar la Tabla Maestra de 22 a 25 columnas. Todas las Spokes deben actualizarse.
+---
 
-### MINOR (0.X.0): Nueva funcionalidad o mejora lógica que no rompe la tabla.
+## 🏷️ ESTRATEGIA DE VERSIONAMIENTO (SemVer)
+**Formato:** vMAJOR.MINOR.PATCH (Ej: v1.2.0)
 
-Ejemplo: Agregar "Inteligencia Predictiva" a Tigo o mejorar la detección de fechas en EPM.
+* **MAJOR (X.0.0):** Cambio estructural que rompe la compatibilidad (Ej: Cambiar la matriz de 65 a 76 columnas). Obliga a actualizar todas las Spokes.
+* **MINOR (0.X.0):** Nueva funcionalidad o mejora lógica que no altera la estructura de la tabla (Ej: Nueva regla de detección de fechas).
+* **PATCH (0.0.X):** Corrección de errores menores, ajustes de OCR o formato visual.
 
-### PATCH (0.0.X): Corrección de errores pequeños o ajustes de formato.
+---
 
-Ejemplo: Tigo movió la fecha 2 cm a la derecha; corrección de OCR.
+## 📜 HITOS Y EVOLUCIÓN TÉCNICA
 
 ### Hito v2.1.0: Modularidad Vertical y Eficiencia (Dic 2025)
-**Problema:** Intentar meter todos los datos técnicos (estrato, subsidios exactos, velocidad de internet) en la tabla maestra de 22 columnas la estaba haciendo inmanejable. Además, sumar totales en facturas complejas era difícil.
-**Solución:**
-1. Se adoptó arquitectura **Core + Vertical**: Una tabla resumen estandarizada y tablas satélite específicas por servicio.
-2. Se definió la **"Fila Total Condicional"**: Solo las facturas complejas (EPM) generan una fila de resumen total para facilitar gráficos globales sin duplicar datos en facturas simples (Tigo).
+* **Problema:** La tabla maestra de 22 columnas era inmanejable para datos técnicos (estrato, subsidios exactos). Sumar totales en facturas complejas generaba duplicidad.
+* **Solución:**
+    1.  Adopción de arquitectura **Core + Vertical**: Tabla resumen estandarizada + tablas satélite específicas.
+    2.  Definición de **"Fila Total Condicional"**: Solo facturas complejas (EPM) generan fila de resumen para evitar redundancia en facturas simples (Tigo).
 
 ### Hito v2.3.0: Blindaje Técnico y Realidad Socioeconómica (Dic 2025)
-**Problema:**
-Al auditar facturas de EPM de Estrato 6 (Ene-Mar 2025), el sistema colapsó en dos frentes:
-1.  **Ceguera Financiera:** Asumía que `Subsidio` siempre era un descuento (negativo). Al encontrarse con "Contribuciones" (cobros positivos del +20% o +60%), la extracción fallaba o generaba datos matemáticamente incorrectos.
-2.  **Rigidez Estructural:** Intentar extraer componentes tarifarios (Generación, Transmisión) columna por columna fallaba cuando el formato visual de la factura cambiaba levemente, generando filas vacías (`N/A`) y perdiendo datos valiosos de auditoría.
+* **Problema:** El sistema fallaba ante "Contribuciones" positivas (Estratos 5 y 6) y era rígido ante cambios visuales en componentes tarifarios, generando filas vacías.
+* **Solución:**
+    1.  **Estrategia "Triángulo de Seguridad":** Redefinición del Bloque B en tres niveles: *Hard Fields* (Medidores), *Structured Fields* (Tarifas) y *Flexible Fields* (JSON para future-proofing).
+    2.  **Agnosticismo Socioeconómico:** Reglas para aceptar subsidios positivos (Contribución) o negativos (Descuento).
+    3.  **Autonomía del Spoke:** Prompts con reglas de mapeo completas (Ej: Gas Compra = Generación) sin dependencia de entrenamiento base.
 
-**Solución Arquitectónica:**
-1.  **Estrategia "Triángulo de Seguridad":** Se redefinió el Bloque B en tres niveles de rigidez para garantizar que siempre se extraiga *algo*, incluso si la factura es difícil de leer:
-    * *Hard Fields:* Datos físicos inmutables (Medidores).
-    * *Structured Fields:* Tarifas desglosadas (si son legibles).
-    * *Flexible Fields (JSON):* Un "balde" para capturar justificaciones legales y novedades visuales sin romper la tabla.
-2.  **Agnosticismo Socioeconómico:** Se reescribió la regla de negocio para aceptar que un subsidio puede ser positivo (Contribución) o negativo (Descuento), dependiendo del estrato.
-3.  **Autonomía del Spoke:** Se eliminó la dependencia de "instrucciones implícitas" o saludos protocolarios. El Prompt v2.3.0 contiene *todas* las reglas de mapeo (ej: Gas Compra = Generación) para no depender del entrenamiento base del modelo.
 ### Hito v2.5.0: Unificación y Modelo de Bloque Único (31-Dic-2025)
-**Problema:**
-La dualidad Bloque A/B (v2.3.0) generaba fricción operativa en el copiado/pegado y riesgo de desincronización de IDs. Además, la "Ceguera Técnica" impedía un seguimiento histórico fluido de componentes como Generación (G) o Pérdidas (P).
+* **Problema:** La dualidad Bloque A/B generaba fricción operativa y riesgo de desincronización de IDs. La "Ceguera Técnica" impedía el seguimiento histórico de componentes como G o P.
+* **Solución:**
+    1.  **Modelo de Bloque Único Dinámico:** Fusión financiera y técnica en una sola matriz plana de alta densidad.
+    2.  **Matriz de 65 Columnas (Piloto EPM):** Desglose independiente de componentes tarifarios y periodos.
+    3.  **Optimización:** Formato `DD/MM/YYYY` y blindaje estricto con apóstrofe (`'`) para IDs protegidos.
 
-**Solución Arquitectónica:**
-1. **Modelo de Bloque Único Dinámico:** Fusión de datos financieros y técnicos en una sola matriz plana. Cada servicio (Spoke) define su número de columnas bajo un núcleo común.
-2. **Matriz de 65 Columnas (Piloto EPM):** Diseño de alta precisión que desglosa componentes tarifarios, lecturas y periodos de facturación en columnas numéricas independientes.
-3. **Optimización de Formatos:** Adopción de `DD/MM/YYYY` para fechas (sin apóstrofe) y blindaje estricto con apóstrofe (`'`) para Contratos, Referentes e IDs de Producto.
+### Hito v2.6.0: Era de la Granularidad Absoluta (02-Ene-2026)
+* **Problema:** Persistencia de "Ceguera de Granularidad" en componentes dinámicos de Gas (Transporte/Compresión) y falta de detalle en residuos de Aseo. Desplazamientos de matriz en filas de totalización.
+* **Solución:**
+    1.  **Salto a 76 Columnas:** Expansión de la matriz para capturar IDs dinámicos (Transporte 7 en Col 65, Compresión 8 en Col 69).
+    2.  **Desglose Forense de Aseo:** Captura de 4 tipos de toneladas (Cols 71-74) en lugar de datos genéricos.
+    3.  **Protocolo OJF (Orden Jerárquico por Factura):** Obligatoriedad de extracción siguiendo el flujo físico del documento.
+    4.  **Blindaje de Constante (Col 48):** Reubicación estratégica de variables técnicas para garantizar Cero Redundancia en el JSON.
+    5.  **Relleno Técnico Forense:** Uso de `"0,00"` en campos técnicos de filas de total para proteger la estructura de la matriz.
+
+---
+
+## 🏛️ FILOSOFÍA DEL SISTEMA
+1.  **Agnosticismo de Datos:** Capacidad de procesar cualquier GEM mediante Spokes personalizadas.
+2.  **Cero Redundancia:** El dato reside en su columna técnica; el JSON es solo para sustento legal.
+3.  **Integridad Forense:** Formatos estrictos para que la información sea 100% analizable en herramientas externas.

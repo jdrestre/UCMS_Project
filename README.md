@@ -1,86 +1,63 @@
 # ⚡ UCMS - Utility Cost Management System
 
-> **Sistema de Auditoría de Servicios Públicos basado en IA Modular Dinámica.**
-> *Versión del Sistema: v2.5.1 (Estable - Foco en EPM & Cero Redundancia)*
+> **Sistema de Auditoría Forense de Servicios Públicos basado en IA Modular Dinámica.**
+> *Versión del Sistema: v2.6.0 (Granularidad Absoluta y Arquitectura Bicapa)*
 
 ---
 
-## 📖 Visión General del Proyecto
+## 🚀 El Sistema UCMS
+El **Utility Cost Management System (UCMS)** es un ecosistema de ingeniería de datos diseñado para la extracción, normalización y auditoría técnica de facturas de servicios públicos complejos. A diferencia de un extractor convencional, el UCMS opera como un sistema modular que separa las reglas de negocio globales de la lógica específica de cada proveedor.
 
-El **UCMS** es un ecosistema de Agentes de IA (Spokes) especializado en la extracción forense, normalización y auditoría financiera de facturas de servicios públicos. 
+### 🏗️ Arquitectura del Sistema: Global vs. Específico
 
-En la versión **v2.5.1**, el sistema ha evolucionado hacia un modelo de **Bloque Único Dinámico**, donde la inteligencia de extracción se personaliza por proveedor, eliminando la redundancia de datos técnicos y garantizando que la información estructurada sea 100% analizable.
+El éxito de la **v2.6.0** radica en la división clara de responsabilidades:
 
-**Capacidades Actuales (v2.5.1):**
-1.  **Arquitectura de Bloque Único:** Fusión de datos financieros y técnicos en una matriz plana de alta densidad.
-2.  **Limpieza Técnica (No-Redundancia):** Eliminación de datos técnicos duplicados en el campo JSON para optimizar el peso de la base de datos.
-3.  **Diferenciación de Estados:** Separación clara entre agentes en Producción (v2.5.1) y agentes Legacy pendientes de migración.
-4.  **Auditoría de Conversión:** Captura de Constantes de Gas y Factores de Energía en la Columna 44 para análisis histórico.
+#### 1. Capa Global (Core System)
+Es el núcleo del sistema que garantiza la integridad de la Base de Datos Maestra. Define:
+* **Estándar Universal de Salida:** Matriz unificada de **76 columnas**.
+* **Protocolos de Integridad:** Uso de apóstrofes (`'`) para protección de IDs, coma decimal (`,`) para compatibilidad regional y **Relleno Técnico (0,00)** para estabilidad estructural.
+* **Glosario y Operaciones:** Definiciones técnicas unificadas y manual de mantenimiento.
+* **Ubicación:** `/00_CONTEXTO`, `/01_ESTANDARES`, `/03_OPERACIONES`.
 
----
-
-## 🏗️ Arquitectura de Datos
-
-El sistema opera bajo un núcleo de identidad común pero con extensiones técnicas adaptables:
-
-### 1. Núcleo de Identidad (Global)
-Las columnas 1 a 19 son estándar para todas las facturas y garantizan la trazabilidad del cliente, periodo y tipo de servicio.
-
-### 2. Extensión Técnica Especializada (Spoke-Specific)
-A partir de la columna 20, la matriz se adapta a la complejidad del proveedor. 
-* **EPM (Piloto v2.5.1):** Matriz de 65 columnas con desglose de 6 servicios simultáneos.
-* **Política de Datos:** Uso de la **Columna 44 (Const)** para valores técnicos críticos, excluyéndolos de la **Columna 65 (JSON)**.
+#### 2. Capa Específica (GEM Spokes)
+Son módulos de inteligencia personalizada para cada Proveedor (GEM). Definen:
+* **Lógica de Negocio Local:** Mapeo de términos específicos (ej. Gas Compra = Generación).
+* **Granularidad Absoluta:** Captura de datos técnicos profundos en las columnas **43 a 74** (ej. IDs dinámicos de Gas o desglose de Toneladas en Aseo).
+* **Protocolo OJF:** Instrucciones de inspección visual siguiendo el orden físico de la factura.
+* **Ubicación:** `/02_SPOKES_PROMPTS`.
 
 ---
 
-## 🤖 Catálogo de Agentes (Spokes)
+## 📈 Estado del Repositorio
 
-| Agente (Spoke) | Proveedor | Versión | Estado | Nivel de Soporte |
+El sistema se encuentra en fase de despliegue de **Alta Densidad**. El Spoke EPM es actualmente el modelo de referencia para la migración del resto de la arquitectura.
+
+| Módulo (Spoke) | Tipo de Servicio | Versión | Estado | Nivel de Detalle |
 | :--- | :--- | :--- | :--- | :--- |
-| **EPM** | Multiservicios | **v2.5.1** | 🟢 **PRODUCCIÓN** | Soporte Total (65 Cols / Cero Redundancia) |
-| **ACUACAR** | Agua | v2.1.0 | 🟠 **LEGACY** | Pendiente Revisión y Migración v2.5 |
-| **AFINIA** | Energía | v2.1.0 | 🟠 **LEGACY** | Pendiente Revisión y Migración v2.5 |
-| **SURTIGAS** | Gas | v2.1.0 | 🟠 **LEGACY** | Pendiente Revisión y Migración v2.5 |
-| **TIGO** | Telecom | v2.1.0 | 🟠 **LEGACY** | Pendiente Revisión y Migración v2.5 |
+| **EPM** | Multiservicio | **v2.6.0** | 🟢 **PRODUCCIÓN** | Granularidad Absoluta (76 Cols) |
+| **ACUACAR** | Aguas | v2.1.0 | 🟠 **LEGACY** | Pendiente Migración v2.6.0 |
+| **AFINIA** | Energía | v2.1.0 | 🟠 **LEGACY** | Pendiente Migración v2.6.0 |
+| **SURTIGAS** | Gas | v2.1.0 | 🟠 **LEGACY** | Pendiente Migración v2.6.0 |
+| **TIGO** | Telecom | v2.1.0 | 🟠 **LEGACY** | Pendiente Migración v2.6.0 |
 
 ---
 
-## 📂 Estructura del Repositorio (UCMS_Project)
+## 📂 Estructura Orgánica del Proyecto
 
 ```text
 UCMS_Project/
-├── 00_CONTEXTO
+├── 00_CONTEXTO/            # Inteligencia de Negocio
 │   ├── GLOSARIO_TERMINOS.md
 │   └── HISTORIA_PROYECTO.md
-├── 01_ESTANDARES
-│   └── OUTPUT_UNIVERSAL.md
-├── 02_SPOKES_PROMPTS
-│   ├── PROMPT_ACUACAR.md
-│   ├── PROMPT_AFINIA.md
-│   ├── PROMPT_EPM.md
-│   ├── PROMPT_SURTIGAS.md
-│   └── PROMPT_TIGO.md
-├── 03_OPERACIONES
+├── 01_ESTANDARES/          # Reglas del Sistema (Global)
+│   └── OUTPUT_UNIVERSAL.md  # Matriz de 76 Columnas
+├── 02_SPOKES_PROMPTS/      # Motores de Extracción (Específico)
+│   ├── PROMPT_EPM.md        # Referencia v2.6.0
+│   └── ... (Spokes Legacy)
+├── 03_OPERACIONES/         # Trazabilidad y Mantenimiento
 │   ├── CHANGELOG_ERRORES.md
 │   └── MANUAL_OPERACIONES_UCMS.md
-├── 04_DATA
+├── 04_DATA/                # Repositorio de Datos
 │   ├── DB_MAESTRA_UCMS.csv
-│   ├── HISTORICO_LEGACY
-│   │   ├── ... (Archivos de soporte y bitácoras legacy)
-│   └── SAMPLE
-│       ├── ACUACAR/
-│       ├── AFINIA/
-│       ├── EPM/
-│       ├── SURTIGAS/
-│       └── TIGO_UNE/
+│   └── SAMPLE/              # Facturas de muestra por GEM
 └── README.md
-
-## 🛠️ Protocolo de Mantenimiento v2.5.1
-
-### Reglas Maestras Globales
-1.  **Formato Universal:** Fechas en `DD/MM/YYYY` y decimales con **COMA (`,`)**. Prohibido el uso de puntos de miles.
-2.  **Protección de IDs (EPM):** Todo Identificador debe iniciar con **Apóstrofe (`'`)** para preservar la integridad en Excel.
-3.  **Integridad de Datos:** Si un dato es numérico y tiene una columna asignada, **no debe** aparecer en el JSON de la columna 65.
-
-### Mejora Continua
-El sistema evoluciona mediante la retroalimentación del Admin. Si se detecta ruido o redundancia, el Prompt de la Spoke debe ser refactorizado inmediatamente para mantener la higiene de la base de datos.

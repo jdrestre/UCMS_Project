@@ -1,95 +1,123 @@
-# ESTÁNDAR DE SALIDA UNIVERSAL UCMS (v2.5.1)
-**Estado:** VIGENTE | **Referencia de conocimiento**
+# ESTÁNDAR DE SALIDA UNIVERSAL UCMS (v2.6.0)
+**Estado:** PROPUESTO PARA DESPLIEGUE | **Referencia de conocimiento v2.6.0**
 
 ## SECCIÓN A: REGLAS MAESTRAS (GLOBALES)
 *Estas reglas aplican a todo el ecosistema UCMS, independientemente de la Spoke.*
 
-1. **Formato de Fecha:** El formato obligatorio es DD/MM/YYYY. No debe llevar apóstrofe para permitir el reconocimiento nativo en celdas de Google Sheet, Excel o hojas de cálculo  .
+1. **Formato de Fecha:** El formato obligatorio es DD/MM/YYYY. No debe llevar apóstrofe para permitir el reconocimiento nativo en celdas de Google Sheets, Excel o hojas de cálculo.
 2. **Formato Numérico:** Uso exclusivo de coma (,) como separador decimal. Está estrictamente prohibido el uso de puntos o separadores de miles.
 3. **Principio de Integridad:** Se prohíbe la redundancia de datos numéricos o técnicos dentro de campos de observación tipo JSON si dichos datos ya poseen una columna asignada en la matriz de la Spoke.
+4. **Relleno de Vacíos:** En filas de totalización o servicios que no apliquen, las columnas técnicas (43 a 74) deben contener "0,00" para mantener la integridad de la base de datos y evitar desplazamientos.
+5. **Cierre Estático:** Las columnas de Alertas y JSON deben situarse siempre al final de la matriz, actuando como anclas de cierre de la fila.
 
 ---
 
-## SECCIÓN B: MATRIZ DE REFERENCIA - SPOKE EPM (65 COLUMNAS)
-*Estructura técnica y reglas de formato específicas para la facturación de EPM.*
+## SECCIÓN B: MATRIZ DE REFERENCIA - SPOKE EPM (76 COLUMNAS)
+*Estructura técnica y reglas de formato para la Granularidad Absoluta de EPM.*
 
 ### B.1 Reglas de Formato Específicas (EPM)
-* **Identificadores Protegidos (IDs):** Es obligatorio el uso del prefijo apóstrofe (') al inicio de los datos para los campos: ID_Unico, Contrato, Ref_Pago, ID_Producto, Medidor e ID_Fila.
-* **Regla de No-Redundancia (EPM):** El valor de la 'Constante de Gas' debe alojarse únicamente en la Columna 44. Queda prohibida su duplicidad en la Columna 65 (Info_Reg_Json).
+* **Identificadores Protegidos (IDs):** Es obligatorio el uso del prefijo apóstrofe (') al inicio de los datos para los campos: ID_Unico, Contrato, Ref_Pago, ID_Producto y Medidor.
+* **Estructura del ID_Unico:** Debe seguir estrictamente el patrón `'PERIODO_EMPRESA_CONTRATO_SERVICIO`. (Ejemplo: `'JUN-2025_EPM_2651903_ACUE`).
+* **Orden Jerárquico por Factura (OJF):** Las filas deben generarse en la secuencia física de cobro: ACUE -> ALCA -> ENERGIA -> GAS -> ASEO -> ALUM -> _TOTAL_OTRAS_ENTIDADES -> _TOTAL.
+* **Regla de No-Redundancia (EPM):** El valor de la 'Constante de Gas' o 'Factor Medidor Energía' debe alojarse únicamente en la **Columna 48 (Const)**. Queda prohibida su duplicidad en la Columna 76 (Info_Reg_Json).
+* **Relleno Técnico Forense:** En las filas de totalización (`_TOTAL_OTRAS_ENTIDADES` y `_TOTAL`), todas las columnas de desgloses unitarios y técnicos (49 a 74) deben rellenarse con "0,00".
 
 ### B.2 Grupos y Rangos (EPM)
-| Grupo | Rango | Descripción General |
-| :--- | :--- | :--- |
-| **G1: Identidad y Tiempos** | 1 - 19 | Metadatos de temporalidad, cliente y periodos de servicio. |
-| **G2: Financiero Detallado** | 20 - 38 | Liquidación en pesos ($) desglosada por servicio vertical. |
-| **G3: Auditoría Técnica** | 39 - 63 | Datos físicos, componentes unitarios ($) y consumos. |
-| **G4: Observaciones** | 64 - 65 | Banderas de alerta (Tags) e información regulatoria (JSON). |
+1. **GRUPO I: IDENTIDAD (Cols 1 - 19):** Metadatos cronológicos, identidad del contrato y tiempos del ciclo.
+2. **GRUPO II: FINANCIERO (Cols 20 - 42):** Liquidación de cobros variables, fijos y contribuciones por cada servicio. Sigue el orden OJF.
+3. **GRUPO III: TÉCNICO (Cols 43 - 74):** Consumos, lecturas, constantes y desgloses de componentes de costo unitario y total.
+4. **GRUPO IV: OBS (Cols 75 - 76):** Alertas de auditoría y contenedor JSON para sustento legal.
 
-### B.3 Catálogo Detallado de Columnas (EPM v2.5.1)
-| # | Columna | Descripción Funcional |
-|:---:|:---|:---|
-| 1 | **ID_Unico** | Llave primaria: `'[PERIODO]_[CONTRATO]_[SERVICIO]`. |
-| 2 | **Periodo** | Texto: `'MES-AAAA` (Ej: `'OCT-2024`). |
-| 3 | **Año** | Numérico: YYYY. |
-| 4 | **Sem** | Semestre del año (S1, S2). |
-| 5 | **Tri** | Trimestre del año (T1..T4). |
-| 6 | **Bim** | Bimestre del año (B1..B6). |
-| 7 | **Mes** | Nombre corto del mes (ENE, FEB...). |
-| 8 | **Num** | Número de mes (1..12). |
-| 9 | **Fecha_Fact** | Fecha de emisión (DD/MM/YYYY). |
+### B.3 Catálogo Detallado de Columnas (76)
+
+#### --- GRUPO I: IDENTIDAD (Cols 1 a 19) ---
+| Col | Nombre Variable | Descripción / Regla de Extracción |
+| :--- | :--- | :--- |
+| 1 | **ID_Unico** | 'PERIODO_EPM_CONTRATO_SERVICIO. Único por fila. |
+| 2 | **Periodo** | Mes y Año de facturación (Ej: JUN-2025). |
+| 3 | **Año** | Año calendario (Ej: 2025). |
+| 4 | **Sem** | Semestre calendario (S1 o S2). |
+| 5 | **Tri** | Trimestre del año (T1 a T4). |
+| 6 | **Bim** | Bimestre del año (B1 a B6). |
+| 7 | **Mes** | Nombre corto del mes (Ej: JUN). |
+| 8 | **Num** | Número de mes (1 a 12). |
+| 9 | **Fecha_Fact** | Fecha de expedición (DD/MM/YYYY). |
 | 10 | **Fecha_Venc** | Fecha límite de pago (DD/MM/YYYY). |
-| 11 | **Contrato** | ID de cuenta con prefijo: `'[NÚMERO]`. |
-| 12 | **Ref_Pago** | Referente para pago electrónico con prefijo: `'[NÚMERO]`. |
-| 13 | **ID_Producto** | ID específico del servicio dentro de EPM con prefijo: `'[ID]`. |
-| 14 | **Ciclo** | Ciclo de lectura de la zona. |
-| 15 | **Est** | Estrato socioeconómico (1..6). |
-| 16 | **Tipo_Servicio** | Vertical: ENERGIA, GAS, ACUE, ALCA, ASEO, ALUM, _TOTAL. |
-| 17 | **Desde** | Inicio periodo lectura (DD/MM/YYYY). |
-| 18 | **Hasta** | Fin periodo lectura (DD/MM/YYYY). |
-| 19 | **Dias** | Días totales facturados. |
-| 20 | **E_Fin_Var** | Energía: Valor consumo ($). |
-| 21 | **E_Fin_Cont** | Energía: Valor contribución/subsidio ($). |
-| 22 | **G_Fin_Var** | Gas: Valor consumo ($). |
-| 23 | **G_Fin_Fijo** | Gas: Valor cargo fijo ($). |
-| 24 | **G_Fin_Cont** | Gas: Valor contribución/subsidio ($). |
-| 25 | **Ac_Fin_Var** | Acueducto: Valor consumo ($). |
-| 26 | **Ac_Fin_Fijo** | Acueducto: Valor cargo fijo ($). |
-| 27 | **Ac_Fin_Cont** | Acueducto: Valor contribución/subsidio ($). |
-| 28 | **Al_Fin_Var** | Alcantarillado: Valor consumo ($). |
-| 29 | **Al_Fin_Fijo** | Alcantarillado: Valor cargo fijo ($). |
-| 30 | **Al_Fin_Cont** | Alcantarillado: Valor contribución/subsidio ($). |
-| 31 | **As_Fin_Fijo** | Aseo: Cargo fijo mensual ($). |
-| 32 | **As_Fin_Var** | Aseo: Cargo variable ($). |
-| 33 | **As_Fin_Cont** | Aseo: Valor contribución ($). |
-| 34 | **Alum_Fin** | Alumbrado: Valor total impuesto ($). |
-| 35 | **Otros** | Financiaciones, seguros o cobros externos ($). |
-| 36 | **Ajuste** | Ajuste al peso (Solo fila _TOTAL). |
-| 37 | **Saldo** | Saldo anterior / Deuda pendiente. |
-| 38 | **Total_Fila** | Suma financiera neta de la fila. |
-| 39 | **Consumo_Cant** | Cantidad consumida (kWh, m3, Ton). |
-| 40 | **Unidad_Medida** | Etiqueta de la unidad (kWh, m3, Ton). |
-| 41 | **Medidor** | Serial del equipo con prefijo: `'[SERIAL]`. |
-| 42 | **Lect_Ant** | Lectura anterior del equipo. |
-| 43 | **Lect_Act** | Lectura actual del equipo. |
-| 44 | **Const** | Factor o constante multiplicadora. (EPM: Factor Medidor / Constante de Corrección Gas). |
-| 45 | **E_CU_G** | Energía: $/kWh Generación. |
-| 46 | **E_CU_T** | Energía: $/kWh Transmisión. |
-| 47 | **E_CU_D** | Energía: $/kWh Distribución. |
-| 48 | **E_CU_C** | Energía: $/kWh Comercialización. |
-| 49 | **E_CU_P** | Energía: $/kWh Pérdidas. |
-| 50 | **E_CU_R** | Energía: $/kWh Restricciones. |
-| 51 | **G_CU_Compr** | Gas: $/m3 Compra. |
-| 52 | **G_CU_Dist** | Gas: $/m3 Distribución. |
-| 53 | **G_CU_Transp** | Gas: $/m3 Transporte. |
-| 54 | **G_CU_Conf** | Gas: $/m3 Confiabilidad. |
-| 55 | **G_CU_Com_F** | Gas: $ Comercialización Fija. |
-| 56 | **A_CU_Cmap** | Agua: $ Costo Admin. |
-| 57 | **A_CU_Cmpac** | Agua: $ Costo Operación. |
-| 58 | **A_CU_Cmt** | Agua: $ Tasas ambientales. |
-| 59 | **Ton_NoAp** | Aseo: Toneladas ordinarias. |
-| 60 | **Ton_Barr** | Aseo: Toneladas barrido. |
-| 61 | **Ton_Limp** | Aseo: Toneladas limpieza urbana. |
-| 62 | **Ton_Rech** | Aseo: Toneladas rechazados. |
-| 63 | **Ton_Disp** | Aseo: Toneladas disposición final. |
-| 64 | **Alertas** | Etiquetas de inteligencia (NORMAL, CAMBIO_MEDIDOR...). |
-| 65 | **Info_Reg_Json** | JSON con decretos e info textual. Prohibida la redundancia con datos ya mapeados en la matriz (Ejemplo: Col 44). |
+| 11 | **Contrato** | 'Número de contrato suscrito con EPM. |
+| 12 | **Ref_Pago** | 'Referencia única para pagos y convenios. |
+| 13 | **ID_Producto** | 'Identificador del servicio o tag de totalización. |
+| 14 | **Ciclo** | Ciclo de facturación asignado. |
+| 15 | **Est** | Estrato socioeconómico (1 a 6). |
+| 16 | **Tipo_Servicio** | Nombre del servicio o categoría de la fila (Ej: ACUE). |
+| 17 | **Desde** | Fecha inicial del periodo de consumo. |
+| 18 | **Hasta** | Fecha final del periodo de consumo. |
+| 19 | **Dias** | Días transcurridos en el ciclo de lectura. |
+
+#### --- GRUPO II: FINANCIERO (Cols 20 a 42) ---
+| Col | Nombre Variable | Servicio / Componente |
+| :--- | :--- | :--- |
+| 20 | **Ac_Fin_Var** | ACUE: Consumo variable liquidado. |
+| 21 | **Ac_Fin_Fijo** | ACUE: Cargo fijo mensual. |
+| 22 | **Ac_Fin_Cont_Fijo** | ACUE: Contribución/Subsidio cargo fijo. |
+| 23 | **Ac_Fin_Cont_Var** | ACUE: Contribución/Subsidio variable. |
+| 24 | **Al_Fin_Var** | ALCA: Vertimiento variable liquidado. |
+| 25 | **Al_Fin_Fijo** | ALCA: Cargo fijo mensual. |
+| 26 | **Al_Fin_Cont_Fijo** | ALCA: Contribución/Subsidio cargo fijo. |
+| 27 | **Al_Fin_Cont_Var** | ALCA: Contribución/Subsidio variable. |
+| 28 | **E_Fin_Var** | ENER: Consumo kWh liquidado. |
+| 29 | **E_Fin_Cont** | ENER: Contribución o Subsidio total. |
+| 30 | **G_Fin_Var** | GAS: Consumo m3 liquidado. |
+| 31 | **G_Fin_Fijo** | GAS: Cargo fijo mensual. |
+| 32 | **G_Fin_Cont_Fijo** | GAS: Contribución/Subsidio cargo fijo. |
+| 33 | **G_Fin_Cont_Var** | GAS: Contribución/Subsidio variable. |
+| 34 | **As_Fin_Fijo** | ASEO: Cargo fijo de recolección. |
+| 35 | **As_Fin_Var_Ap** | ASEO: Incentivo al aprovechamiento. |
+| 36 | **As_Fin_Var_NoAp** | ASEO: Disposición residuos ordinarios. |
+| 37 | **As_Fin_Cont** | ASEO: Contribución o Subsidio total. |
+| 38 | **Alum_Fin** | ALUM: Impuesto Alumbrado Público. |
+| 39 | **Otros** | Cobros de terceros / Financiaciones. |
+| 40 | **Ajuste** | Ajuste decimal a la unidad ($). |
+| 41 | **Saldo** | Saldo anterior pendiente. |
+| 42 | **Total_Fila** | Total neto de la fila actual. |
+
+#### --- GRUPO III: TÉCNICO (Cols 43 a 74) ---
+| Col | Nombre Variable | Detalle Técnico / Granularidad |
+| :--- | :--- | :--- |
+| 43 | **Consumo_Cant** | Cantidad física (kWh, m3, Ton). |
+| 44 | **Unidad_Medida** | Unidad (kWh, m3, Ton, Global). |
+| 45 | **Medidor** | 'Serial del equipo. |
+| 46 | **Lect_Ant** | Lectura anterior. |
+| 47 | **Lect_Act** | Lectura actual. |
+| 48 | **Const** | Constante corrección (Gas) / Factor (Energía). |
+| 49 | **A_CU_Cmap_Cost** | ACUE: Costo medio administración ($/m3). |
+| 50 | **A_CU_Cmpac_Unit** | ACUE: Tarifa unitaria Cmpac. |
+| 51 | **A_CU_Cmpac_Tot** | ACUE: Liquidación total Cmpac. |
+| 52 | **A_CU_Cmt_Unit** | ACUE: Tarifa unitaria Cmt. |
+| 53 | **A_CU_Cmt_Tot** | ACUE: Liquidación total Cmt. |
+| 54 | **Al_CU_Base_Cost** | ALCA: Costo base vertimiento ($/m3). |
+| 55 | **Al_CU_Cmt_Unit** | ALCA: Tarifa unitaria Cmt. |
+| 56 | **Al_CU_Cmt_Tot** | ALCA: Liquidación total Cmt. |
+| 57 | **E_CU_G** | ENER: Generación ($/kWh). |
+| 58 | **E_CU_T** | ENER: Transmisión ($/kWh). |
+| 59 | **E_CU_D** | ENER: Distribución ($/kWh). |
+| 60 | **E_CU_C** | ENER: Comercialización ($/kWh). |
+| 61 | **E_CU_P** | ENER: Pérdidas ($/kWh). |
+| 62 | **E_CU_R** | ENER: Restricciones ($/kWh). |
+| 63 | **G_CU_Compr_V** | GAS: Compra variable ($/m3). |
+| 64 | **G_CU_Dist_V** | GAS: Distribución variable ($/m3). |
+| 65 | **G_CU_Transp7_V** | GAS: **Variable "Transporte 7"** ($/m3). |
+| 66 | **G_CU_Conf_V** | GAS: Confiabilidad variable ($/m3). |
+| 67 | **G_CU_Com_V** | GAS: Comercialización variable ($/m3). |
+| 68 | **G_CU_Transp_F** | GAS: Transporte Gn (Cargo Fijo). |
+| 69 | **G_CU_Compr8_F** | GAS: **Fijo "Compresión 8"** ($/factura). |
+| 70 | **G_CU_Com_F** | GAS: Comercialización (Cargo Fijo). |
+| 71 | **As_Ton_NoAp** | ASEO: Toneladas No Aprovechables. |
+| 72 | **As_Ton_Barr** | ASEO: Toneladas barrido y limpieza. |
+| 73 | **As_Ton_Limp** | ASEO: Toneladas limpieza urbana. |
+| 74 | **As_Ton_Rech** | ASEO: Toneladas rechazados. |
+
+#### --- GRUPO IV: OBS (Cols 75 a 76) ---
+| Col | Nombre Variable | Descripción |
+| :--- | :--- | :--- |
+| 75 | **Alertas** | Tags: NORMAL, AUDITORIA, ALERTA. |
+| 76 | **Info_Reg_Json** | Sustento legal/normativo. Sin datos técnicos. |
