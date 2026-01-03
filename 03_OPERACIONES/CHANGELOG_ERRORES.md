@@ -6,6 +6,9 @@ Este archivo constituye la memoria técnica forense del sistema. Registra la tra
 
 | Fecha | GEM | Versión | Tipo | Descripción |
 | :--- | :--- | :--- | :--- | :--- |
+| Fecha | GEM | Versión | Tipo | Descripción |
+| :--- | :--- | :--- | :--- | :--- |
+| **03/01/2026** | **GLOBAL** | **v2.6.1** | **HITO** | **Consolidación de Identidad Bicapa y Agnosticismo**: Se establece que el Núcleo Global rige exclusivamente protocolos de integridad (Fechas, Decimales, IDs Protegidos). Se desvincula la densidad de columnas del Core Global, reafirmando que la estructura de matriz (ej. 76 cols para EPM) es propiedad exclusiva de cada Spoke Agent para evitar contaminación sistémica. |
 | **02/01/2026** | **GLOBAL** | **v2.6.0** | **HITO** | **Salto a 76 columnas**: Implementación de Granularidad Absoluta, Protocolo OJF y Relleno Técnico (0,00). |
 | 02/01/2026 | **GLOBAL** | v2.6.0 | **AJUSTE** | Estandarización de la variable técnica (Constante/Factor) exclusivamente en la **Columna 48**. |
 | 02/01/2026 | **EPM** | v2.6.0 | **SOLUCIONADO** | Mapeo forense de IDs dinámicos Gas (Transporte 7, Compresión 8) y 4 Toneladas de Aseo (71-74). |
