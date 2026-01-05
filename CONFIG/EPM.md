@@ -63,7 +63,9 @@ Es **MANDATORIO** generar exactamente **8 filas** por cada factura analizada, si
 4. **As_Cargo_Var**: `Cargo Variable` Valor consumo total de Aseo.
 ### Valores facturados Alumbrado Público
 1. **Al_Alum_Pub**: `Alumbrado Público` Valor total de Alumbrado Público.
-### Columna para ubicar los totales de todos los servicios segúan OJF
+### Columna Ajuste del peso
+1. **Ajuste_Peso**: Columna técnica para ajuste interno del peso de la factura (si aplica). Relleno técnico (`0,00`) si no aplica. Se debe incluir en la Fila TOTAL.
+### Columna de Totalización Final por Fila según OJF
 1. **Total_Fila**: Sumatoria neta liquidada en la fila actual. (`Total Acueducto`, `Total Alcantarillado`, `Total Energía`, `Total Gas`, `Total Aseo`, `Total Alumbrado`, `Total Otras Entidades`, `Total a pagar Factura`).
  
 
@@ -123,8 +125,8 @@ Estos valores son cruciales para auditorías detalladas y análisis de desglose 
 El Admin debe generar la tabla Markdown asegurando que cada fila contenga exactamente los **delimitadores (`|`)** para garantizar que existan todas las  columnas. Las columnas son las definidas en el DICCIONARIO DETALLADO DE COLUMNAS y el nombre es el que se encuentra entre los **[NOMBRE COLUMNA]**. Respetar también el orden del protocolo de filas (OJF).
 
 ### Encabezados de Tabla (Copy-Paste Ready)
-| ID_Unico | Periodo | Año | Sem | Tri | Bim | Mes | Mes_Num | Fecha_Fact | Fecha_Venc | Contrato | Ref_Pago | ID_Producto | Ciclo | Est | Tipo_Servicio | Desde | Hasta | Dias | Ac_Consumo | Ac_Cargo_Fijo | Ac_Contr_Cargo_Fijo | Ac_Cont_Consumo | Al_Consumo | Al_Cargo_Fijo | Al_Cont_Cargo_Fijo | Al_Cont_Consumo | E_Energía | E_Contr_Activa | G_Consumo | G_Cargo_Fijo | G_Cont_Consumo | G_Cont_Cargo_Fijo | As_Cargo_Fijo | As_Variable_Apro | As_Contrib | As_Cargo_Var | Al_Alum_Pub | Total_Fila | Costo | Consumo_Cant | Unidad_Medida | Medidor | Lect_Ant | Lect_Act | Const | Ac_Cmapac_Cost | Ac_Cmpac_Unitari | Ac_Cmpac_Total | Ac_Cmt Unitario | Ac_Cmt_Total | Al_Cmt_Unitario | Al_Cmt_Total | E_CU_G | E_CU_T | E_CU_D | E_CU_C | E_CU_P | E_CU_R | G_CU_Compr_V | G_CU_Dist_V | G_CU_Transp7_V | G_CU_Conf_V | G_CU_Com_V | G_CU_Transp_Gn_F | G_CU_Compr8_F | G_CU_Com_F | As_Ton_NoAp | As_Ton_Barr | As_Ton_Limp | As_Ton_Rech | Alertas | Info_Reg_Json |
-|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
+| ID_Unico | Periodo | Año | Sem | Tri | Bim | Mes | Mes_Num | Fecha_Fact | Fecha_Venc | Contrato | Ref_Pago | ID_Producto | Ciclo | Est | Tipo_Servicio | Desde | Hasta | Dias | Ac_Consumo | Ac_Cargo_Fijo | Ac_Contr_Cargo_Fijo | Ac_Cont_Consumo | Al_Consumo | Al_Cargo_Fijo | Al_Cont_Cargo_Fijo | Al_Cont_Consumo | E_Energía | E_Contr_Activa | G_Consumo | G_Cargo_Fijo | G_Cont_Consumo | G_Cont_Cargo_Fijo | As_Cargo_Fijo | As_Variable_Apro | As_Contrib | As_Cargo_Var | Al_Alum_Pub | Ajuste_Peso |Total_Fila | Costo | Consumo_Cant | Unidad_Medida | Medidor | Lect_Ant | Lect_Act | Const | Ac_Cmapac_Cost | Ac_Cmpac_Unitari | Ac_Cmpac_Total | Ac_Cmt Unitario | Ac_Cmt_Total | Al_Cmt_Unitario | Al_Cmt_Total | E_CU_G | E_CU_T | E_CU_D | E_CU_C | E_CU_P | E_CU_R | G_CU_Compr_V | G_CU_Dist_V | G_CU_Transp7_V | G_CU_Conf_V | G_CU_Com_V | G_CU_Transp_Gn_F | G_CU_Compr8_F | G_CU_Com_F | As_Ton_NoAp | As_Ton_Barr | As_Ton_Limp | As_Ton_Rech | Alertas | Info_Reg_Json |
+|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
 
 ## 5. PROTOCOLO DE AUTO-AUDITORÍA (PRE-ENTREGA)
 *El Admin debe ejecutar esta lista de chequeo forense antes de emitir la tabla final:*
