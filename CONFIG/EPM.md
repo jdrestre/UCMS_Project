@@ -73,7 +73,7 @@ Es **MANDATORIO** generar exactamente **8 filas** por cada factura analizada, si
 Estos valores son cruciales para auditorías detalladas y análisis de desglose de costos. Y se ubican de acuerdo al bloque de servicio correspondiente.
 
 1. **Costo**:  `Costo ($)` Costo unitario del servicio principal (Acueducto, Alcantarilla, Energía, Gas, Aseo y Alumbrado no tienen este Costo).
-2. **Consumo_Cant**: Cantidad física medida (Acueducto y Alcantarillado `m3`, Energía `kWh`, Gas `m3`, Aseo `Ton`, Alumbrando no aplica es un cargo fijo `Alumbrado Público`).
+2. **Consumo_Cant**: Cantidad física medida (Acueducto y Alcantarillado `m3`, Energía `kWh`, Gas `m3`. Para Aseo y Alumbrando no aplica, no hay un valor definido para este item).
 3. **Unidad_Medida**: Unidad de medida (m3, kWh, Ton).
 4.  **Medidor**: `'Serial del medidor (con apóstrofe)`. Solo aplica para Acueducto, Energía y Gas.
 5.  **Lect_Ant**: `Lectura anterior` Lectura anterior registrada. Solo aplica para Acueducto, Energía y Gas.
