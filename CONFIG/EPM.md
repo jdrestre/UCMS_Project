@@ -128,11 +128,11 @@ Una vez tengas identificada esta zona necesito realizar la extracción de toda l
 - Plan
 - Compra
 - Distribución
-- Transporte 7 --> extrae el valor numérico que aparece después de Transporte 7 
+- Transporte 7 --> extrae el valor numérico que aparece después de `Transporte 7` 
 - Confiabilidad
 - Comercializac
-- Transporte Gn
-- Compresión 8
+- Transporte Gn --> extrae el valor numérico que aparece después de `Transporte Gn`
+- Compresión 8 --> extrae el valor numérico que aparece después de `Compresión 8`
 - Comercializac
 
 ---
