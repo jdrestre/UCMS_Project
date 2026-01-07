@@ -12,7 +12,7 @@ Se puede identificar por el letrero del logo de la empresa en la parte superior 
 - Pagar hasta el (utilizar este formato siempre dd/mm/yyyy)
 - Contrato (Apostrofe obligatorio al inicio ('))
 - Referente de pago: (Apostrofe obligatorio al inicio ('))
-- Documento No (Busca después de `Documento No:` y Extrae la secuencia numérica completa agrega Apostrofe obligatorio al inicio ('))
+- Documento No --> (Busca después de `Documento No:` y Extrae la secuencia numérica completa que aparece después de `:` y agrega Apostrofe obligatorio al inicio ('))
 - Cliente
 - CC/NIT
 - Dirección de cobro
@@ -128,7 +128,7 @@ Una vez tengas identificada esta zona necesito realizar la extracción de toda l
 - Plan
 - Compra
 - Distribución
-- Transporte 7
+- Transporte 7 --> extrae el valor numérico que aparece después de Transporte 7 
 - Confiabilidad
 - Comercializac
 - Transporte Gn
