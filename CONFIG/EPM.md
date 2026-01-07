@@ -12,7 +12,7 @@ Se puede identificar por el letrero del logo de la empresa en la parte superior 
 - Pagar hasta el (utilizar este formato siempre dd/mm/yyyy)
 - Contrato (Apostrofe obligatorio al inicio ('))
 - Referente de pago: (Apostrofe obligatorio al inicio ('))
-- Documento No --> (Busca después de `Documento No:` y Extrae la secuencia numérica completa que aparece después de `:` y agrega Apostrofe obligatorio al inicio ('))
+- Documento No --> Extrae el valor numérico completo que aparece inmediatamente después de la etiqueta 'Documento No:'. Debes incluir TODOS los dígitos y espacios que aparezcan en esa misma línea (por ejemplo: '144 1676405'). No omitas los primeros dígitos ni resumas el número y agrega Apostrofe obligatorio al inicio (')
 - Cliente
 - CC/NIT
 - Dirección de cobro
