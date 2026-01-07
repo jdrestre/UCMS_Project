@@ -137,13 +137,39 @@ Una vez tengas identificada esta zona necesito realizar la extracción de toda l
 
 ---
 
+## 5. Bloque Otras Entidades
+Se puede identificar por el letrero vertical con la palabra "Otras Entidades" y la información del bloque se cubre a la derecha de ese letrero. Arriba empieza con `Emvarias` y abajo finaliza con `Total Otras Entidades` de esta zona se sacará toda la información del Bloque Otras Entidades. Este Bloque tiene la particularidad que puede tener varios sub bloques internos, cada sub bloque empieza con el nombre de la entidad (Emvarias para Aseo y Alumbrado Público Medellín para Alumbrado Público) y termina con los totales de cada sub bloque (Total Aseo y Total Alumbrado Público) y al final del Bloque está el Total Otras Entidades que es la suma de los totales de cada sub bloque. Una vez tengas identificada esta zona necesito realizar la extracción de toda la información de este Bloque Otras Entidades para realizar seguimiento histórico para cualquier factura.
+- Total Otras Entidades
+
+A continuación te detallo los sub bloques que puede tener este Bloque Otras Entidades:
+
+### 5.1 Aseo
+Se puede identificar por el letrero con la palabra "Emvarias" y la información del sub bloque se cubre a la derecha de ese letrero. Arriba empieza con `Emvarias` y abajo finaliza con `Total Aseo` de esta zona se sacará toda la información del Sub Bloque Aseo. Una vez tengas identificada esta zona necesito realizar la extracción de toda la información del Sub Bloque Aseo para realizar seguimiento histórico para cualquier factura.
+- Cargo fijo
+- Cargo Variable Aprovechable
+- Contribución
+- Cargo Variable
+- No Aprov - Ordinarios
+- Barrido y limpieza
+- Limpieza urbana
+- Rechazados
+- Total Aseo
+
+### 5.1 Alumbrado Público
+Se puede identificar por el letrero con la palabra "Alumbrado Público Medellín" y la información del sub bloque se cubre a la derecha de ese letrero. Arriba empieza con `Alumbrado Público Medellín` y abajo finaliza con `Total Alumbrado Público` de esta zona se sacará toda la información del Sub Bloque Alumbrado Público. Una vez tengas identificada esta zona necesito realizar la extracción de toda la información del Sub Bloque Alumbrado Público para realizar seguimiento histórico para cualquier factura.
+- Alumbrado Público
+- Total Alumbrado Público
+
+---
+
 ## Instrucciones adicionales
 - Toma solo los valores numéricos al sacar los valores de cada dato.
 - Los datos numéricos solo utilizan la (,) como separador decimal y quita el separador de miles.
 - Si encuentras un valor adicional a los anteriores me lo haces saber. Indicando con qué Bloque tiene relación y la historia del dato encontrado.
 - Los valores numéricos que no encuentres los reemplazas con (0,00).
 - Evalúa el contenido de cada Bloque y los datos extraídos y si encuentras algún dato adicional que le pueda aportar a la extracción en alguno de los bloques y me haces una recomendación.
-- Verifica que los totales de Bloque 1, Bloque 2, Bloque 3, Bloque 4 coincidan con los totales que se encuentran en el Bloque General, si no coinciden me lo haces saber indicando la diferencia encontrada.
+- Verifica que los totales de Bloque 1, Bloque 2, Bloque 3, Bloque 4, Bloque 5 coincidan con los totales que se encuentran en el Bloque General, si no coinciden me lo haces saber indicando la diferencia encontrada.
 - Si necesitas alguna aclaración adicional me lo haces saber antes de iniciar la extracción.
+- Verifica que la sumatoria de los sub bloques del Bloque 5 coincidan con el total del Bloque 5 y a la vez comparar con el valor que se encuentra en el Bloque General, si no coinciden me lo haces saber indicando la diferencia encontrada.
 
 Dame una tabla con estos datos identificados y dame un análisis de las Instrucciones para ubicar el Bloque y Dato fueron las correctas.
