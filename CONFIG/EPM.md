@@ -107,6 +107,36 @@ Una vez tengas identificada esta zona necesito realizar la extracción de toda l
 
 ---
 
+## 4. Bloque Gas
+Se puede identificar por el letrero vertical con la palabra "Gas" y la información del bloque se cubre a la derecha de ese letrero, puede excluir la zona gráfica para quitar ruido de la extracción. Arriba empieza con `Cálculo Consumo` y abajo finaliza con `Total Gas` de esta zona se sacará toda la información del Bloque Gas.
+Una vez tengas identificada esta zona necesito realizar la extracción de toda la información de este Bloque Gas para realizar seguimiento histórico para cualquier factura.
+- Fecha Inicio de Cálculo de Consumo (utilizar este formato siempre dd/mm/yyyy)
+- Fecha Final de Cálculo de Consumo (utilizar este formato siempre dd/mm/yyyy)
+- Días de Cálculo de Consumo
+- Lectura Actual
+- Lectura Anterior
+- Constante
+- Consumo m3
+- Consumo mmm-yy
+- Cargo fijo mmm-yy
+- Contrib consumo
+- Contrib cargo fijo
+- Total Gas
+- Producto (Apostrofe obligatorio al inicio ('))
+- Categoría
+- Medidor (Apostrofe obligatorio al inicio ('))
+- Plan
+- Compra
+- Distribución
+- Transporte 7
+- Confiabilidad
+- Comercializac
+- Transporte Gn
+- Compresión 8
+- Comercializac
+
+---
+
 ## Instrucciones adicionales
 - Toma solo los valores numéricos al sacar los valores de cada dato.
 - Los datos numéricos solo utilizan la (,) como separador decimal y quita el separador de miles.
