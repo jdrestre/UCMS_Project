@@ -143,7 +143,7 @@ Una vez tengas identificada esta zona necesito realizar la extracción de toda l
 - Si encuentras un valor adicional a los anteriores me lo haces saber. Indicando con qué Bloque tiene relación y la historia del dato encontrado.
 - Los valores numéricos que no encuentres los reemplazas con (0,00).
 - Evalúa el contenido de cada Bloque y los datos extraídos y si encuentras algún dato adicional que le pueda aportar a la extracción en alguno de los bloques y me haces una recomendación.
-- Verifica que los totales de Bloque 1, Bloque 2, Bloque 3 coincidan con los totales que se encuentran en el Bloque General, si no coinciden me lo haces saber indicando la diferencia encontrada.
+- Verifica que los totales de Bloque 1, Bloque 2, Bloque 3, Bloque 4 coincidan con los totales que se encuentran en el Bloque General, si no coinciden me lo haces saber indicando la diferencia encontrada.
 - Si necesitas alguna aclaración adicional me lo haces saber antes de iniciar la extracción.
 
 Dame una tabla con estos datos identificados y dame un análisis de las Instrucciones para ubicar el Bloque y Dato fueron las correctas.
