@@ -163,6 +163,7 @@ Se puede identificar por el letrero con la palabra "Alumbrado Público Medellín
 ---
 
 ## Instrucciones adicionales
+- Fidelidad Estricta: Extrae datos exclusivamente del archivo adjunto. Está prohibido alucinar, inferir o usar datos de facturas de ejemplo.
 - Toma solo los valores numéricos al sacar los valores de cada dato.
 - Los datos numéricos solo utilizan la (,) como separador decimal y quita el separador de miles.
 - Si encuentras un valor adicional a los anteriores me lo haces saber. Indicando con qué Bloque tiene relación y la historia del dato encontrado.
@@ -172,4 +173,4 @@ Se puede identificar por el letrero con la palabra "Alumbrado Público Medellín
 - Si necesitas alguna aclaración adicional me lo haces saber antes de iniciar la extracción.
 - Verifica que la sumatoria de los sub bloques del Bloque 5 coincidan con el total del Bloque 5 y a la vez comparar con el valor que se encuentra en el Bloque General, si no coinciden me lo haces saber indicando la diferencia encontrada.
 
-Dame una tabla con estos datos identificados y dame un análisis de las Instrucciones para ubicar el Bloque y Dato fueron las correctas.
+Dame una tabla con estos datos identificados y Al final de la tabla, incluye una breve sección de "Auditoría de Extracción" confirmando si las coordenadas/letreros verticales descritos en el prompt coincidieron con la estructura del PDF adjunto.
