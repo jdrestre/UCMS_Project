@@ -145,6 +145,7 @@ A continuación te detallo los sub bloques que puede tener este Bloque Otras Ent
 
 ### 5.1 Aseo
 Se puede identificar por el letrero con la palabra "Emvarias" y la información del sub bloque se cubre a la derecha de ese letrero. Arriba empieza con `Emvarias` y abajo finaliza con `Total Aseo` de esta zona se sacará toda la información del Sub Bloque Aseo. Una vez tengas identificada esta zona necesito realizar la extracción de toda la información del Sub Bloque Aseo para realizar seguimiento histórico para cualquier factura.
+- Periodo de consumo ('mmm-yy) Incluir apostrofe al inicio (') 
 - Cargo fijo
 - Cargo Variable Aprovechable
 - Contribución
@@ -174,3 +175,34 @@ Se puede identificar por el letrero con la palabra "Alumbrado Público Medellín
 - Verifica que la sumatoria de los sub bloques del Bloque 5 coincidan con el total del Bloque 5 y a la vez comparar con el valor que se encuentra en el Bloque General, si no coinciden me lo haces saber indicando la diferencia encontrada.
 
 Dame una tabla con estos datos identificados y Al final de la tabla, incluye una breve sección de "Auditoría de Extracción" confirmando si las coordenadas/letreros verticales descritos en el prompt coincidieron con la estructura del PDF adjunto.
+
+# TABLA DE DATOS EXTRAÍDOS
+
+La tabla debe tener 8 filas que corresponden a los servicios: Acueducto, Alcantarillado, Energía, Gas, Otras Entidades y Total General.
+La primera columna debe listar los nombres de los servicios con un ID definido como `ID_Servicio` y debe ser definido de la siguiente manera: 
+- PERIODO = mmm-yyyy
+- SERVICIO = Nombre del servicio (ACUE, ALCA, ENER, GAS, ASEO, ALUM, OTRAS, TOTAL)
+- CONTRATO = Número de contrato extraído del Bloque General
+
+FORMATO DEL `ID_Servicio`: 'PERIODO_SERVICIO_CONTRATO' (Ejemplo: 'ENE-2025_ACUE_12345678')
+
+## COLUMNAS DE LA TABLA
+LA TABLA DE DATOS EXTRAÍDOS debe contener las siguientes columnas:
+- ID_Servicio (como se definió anteriormente)
+- PERÍODO ('mmm-yyyy) Debe tener un apostrofe al inicio (') Ejemplo: 'ENE-2025
+- SERVICIO (Nombre del servicio: Acueducto, Alcantarillado, Energía, Gas, Otras Entidades, Total General)
+- FECHA_GENERACIÓN (dd/mm/yyyy) Se extrae del Bloque General `Fecha de generación`
+- FECHA_LIMITE_PAGO (dd/mm/yyyy) Se extrae del Bloque General `Pagar hasta el`
+- VALOR_A_PAGAR (Valor numérico sin separador de miles y con coma como separador decimal) Se toma de cada Bloque correspondiente por servicio y del Bloque General para la fila de Total General.
+- FECHA_INICIO_CONSUMO (dd/mm/yyyy) Se extrae de cada Bloque correspondiente por servicio del `Fecha Inicio de Cálculo de Consumo`. Para Aseo, Alumbrado Público, Otras Entidades y Total General se coloca (N/A)
+- FECHA_FINAL_CONSUMO (dd/mm/yyyy) Se extrae de cada Bloque correspondiente por servicio del `Fecha Final de Cálculo de Consumo`
+- DiAS_CÁLCULO_CONSUMO (Número entero) Se extrae de cada Bloque correspondiente por servicio del `Días de Cálculo de Consumo`
+- CONSUMO (Valor numérico sin separador de miles y con coma como separador decimal) Se toma de cada Bloque correspondiente por servicio. Para Aseo, Alumbrado Público, Otras Entidades y Total General se coloca (0,00)
+
+
+## FORMATO DE SALIDA
+Debe ser markdown con las columnas definidas en la sección `Columnas de la tabla` separadas por tuberías `|` como se muestra a continuación:
+| ID_Servicio | PERÍODO | SERVICIO | FECHA_GENERACIÓN | FECHA_LIMITE_PAGO | VALOR_A_PAGAR | FECHA_INICIO_CONSUMO | FECHA_FINAL_CONSUMO | DIAS_CÁLCULO_CONSUMO | CONSUMO |
+|-------------|---------|----------|------------------|-------------------|---------------|----------------------|---------------------|----------------------|---------|
+| 'MMM-YYYY_ACUE_XXXXXXXX' | 'mmm-yyyy | Acueducto | dd/mm/yyyy | dd/mm/yyyy | valor | dd/mm/yyyy | dd/mm/yyyy | número | valor |
+| ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |
