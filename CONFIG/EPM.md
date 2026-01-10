@@ -176,7 +176,7 @@ Se puede identificar por el letrero con la palabra "Alumbrado Público Medellín
 
 Dame una tabla con estos datos identificados y Al final de la tabla, incluye una breve sección de "Auditoría de Extracción" confirmando si las coordenadas/letreros verticales descritos en el prompt coincidieron con la estructura del PDF adjunto.
 
-# TABLA DE DATOS EXTRAÍDOS
+# TABLAS DE DATOS EXTRAÍDOS
 
 La tabla debe tener 8 filas que corresponden a los servicios: Acueducto, Alcantarillado, Energía, Gas, Otras Entidades y Total General.
 La primera columna debe listar los nombres de los servicios con un ID definido como `ID_Servicio` y debe ser definido de la siguiente manera: 
@@ -186,28 +186,66 @@ La primera columna debe listar los nombres de los servicios con un ID definido c
 
 FORMATO DEL `ID_Servicio`: 'PERIODO_SERVICIO_CONTRATO' (Ejemplo: 'ENE-2025_ACUE_12345678')
 
-## COLUMNAS DE LA TABLA
+## COLUMNAS DE LA TABLA BASE
 LA TABLA DE DATOS EXTRAÍDOS debe contener las siguientes columnas:
 - ID_Servicio (como se definió anteriormente)
 - PERÍODO ('mmm-yyyy) Debe tener un apostrofe al inicio (') Ejemplo: 'ENE-2025
 - SERVICIO (Nombre del servicio: Acueducto, Alcantarillado, Energía, Gas, Otras Entidades, Total General)
 - FECHA_GENERACIÓN (dd/mm/yyyy) Se extrae del Bloque General `Fecha de generación`
 - FECHA_LIMITE_PAGO (dd/mm/yyyy) Se extrae del Bloque General `Pagar hasta el`
-- FECHA_INICIO_CONSUMO (dd/mm/yyyy) Se extrae de cada Bloque correspondiente por servicio del `Fecha Inicio de Cálculo de Consumo`. Para Aseo, Alumbrado Público, Otras Entidades y Total General se coloca (N/A)
-- FECHA_FINAL_CONSUMO (dd/mm/yyyy) Se extrae de cada Bloque correspondiente por servicio del `Fecha Final de Cálculo de Consumo`
-- DiAS_CÁLCULO_CONSUMO (Número entero) Se extrae de cada Bloque correspondiente por servicio del `Días de Cálculo de Consumo`
-- LECTURA_ACTUAL (Número entero) Se extrae de cada Bloque correspondiente por servicio. Para Aseo, Alumbrado Público, Otras Entidades y Total General se coloca (0)
-- LECTURA_ANTERIOR (Número entero) Se extrae de cada Bloque correspondiente por servicio. Para Aseo, Alumbrado Público, Otras Entidades y Total General se coloca (0)
-- CONSUMO Es la diferencia entre LECTURA_ACTUAL y LECTURA_ANTERIOR(Valor numérico sin separador de miles y con coma como separador decimal) Se toma de cada Bloque correspondiente por servicio. Para Aseo, Alumbrado Público, Otras Entidades y Total General se coloca (0,00)
+- CONSUMO (Valor numérico sin separador de miles y con coma como separador decimal) Se toma de cada Bloque correspondiente por servicio. Para Aseo, Alumbrado Público, Otras Entidades y Total General se coloca (0,00)
 - CONSTANTE Para los Bloques que tienen este dato (Gas y Energía), para Gas y Energía se extrae utilizando la coma como separador decimal, para los demás servicios se coloca (0,00).
 - COSTO ($) Se extrae de cada Bloque correspondiente por servicio (Valor numérico sin separador de miles y con coma como separador decimal). Para Aseo, Alumbrado Público, Otras Entidades y Total General se coloca (0,00).
 - VALOR_A_PAGAR (Valor numérico sin separador de miles y con coma como separador decimal) Se toma de cada Bloque correspondiente por servicio con el texto `Total [Servicio]`  y del Bloque General para la fila de Otras Entidades y Total General.
 - OTROS_CARGOS (Valor numérico sin separador de miles y con coma como separador decimal) Se extrae del Bloque General en caso que se encuentre un valor adicional que no corresponda a los servicios definidos (Acueducto, Alcantarillado, Energía, Gas, Otras Entidades, Ajuste al peso). En caso de no encontrar ningún valor adicional se coloca (0,00). Si el valor tiene relación con algún servicio se coloca en la fila correspondiente al servicio.
 
 
-## FORMATO DE SALIDA
+### FORMATO DE SALIDA TABLA BASE
 Debe ser markdown con las columnas definidas en la sección `Columnas de la tabla` separadas por tuberías `|` como se muestra a continuación:
-| ID_Servicio | PERÍODO | SERVICIO | FECHA_GENERACIÓN | FECHA_LIMITE_PAGO | FECHA_INICIO_CONSUMO | FECHA_FINAL_CONSUMO | DIAS_CÁLCULO_CONSUMO | LECTURA_ACTUAL | LECTURA_ANTERIOR | CONSUMO | CONSTANTE | COSTO ($) | VALOR_A_PAGAR | OTROS_CARGOS |
-|-------------|---------|----------|------------------|-------------------|----------------------|---------------------|----------------------|----------------|------------------|---------|-----------|-----------|---------------|--------------|
-| 'MMM-YYYY_ACUE_XXXXXXXX' | 'mmm-yyyy | Acueducto | dd/mm/yyyy | dd/mm/yyyy | dd/mm/yyyy | dd/mm/yyyy | número | número | número | valor | valor | valor | valor | valor |
-| ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |
+| ID_Servicio | PERÍODO | SERVICIO | FECHA_GENERACIÓN | FECHA_LIMITE_PAGO | CONSUMO | CONSTANTE | COSTO ($) | VALOR_A_PAGAR | OTROS_CARGOS |
+|---|---|---|---|---|---|---|---|---|---|
+| 'MMM-YYYY_ACUE_XXXXXXXX' | 'mmm-yyyy | Acueducto | dd/mm/yyyy | dd/mm/yyyy | valor | valor | valor | valor | valor |
+| ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |
+
+---
+
+## COLUMNAS TABLA ACUEDUCTO Y ALCANTARILLADO DETALLE
+Necesito una tabla detallada solo para los bloques de: 
+Bloque Acueducto y Bloque de Alcantarillado con las siguientes columnas:
+- ID_Servicio (como se definió anteriormente) DEBE SER EL MISMO QUE EN LA TABLA BASE Y UNA FILA POR CADA SERVICIO (ACUE Y ALCA)
+- SERVICIO (Nombre del servicio: Acueducto, Alcantarillado)
+- PERIÓDO ('mmm-yyyy) Debe tener un apostrofe al inicio (') Ejemplo: 'ENE-2025
+- PERIODO_CONSUMO_INICIO (dd/mm/yyyy) Se extrae del Bloque correspondiente al servicio `Cálculo Consumo`
+- PERIODO_CONSUMO_FINAL (dd/mm/yyyy) Se extrae del Bloque correspondiente al servicio `Cálculo Consumo`
+- DÍAS_CÁLCULO_CONSUMO (Número entero) Se extrae del Bloque correspondiente al servicio `Cálculo Consumo`
+- LECTURA_ACTUAL Se extrae del Bloque correspondiente al servicio `Lectura Actual`
+- LECTURA_ANTERIOR Se extrae del Bloque correspondiente al servicio `Lectura Anterior`
+- CONSUMO_M3 Se extrae del Bloque correspondiente al servicio `Consumo m3`
+- COSTO ($) Se extrae del Bloque correspondiente al servicio `Costo ($)`
+- CONSUMO_MMM-YY Se extrae del Bloque correspondiente al servicio `Consumo mmm-yy` y es el valor numérico sin separador de miles y con coma como separador decimal que resulta de multiplicar el Consumo m3 por el Costo ($) en esa línea.
+- CARGO_FIJO_MMM-YY Se extrae del Bloque correspondiente al servicio `Cargo fijo mmm-yy`
+- CONTRIB_CARGO_FIJO Se extrae del Bloque correspondiente al servicio `Contribución Cargo Fijo`
+- CONTRIB_CONSUMO Se extrae del Bloque correspondiente al servicio `Contribución Consumo`
+- TOTAL_SERVICIO Se extrae del Bloque correspondiente al servicio `Total Servicio` (Acueducto o Alcantarillado)
+- PRODUCTO (Apostrofe obligatorio al inicio (')) 
+- CATEGORÍA
+- MEDIDOR (Apostrofe obligatorio al inicio ('))
+- PLAN
+- CMAPAC_COST Nombre exacto del dato a extraer `Cmapac - Cost `
+- CMAPAC_UNITARI Nombre exacto del dato a extraer `Cmpac Unitari`
+- CMAPAC_TOTAL Nombre exacto del dato a extraer `Cmpac Total`
+- CMT_UNITARIO Nombre exacto del dato a extraer `Cmt Unitario`
+- CMT_TOTAL Nombre exacto del dato a extraer `Cmt Total`
+
+Para los valores de Alcantarillado que no encuentres en la factura los reemplazas con (0,00) o 0 según corresponda.
+
+---
+
+### FORMATO DE SALIDA TABLA DETALLE ACUEDUCTO Y ALCANTARILLADO
+Debe ser markdown con las columnas definidas en la sección `Columnas tabla Acueducto y Alcantarillado detalle` separadas por tuberías `|` como se muestra a continuación:
+| ID_Servicio | SERVICIO | PERIÓDO | PERIODO_CONSUMO_INICIO | PERIODO_CONSUMO_FINAL | DÍAS_CÁLCULO_CONSUMO | LECTURA_ACTUAL | LECTURA_ANTERIOR | CONSUMO_M3 | COSTO ($) | CONSUMO_MMM-YY | CARGO_FIJO_MMM-YY | CONTRIB_CARGO_FIJO | CONTRIB_CONSUMO | TOTAL_SERVICIO | PRODUCTO | CATEGORÍA | MEDIDOR | PLAN | CMAPAC_COST | CMAPAC_UNITARI | CMAPAC_TOTAL | CMT_UNITARIO | CMT_TOTAL |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---||---|---|---|---|---|
+| 'MMM-YYYY_ACUE_XXXXXXXX' | Acueducto | 'mmm-yyyy | dd/mm/yyyy | dd/mm/yyyy | valor | valor | valor | valor | valor | valor | valor | valor | valor | valor | 'producto' | valor | 'medidor' | valor | valor | valor | valor | valor |
+| 'MMM-YYYY_ALCA_XXXXXXXX' | Alcantarillado | 'mmm-yyyy | dd/mm/yyyy | dd/mm/yyyy | valor | valor | valor | valor | valor | valor | valor | valor | valor | valor | 'producto' | valor | 'medidor' | | valor | valor | valor | valor | valor |
+
+---
