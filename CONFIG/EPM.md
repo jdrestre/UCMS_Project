@@ -160,6 +160,7 @@ Se puede identificar por el letrero con la palabra "Emvarias" y la información 
 Se puede identificar por el letrero con la palabra "Alumbrado Público Medellín" y la información del sub bloque se cubre a la derecha de ese letrero. Arriba empieza con `Alumbrado Público Medellín` y abajo finaliza con `Total Alumbrado Público` de esta zona se sacará toda la información del Sub Bloque Alumbrado Público. Una vez tengas identificada esta zona necesito realizar la extracción de toda la información del Sub Bloque Alumbrado Público para realizar seguimiento histórico para cualquier factura.
 - Alumbrado Público
 - Total Alumbrado Público
+- Total Otras Entidades (SUMATORIA DE LOS TOTALES DE CADA SUB BLOQUE ANOTADOS ARRIBA ASEO Y ALUMBRADO PÚBLICO)
 
 ---
 
@@ -215,12 +216,12 @@ Bloque Acueducto y Bloque de Alcantarillado con las siguientes columnas:
 - ID_Servicio (como se definió anteriormente) DEBE SER EL MISMO QUE EN LA TABLA BASE Y UNA FILA POR CADA SERVICIO (ACUE Y ALCA)
 - SERVICIO (Nombre del servicio: Acueducto, Alcantarillado)
 - PERIÓDO ('mmm-yyyy) Debe tener un apostrofe al inicio (') Ejemplo: 'ENE-2025
-- PERIODO_CONSUMO_INICIO (dd/mm/yyyy) Se extrae del Bloque correspondiente al servicio `Cálculo Consumo`
-- PERIODO_CONSUMO_FINAL (dd/mm/yyyy) Se extrae del Bloque correspondiente al servicio `Cálculo Consumo`
-- DÍAS_CÁLCULO_CONSUMO (Número entero) Se extrae del Bloque correspondiente al servicio `Cálculo Consumo`
-- LECTURA_ACTUAL Se extrae del Bloque correspondiente al servicio `Lectura Actual`
+- PERIODO_CONSUMO_INICIO (dd/mm/yyyy) Se extrae del Bloque correspondiente al servicio `Cálculo Consumo` y es el mismo valor para Acueducto y Alcantarillado
+- PERIODO_CONSUMO_FINAL (dd/mm/yyyy) Se extrae del Bloque correspondiente al servicio `Cálculo Consumo` y es el mismo valor para Acueducto y Alcantarillado
+- DÍAS_CÁLCULO_CONSUMO (Número entero) Se extrae del Bloque correspondiente al servicio `Cálculo Consumo` y es el mismo valor para Acueducto y Alcantarillado
+- LECTURA_ACTUAL Se extrae del Bloque correspondiente al servicio `Lectura Actual` y es el mismo valor para Acueducto y Alcantarillado
 - LECTURA_ANTERIOR Se extrae del Bloque correspondiente al servicio `Lectura Anterior`
-- CONSUMO_M3 Se extrae del Bloque correspondiente al servicio `Consumo m3`
+- CONSUMO_M3 Se extrae del Bloque correspondiente al servicio `Consumo m3` y es el mismo valor para Acueducto y Alcantarillado
 - COSTO ($) Se extrae del Bloque correspondiente al servicio `Costo ($)`
 - CONSUMO_MMM-YY Se extrae del Bloque correspondiente al servicio `Consumo mmm-yy` y es el valor numérico sin separador de miles y con coma como separador decimal que resulta de multiplicar el Consumo m3 por el Costo ($) en esa línea.
 - CARGO_FIJO_MMM-YY Se extrae del Bloque correspondiente al servicio `Cargo fijo mmm-yy`
@@ -247,5 +248,104 @@ Debe ser markdown con las columnas definidas en la sección `Columnas tabla Acue
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---||---|---|---|---|---|
 | 'MMM-YYYY_ACUE_XXXXXXXX' | Acueducto | 'mmm-yyyy | dd/mm/yyyy | dd/mm/yyyy | valor | valor | valor | valor | valor | valor | valor | valor | valor | valor | 'producto' | valor | 'medidor' | valor | valor | valor | valor | valor |
 | 'MMM-YYYY_ALCA_XXXXXXXX' | Alcantarillado | 'mmm-yyyy | dd/mm/yyyy | dd/mm/yyyy | valor | valor | valor | valor | valor | valor | valor | valor | valor | valor | 'producto' | valor | 'medidor' | | valor | valor | valor | valor | valor |
+
+---
+
+## COLUMNAS TABLA ENERGÍA DETALLE
+Necesito una tabla detallada solo para el Bloque de Energía con las siguientes columnas:
+- ID_Servicio (como se definió anteriormente) DEBE SER EL MISMO QUE EN LA TABLA BASE Y UNA FILA POR EL SERVICIO ENERGÍA (ENER)
+- SERVICIO (Nombre del servicio: Energía)
+- PERIÓDO ('mmm-yyyy) Debe tener un apostrofe al inicio (') Ejemplo: 'ENE-2025
+- PERIODO_CONSUMO_INICIO (dd/mm/yyyy) Se extrae del Bloque correspondiente al servicio `Cálculo Consumo`
+- PERIODO_CONSUMO_FINAL (dd/mm/yyyy) Se extrae del Bloque correspondiente al servicio `Cálculo Consumo`
+- DÍAS_CÁLCULO_CONSUMO (Número entero) Se extrae del Bloque correspondiente al servicio `Cálculo Consumo`
+- LECTURA_ACTUAL Se extrae del Bloque correspondiente al servicio `Lectura Actual`
+- LECTURA_ANTERIOR Se extrae del Bloque correspondiente al servicio `Lectura Anterior`
+- CONSTANTE Se extrae del Bloque correspondiente al servicio `Constante`
+- CONSUMO_KWH Se extrae del Bloque correspondiente al servicio `Consumo kWh`
+- COSTO ($) Se extrae del Bloque correspondiente al servicio `Costo ($)`
+- ENERGÍA_MMM-YY Se extrae del Bloque correspondiente al servicio `Energía mmm-yy` y es el valor numérico sin separador de miles y con coma como separador decimal que resulta de multiplicar el Consumo kWh por el Costo ($) en esa línea.
+- CONTRIBUCIÓN_ACTIVA Se extrae del Bloque correspondiente al servicio `Contribución activa`
+- TOTAL_ENERGÍA Se extrae del Bloque correspondiente al servicio `Total Energía`
+- PRODUCTO (Apostrofe obligatorio al inicio (')) 
+- CATEGORÍA
+- MEDIDOR (Apostrofe obligatorio al inicio ('))
+- PLAN
+- GENERACIÓN Extrae el valor numérico que aparece después de `Generación` utilizando la coma como separador decimal
+- TRANSMISIÓN Extrae el valor numérico que aparece después de `Transmisión` utilizando la coma como separador decimal
+- DISTRIBUCIÓN Extrae el valor numérico que aparece después de `Distribución` utilizando la coma como separador decimal
+- COMERCIALIZACIÓN Extrae el valor numérico que aparece después de `Comercializac` utilizando la coma como separador decimal
+- PERDIDAS Extrae el valor numérico que aparece después de `Perdidas` utilizando la coma como separador decimal
+- RESTRICCIONES Extrae el valor numérico que aparece después de `Restricciones` utilizando la coma como separador decimal
+- N_TENSIÓN_Voltios Extrae el valor numérico que aparece después de `N. tensión` como número entero
+
+---
+
+### FORMATO DE SALIDA TABLA DETALLE ENERGÍA
+Debe ser markdown con las columnas definidas en la sección `Columnas tabla Energía detalle` separadas por tuberías `|` como se muestra a continuación:
+| ID_Servicio | SERVICIO | PERIÓDO | PERIODO_CONSUMO_INICIO | PERIODO_CONSUMO_FINAL | DÍAS_CÁLCULO_CONSUMO | LECTURA_ACTUAL | LECTURA_ANTERIOR | CONSTANTE | CONSUMO_KWH | COSTO ($) | ENERGÍA_MMM-YY | CONTRIBUCIÓN_ACTIVA | TOTAL_ENERGÍA | PRODUCTO | CATEGORÍA | MEDIDOR | PLAN | GENERACIÓN | TRANSMISIÓN | DISTRIBUCIÓN | COMERCIALIZACIÓN | PERDIDAS | RESTRICCIONES | N_TENSIÓN_Voltios |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 'MMM-YYYY_ENER_XXXXXXXX' | Energía | 'mmm-yyyy | dd/mm/yyyy | dd/mm/yyyy | valor | valor | valor | valor | valor | valor | valor | valor | valor | 'producto' | valor | 'medidor' | | valor | valor | valor | valor | valor | valor | valor | valor |
+
+---
+
+## COLUMNAS TABLA GAS DETALLE
+Necesito una tabla detallada solo para el Bloque de Gas con las siguientes columnas:
+- ID_Servicio (como se definió anteriormente) DEBE SER EL MISMO QUE EN LA TABLA BASE Y UNA FILA POR EL SERVICIO GAS (GAS)
+- SERVICIO (Nombre del servicio: Gas)
+- PERIÓDO ('mmm-yyyy) Debe tener un apostrofe al inicio (') Ejemplo: 'ENE-2025
+- PERIODO_CONSUMO_INICIO (dd/mm/yyyy) Se extrae del Bloque correspondiente al servicio `Cálculo Consumo`
+- PERIODO_CONSUMO_FINAL (dd/mm/yyyy) Se extrae del Bloque correspondiente al servicio `Cálculo Consumo`
+- DÍAS_CÁLCULO_CONSUMO (Número entero) Se extrae del Bloque correspondiente al servicio `Cálculo Consumo`
+- LECTURA_ACTUAL Se extrae del Bloque correspondiente al servicio `Lectura Actual`
+- LECTURA_ANTERIOR Se extrae del Bloque correspondiente al servicio `Lectura Anterior`
+- CONSTANTE Se extrae del Bloque correspondiente al servicio `Constante`
+- CONSUMO_M3 Se extrae del Bloque correspondiente al servicio `Consumo m3`
+- COSTO ($) Se extrae del Bloque correspondiente al servicio `Costo ($)`
+- CONSUMO_MMM-YY Se extrae del Bloque correspondiente al servicio `Consumo mmm-yy` y es el valor numérico sin separador de miles y con coma como separador decimal que resulta de multiplicar el Consumo m3 por el Costo ($) en esa línea.
+- CARGO_FIJO_MMM-YY Se extrae del Bloque correspondiente al servicio `Cargo fijo mmm-yy`
+- CONTRIB_CONSUMO Se extrae del Bloque correspondiente al servicio `Contrib Consumo`
+- CONTRIB_CARGO_FIJO Se extrae del Bloque correspondiente al servicio `Contrib Cargo Fijo`
+- TOTAL_GAS Se extrae del Bloque correspondiente al servicio `Total Gas`
+- PRODUCTO (Apostrofe obligatorio al inicio (')) 
+- CATEGORÍA
+- MEDIDOR (Apostrofe obligatorio al inicio ('))
+- PLAN
+- COMPRA Extrae el valor numérico que aparece después de `Compra` utilizando la coma como separador decimal
+- DISTRIBUCIÓN Extrae el valor numérico que aparece después de `Distribución` utilizando la coma como separador decimal
+- TRANSPORTE Extrae el valor numérico que aparece después de `Transporte` o `Transporte 7`, el que aparezca, utilizando la coma como separador decimal
+- CONFIABILIDAD Extrae el valor numérico que aparece después de `Confiabilidad` utilizando la coma como separador decimal
+- COMERCIALIZACIÓN Extrae el valor numérico que aparece después de `Comercializac` utilizando la coma como separador decimal
+- TRANSPORTE_GN Extrae el valor numérico que aparece después de `Transporte Gn` utilizando la coma como separador decimal
+- COMPRESIÓN_FIJA Extrae el valor numérico que aparece después de `Compresión` o `Compresión 8`, el que aparezca, utilizando la coma como separador decimal
+- COMERCIALIZACIÓN_FIJA Extrae el valor numérico que aparece después de la segunda aparición de `Comercializac` utilizando la coma como separador decimal, debe coincidir con el valor que aparece en la columna CARGO_FIJO_MMM-YY (En algunas facturas no aparece este valor, en ese caso colocar (0,00))
+
+---
+
+### FORMATO DE SALIDA TABLA DETALLE GAS
+Debe ser markdown con las columnas definidas en la sección `Columnas tabla Gas detalle` separadas por tuberías `|` como se muestra a continuación:
+| ID_Servicio | SERVICIO | PERIÓDO | PERIODO_CONSUMO_INICIO | PERIODO_CONSUMO_FINAL | DÍAS_CÁLCULO_CONSUMO | LECTURA_ACTUAL | LECTURA_ANTERIOR | CONSTANTE | CONSUMO_M3 | COSTO ($) | CONSUMO_MMM-YY | CARGO_FIJO_MMM-YY | CONTRIB_CONSUMO | CONTRIB_CARGO_FIJO | TOTAL_GAS | PRODUCTO | CATEGORÍA | MEDIDOR | PLAN | COMPRA | DISTRIBUCIÓN | TRANSPORTE | CONFIABILIDAD | COMERCIALIZACIÓN | TRANSPORTE_GN | COMPRESIÓN_FIJA | COMERCIALIZACIÓN_FIJA |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 'MMM-YYYY_GAS_XXXXXXXX' | Gas | 'mmm-yyyy | dd/mm/yyyy | dd/mm/yyyy | valor | valor | | valor | valor | valor | valor | valor | valor | valor | valor | valor | 'producto' | valor | 'medidor' | | valor | valor | valor | valor | valor | valor | valor |
+
+---
+
+## COLUMNAS TABLA OTRAS ENTIDADES DETALLE
+Necesito una tabla detallada solo para el Bloque de Otras Entidades con las siguientes columnas:
+- ID_Servicio (como se definió anteriormente) DEBE SER EL MISMO QUE EN LA TABLA BASE Y UNA FILA POR CADA SUB BLOQUE (ASEO Y ALUM) Y UNA FILA ADICIONAL PARA EL TOTAL GENERAL (OTRAS ENTIDADES)
+- SERVICIO (Nombre del servicio: Aseo, Alumbrado Público)
+- PERIÓDO ('mmm-yyyy) Debe tener un apostrofe al inicio (') Ejemplo: 'ENE-2025
+- CARGO_FIJO Se extrae del Sub Bloque correspondiente al servicio `Cargo fijo` (Solo para Aseo)
+- CARGO_VARIABLE_APROVECHABLE Se extrae del Sub Bloque correspondiente al servicio `Cargo Variable Aprovecha` (Solo para Aseo)
+- CONTRIBUCIÓN Se extra e del Sub Bloque correspondiente al servicio `Contribución` (Solo para Aseo)
+- CARGO_VARIABLE Se extrae del Sub Bloque correspondiente al servicio `Cargo Variable` (Solo para Aseo)
+- NO_APROV_ORDINARIOS Se extrae del Sub Bloque correspondiente al servicio `No Aprov - Ordinarios` (Solo para Aseo)
+- BARRIDO_Y_LIMPIEZA Se extrae del Sub Bloque correspondiente al servicio `Barrido y limpieza` (Solo para Aseo)
+- LIMPIEZA_URBANA Se extrae del Sub Bloque correspondiente al servicio `Limpieza urbana` (Solo para Aseo)
+- RECHAZADOS Se extrae del Sub Bloque correspondiente al servicio `Rechazados` (Solo para Aseo)
+- ALUMBRADO_PÚBLICO Se extrae del Sub Bloque correspondiente al servicio `Alumbrado Público` (Solo para Alumbrado Público)
+- TOTAL_SERVICIO Se extrae del Sub Bloque correspondiente al servicio `Total [Servicio]` (Aseo, Alumbrado Público Y Otras Entidades(SUMATORIA DE LOS TOTALES DE LOS SUB BLOQUES ASEO Y ALUMBRADO PÚBLICO))
+
+* Para los valores que no encuentres en la factura los reemplazas con (0,00).
 
 ---
