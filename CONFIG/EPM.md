@@ -193,16 +193,21 @@ LA TABLA DE DATOS EXTRAÍDOS debe contener las siguientes columnas:
 - SERVICIO (Nombre del servicio: Acueducto, Alcantarillado, Energía, Gas, Otras Entidades, Total General)
 - FECHA_GENERACIÓN (dd/mm/yyyy) Se extrae del Bloque General `Fecha de generación`
 - FECHA_LIMITE_PAGO (dd/mm/yyyy) Se extrae del Bloque General `Pagar hasta el`
-- VALOR_A_PAGAR (Valor numérico sin separador de miles y con coma como separador decimal) Se toma de cada Bloque correspondiente por servicio y del Bloque General para la fila de Total General.
 - FECHA_INICIO_CONSUMO (dd/mm/yyyy) Se extrae de cada Bloque correspondiente por servicio del `Fecha Inicio de Cálculo de Consumo`. Para Aseo, Alumbrado Público, Otras Entidades y Total General se coloca (N/A)
 - FECHA_FINAL_CONSUMO (dd/mm/yyyy) Se extrae de cada Bloque correspondiente por servicio del `Fecha Final de Cálculo de Consumo`
 - DiAS_CÁLCULO_CONSUMO (Número entero) Se extrae de cada Bloque correspondiente por servicio del `Días de Cálculo de Consumo`
-- CONSUMO (Valor numérico sin separador de miles y con coma como separador decimal) Se toma de cada Bloque correspondiente por servicio. Para Aseo, Alumbrado Público, Otras Entidades y Total General se coloca (0,00)
+- LECTURA_ACTUAL (Número entero) Se extrae de cada Bloque correspondiente por servicio. Para Aseo, Alumbrado Público, Otras Entidades y Total General se coloca (0)
+- LECTURA_ANTERIOR (Número entero) Se extrae de cada Bloque correspondiente por servicio. Para Aseo, Alumbrado Público, Otras Entidades y Total General se coloca (0)
+- CONSUMO Es la diferencia entre LECTURA_ACTUAL y LECTURA_ANTERIOR(Valor numérico sin separador de miles y con coma como separador decimal) Se toma de cada Bloque correspondiente por servicio. Para Aseo, Alumbrado Público, Otras Entidades y Total General se coloca (0,00)
+- CONSTANTE Para los Bloques que tienen este dato (Gas y Energía), para Gas y Energía se extrae utilizando la coma como separador decimal, para los demás servicios se coloca (0,00).
+- COSTO ($) Se extrae de cada Bloque correspondiente por servicio (Valor numérico sin separador de miles y con coma como separador decimal). Para Aseo, Alumbrado Público, Otras Entidades y Total General se coloca (0,00).
+- VALOR_A_PAGAR (Valor numérico sin separador de miles y con coma como separador decimal) Se toma de cada Bloque correspondiente por servicio con el texto `Total [Servicio]`  y del Bloque General para la fila de Otras Entidades y Total General.
+- OTROS_CARGOS (Valor numérico sin separador de miles y con coma como separador decimal) Se extrae del Bloque General en caso que se encuentre un valor adicional que no corresponda a los servicios definidos (Acueducto, Alcantarillado, Energía, Gas, Otras Entidades, Ajuste al peso). En caso de no encontrar ningún valor adicional se coloca (0,00). Si el valor tiene relación con algún servicio se coloca en la fila correspondiente al servicio.
 
 
 ## FORMATO DE SALIDA
 Debe ser markdown con las columnas definidas en la sección `Columnas de la tabla` separadas por tuberías `|` como se muestra a continuación:
-| ID_Servicio | PERÍODO | SERVICIO | FECHA_GENERACIÓN | FECHA_LIMITE_PAGO | VALOR_A_PAGAR | FECHA_INICIO_CONSUMO | FECHA_FINAL_CONSUMO | DIAS_CÁLCULO_CONSUMO | CONSUMO |
-|-------------|---------|----------|------------------|-------------------|---------------|----------------------|---------------------|----------------------|---------|
-| 'MMM-YYYY_ACUE_XXXXXXXX' | 'mmm-yyyy | Acueducto | dd/mm/yyyy | dd/mm/yyyy | valor | dd/mm/yyyy | dd/mm/yyyy | número | valor |
-| ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |
+| ID_Servicio | PERÍODO | SERVICIO | FECHA_GENERACIÓN | FECHA_LIMITE_PAGO | FECHA_INICIO_CONSUMO | FECHA_FINAL_CONSUMO | DIAS_CÁLCULO_CONSUMO | LECTURA_ACTUAL | LECTURA_ANTERIOR | CONSUMO | CONSTANTE | COSTO ($) | VALOR_A_PAGAR | OTROS_CARGOS |
+|-------------|---------|----------|------------------|-------------------|----------------------|---------------------|----------------------|----------------|------------------|---------|-----------|-----------|---------------|--------------|
+| 'MMM-YYYY_ACUE_XXXXXXXX' | 'mmm-yyyy | Acueducto | dd/mm/yyyy | dd/mm/yyyy | dd/mm/yyyy | dd/mm/yyyy | número | número | número | valor | valor | valor | valor | valor |
+| ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |
