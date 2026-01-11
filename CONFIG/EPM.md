@@ -197,16 +197,17 @@ LA TABLA DE DATOS EXTRAÍDOS debe contener las siguientes columnas:
 - CONSUMO (Valor numérico sin separador de miles y con coma como separador decimal) Se toma de cada Bloque correspondiente por servicio. Para Aseo, Alumbrado Público, Otras Entidades y Total General se coloca (0,00)
 - CONSTANTE Para los Bloques que tienen este dato (Gas y Energía), para Gas y Energía se extrae utilizando la coma como separador decimal, para los demás servicios se coloca (0,00).
 - COSTO ($) Se extrae de cada Bloque correspondiente por servicio (Valor numérico sin separador de miles y con coma como separador decimal). Para Aseo, Alumbrado Público, Otras Entidades y Total General se coloca (0,00).
-- VALOR_A_PAGAR (Valor numérico sin separador de miles y con coma como separador decimal) Se toma de cada Bloque correspondiente por servicio con el texto `Total [Servicio]`  y del Bloque General para la fila de Otras Entidades y Total General.
+- VALOR_A_PAGAR (Valor numérico sin separador de miles y con coma como separador decimal) Se toma de cada Bloque correspondiente por servicio con el texto `Total [Servicio]`  y del Bloque General para la fila de Otras Entidades y Total General
+- PORCENTAJE_DEL_TOTAL (Valor numérico con dos decimales y coma como separador decimal) Se calcula dividiendo el VALOR_A_PAGAR de cada servicio entre el VALOR_A_PAGAR del Total General. Para el Total General se coloca (1)
 - OTROS_CARGOS (Valor numérico sin separador de miles y con coma como separador decimal) Se extrae del Bloque General en caso que se encuentre un valor adicional que no corresponda a los servicios definidos (Acueducto, Alcantarillado, Energía, Gas, Otras Entidades, Ajuste al peso). En caso de no encontrar ningún valor adicional se coloca (0,00). Si el valor tiene relación con algún servicio se coloca en la fila correspondiente al servicio.
 
 
 ### FORMATO DE SALIDA TABLA BASE
 Debe ser markdown con las columnas definidas en la sección `Columnas de la tabla` separadas por tuberías `|` como se muestra a continuación:
-| ID_Servicio | PERÍODO | SERVICIO | FECHA_GENERACIÓN | FECHA_LIMITE_PAGO | CONSUMO | CONSTANTE | COSTO ($) | VALOR_A_PAGAR | OTROS_CARGOS |
-|---|---|---|---|---|---|---|---|---|---|
-| 'MMM-YYYY_ACUE_XXXXXXXX' | 'mmm-yyyy | Acueducto | dd/mm/yyyy | dd/mm/yyyy | valor | valor | valor | valor | valor |
-| ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |
+| ID_Servicio | PERÍODO | SERVICIO | FECHA_GENERACIÓN | FECHA_LIMITE_PAGO | CONSUMO | CONSTANTE | COSTO ($) | VALOR_A_PAGAR | PORCENTAJE_DEL_TOTAL | OTROS_CARGOS |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 'MMM-YYYY_ACUE_XXXXXXXX' | 'mmm-yyyy | Acueducto | dd/mm/yyyy | dd/mm/yyyy | valor | valor | valor | valor | valor | valor |
+| ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |
 
 ---
 
