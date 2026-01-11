@@ -2,6 +2,7 @@
 **Rol:** Analista de Automatización de Procesos (RPA) / Especialista en Extracción de Datos (Data Extraction Specialist) | **Objetivo:** Automatizar la extracción y normalización de datos de servicios públicos para el seguimiento histórico y la auditoría financiera.
 
 ---
+Lee detenidamente hasta el final antes de iniciar la extracción. Para cualquier duda o aclaración adicional me lo haces saber antes de iniciar la extracción.
 
 De la factura adjunta quiero extraer información por cada bloque que vaya definiendo por servicio
 
@@ -198,16 +199,18 @@ LA TABLA DE DATOS EXTRAÍDOS debe contener las siguientes columnas:
 - CONSTANTE Para los Bloques que tienen este dato (Gas y Energía), para Gas y Energía se extrae utilizando la coma como separador decimal, para los demás servicios se coloca (0,00).
 - COSTO ($) Se extrae de cada Bloque correspondiente por servicio (Valor numérico sin separador de miles y con coma como separador decimal). Para Aseo, Alumbrado Público, Otras Entidades y Total General se coloca (0,00).
 - VALOR_A_PAGAR (Valor numérico sin separador de miles y con coma como separador decimal) Se toma de cada Bloque correspondiente por servicio con el texto `Total [Servicio]`  y del Bloque General para la fila de Otras Entidades y Total General
-- PORCENTAJE_DEL_TOTAL (Valor numérico con dos decimales y coma como separador decimal) Se calcula dividiendo el VALOR_A_PAGAR de cada servicio entre el VALOR_A_PAGAR del Total General. Para el Total General se coloca (1)
+- PORCENTAJE_DEL_TOTAL (Valor numérico con dos decimales y coma como separador decimal) Se calcula dividiendo el VALOR_A_PAGAR de cada servicio entre el VALOR_A_PAGAR del Total General. Debe quedar con la forma de división para que el Total General sea uno (1) y darle formato directamente en la celda correspondiente al pegarlo en Excel o Google Sheets. Ejemplo: Si el VALOR_A_PAGAR del servicio Acueducto es 50.000,00 y el VALOR_A_PAGAR del Total General es 200.000,00, la fórmula en la celda de PORCENTAJE_DEL_TOTAL para Acueducto debe ser `=50000,00/200000,00`, lo que al pegarlo en Excel o Google Sheets mostrará 0,25 (25%).
 - OTROS_CARGOS (Valor numérico sin separador de miles y con coma como separador decimal) Se extrae del Bloque General en caso que se encuentre un valor adicional que no corresponda a los servicios definidos (Acueducto, Alcantarillado, Energía, Gas, Otras Entidades, Ajuste al peso). En caso de no encontrar ningún valor adicional se coloca (0,00). Si el valor tiene relación con algún servicio se coloca en la fila correspondiente al servicio.
+- OBSERVACIONES Agregar la columna `OBSERVACIONES` como ÚLTIMA COLUMNA de la TABLA BASE. De acuerdo a lo definido en la sección `COLUMNA ADICIONAL OBLIGATORIA: OBSERVACIONES (TABLA BASE Y SALIDA CSV)`
+
 
 
 ### FORMATO DE SALIDA TABLA BASE
 Debe ser markdown con las columnas definidas en la sección `Columnas de la tabla` separadas por tuberías `|` como se muestra a continuación:
-| ID_Servicio | PERÍODO | SERVICIO | FECHA_GENERACIÓN | FECHA_LIMITE_PAGO | CONSUMO | CONSTANTE | COSTO ($) | VALOR_A_PAGAR | PORCENTAJE_DEL_TOTAL | OTROS_CARGOS |
-|---|---|---|---|---|---|---|---|---|---|---|
-| 'MMM-YYYY_ACUE_XXXXXXXX' | 'mmm-yyyy | Acueducto | dd/mm/yyyy | dd/mm/yyyy | valor | valor | valor | valor | valor | valor |
-| ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |
+| ID_Servicio | PERÍODO | SERVICIO | FECHA_GENERACIÓN | FECHA_LIMITE_PAGO | CONSUMO | CONSTANTE | COSTO ($) | VALOR_A_PAGAR | PORCENTAJE_DEL_TOTAL | OTROS_CARGOS | OBSERVACIONES |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 'MMM-YYYY_ACUE_XXXXXXXX' | 'mmm-yyyy | Acueducto | dd/mm/yyyy | dd/mm/yyyy | valor | valor | valor | valor | valor | valor | valor |
+| ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |
 
 ---
 
@@ -350,3 +353,165 @@ Necesito una tabla detallada solo para el Bloque de Otras Entidades con las sigu
 * Para los valores que no encuentres en la factura los reemplazas con (0,00).
 
 ---
+
+## SALIDA DE TODAS LAS TABLAS EN CSV (ESTÁNDAR OBLIGATORIO)
+
+Finalmente, convierte **todos los datos extraídos** de los siguientes bloques:
+- Bloque General
+- Bloque Acueducto
+- Bloque Alcantarillado
+- Bloque Energía
+- Bloque Gas
+- Bloque Otras Entidades (incluyendo sub-bloques Aseo y Alumbrado Público)
+
+en **salidas CSV normalizadas**, diseñadas para almacenamiento histórico, auditoría y trazabilidad por factura.
+
+---
+
+### REGLAS OBLIGATORIAS DE IDENTIFICACIÓN
+1. **Todas las salidas CSV DEBEN incluir como PRIMERA COLUMNA el campo:**
+   - `PERIODO_FACTURA`
+2. `PERIODO_FACTURA` debe corresponder al período de la factura (formato `'MMM-YYYY`, con apóstrofe inicial).
+3. **Cada fila de cada CSV debe repetir el mismo `PERIODO_FACTURA`**, garantizando que todos los registros queden inequívocamente asociados a la factura correspondiente.
+4. No está permitido omitir `PERIODO_FACTURA` en ningún bloque o sub-bloque.
+
+---
+
+### COLUMNA OBLIGATORIA ADICIONAL: OBSERVACIONES (TABLA BASE)
+
+1. La **TABLA BASE** debe incluir obligatoriamente una columna adicional llamada:
+   - `OBSERVACIONES`
+2. La columna `OBSERVACIONES` debe:
+   - Aparecer como **última columna** de la TABLA BASE.
+   - Estar incluida tanto en la **tabla en Markdown** como en la **SALIDA CSV** de la TABLA BASE.
+3. `OBSERVACIONES` debe contener un **resumen textual breve y estructurado** de:
+   - Texto, notas, leyendas, aclaraciones o secciones de la factura **no capturadas explícitamente** en las demás columnas.
+   - Información relevante para interpretación, auditoría o conciliación del servicio.
+   - Referencias a bloques, sub-bloques o cargos especiales asociados al servicio.
+4. El contenido de `OBSERVACIONES` debe:
+   - Referirse **exclusivamente** al servicio de la fila correspondiente.
+   - Usar texto corto (máx. 250 caracteres).
+   - Separar ideas con punto y coma `;`.
+   - No usar saltos de línea.
+5. Para la fila **Total General**, `OBSERVACIONES` debe usarse para:
+   - Explicar ajustes al peso, redondeos o diferencias de conciliación.
+6. Si no se identifican observaciones relevantes para un servicio, se debe colocar:
+   - `Sin observaciones`
+7. Está prohibido inferir, deducir o agregar información que no esté explícitamente presente en la factura.
+
+---
+
+### FORMATO GENERAL DE LA SALIDA
+- Toda la salida debe entregarse en **un solo bloque de texto**, apto para copiar y pegar.
+- Cada Bloque o Sub Bloque debe:
+  - Iniciar con su nombre claramente identificado (por ejemplo: `Bloque General (ENE-2026):`).
+  - Contener una **fila de encabezados CSV**.
+  - Contener una o más filas de datos.
+- **Cada Bloque o Sub Bloque debe estar separado del siguiente por una línea en blanco.**
+- No deben incluirse explicaciones, comentarios ni texto adicional dentro del bloque CSV.
+
+---
+
+### EJEMPLO DE ESTRUCTURA (REFERENCIAL)
+
+Bloque General (ENE-2026):
+PERIODO_FACTURA,Documento Electrónico Equivalente SPD N°,Valor total a pagar,Pagar hasta el,Contrato,Referente de pago,Documento No,Cliente,CC/NIT,Dirección de cobro,Ciudad - Departamento,Estrato,Ciclo,Acueducto Consumo,Acueducto Valor a pagar,Alcantarillado Consumo,Alcantarillado Valor a pagar,Energía Consumo,Energía Valor a pagar,Gas Consumo,Gas Valor a pagar,Otras entidades Valor a pagar,Ajuste al peso Valor a pagar,Fecha de generación,Fecha de validación,OBSERVACIONES
+'ENE-2026,valor1,valor2,valor3,...,Sin observaciones
+
+Bloque Acueducto (ENE-2026):
+PERIODO_FACTURA,Fecha Inicio de Cálculo de Consumo,Fecha Final de Cálculo de Consumo,Días de Cálculo de Consumo,Lectura Actual,Lectura Anterior,Consumo m3,Costo ($),Consumo mmm-yy,Cargo fijo mmm-yy,Contrib Cargo Fijo,Contrib Consumo,Total Acueducto,Producto,Categoría,Medidor,Plan,Cmapac - Cost,Cmpac Unitari,Cmpac Total,Cmt Unitario,Cmt Total
+'ENE-2026,valor1,valor2,valor3,...
+
+Bloque Alcantarillado (ENE-2026):
+PERIODO_FACTURA,...
+
+Bloque Energía (ENE-2026):
+PERIODO_FACTURA,...
+
+Bloque Gas (ENE-2026):
+PERIODO_FACTURA,...
+
+Sub Bloque Aseo (ENE-2026):
+PERIODO_FACTURA,...
+
+Sub Bloque Alumbrado Público (ENE-2026):
+PERIODO_FACTURA,...
+
+Bloque Otras Entidades (ENE-2026):
+PERIODO_FACTURA,...
+
+---
+
+### CONDICIONES ADICIONALES
+- Los encabezados CSV deben respetar **exactamente** los nombres definidos en cada bloque del prompt.
+- No se deben fusionar bloques.
+- No se deben cambiar nombres de columnas.
+- Si un valor no existe en la factura, debe colocarse `0,00` o `0` según corresponda.
+- El orden de columnas debe respetarse estrictamente.
+- El separador de campos es la coma `,`.
+- Los valores numéricos deben usar coma como separador decimal y **no** usar separador de miles.
+
+Esta instrucción define el **formato canónico y auditable** de salida CSV y debe cumplirse de forma estricta para garantizar consistencia entre modelos, ejecuciones y períodos históricos.
+
+---
+
+## COLUMNA ADICIONAL OBLIGATORIA: OBSERVACIONES (TABLA BASE Y SALIDA CSV)
+
+Se debe incluir de forma **obligatoria** una columna adicional llamada:
+
+- `OBSERVACIONES`
+
+en:
+1. La **TABLA BASE** (tabla consolidada por servicio).
+2. La **SALIDA CSV correspondiente a la TABLA BASE**.
+
+### DEFINICIÓN DE LA COLUMNA OBSERVACIONES
+La columna `OBSERVACIONES` debe contener un **resumen textual breve y estructurado** de:
+
+- Información adicional presente en la factura que:
+  - No haya sido capturada explícitamente en las columnas definidas.
+  - Corresponda a texto libre, notas, subtítulos, aclaraciones, leyendas, cargos explicativos, mensajes operativos o secciones gráficas.
+- Referencias cruzadas a:
+  - Otros bloques del documento.
+  - Sub-bloques internos.
+  - Cargos especiales, ajustes, subsidios, contribuciones, condiciones tarifarias o notas regulatorias.
+- Elementos que ayuden a **interpretar, auditar o contextualizar** los valores del servicio.
+
+### REGLAS DE ASIGNACIÓN POR SERVICIO
+1. Cada fila de la TABLA BASE debe tener su propia celda `OBSERVACIONES`.
+2. El contenido debe referirse **únicamente** al servicio de esa fila:
+   - Acueducto → observaciones del bloque Acueducto.
+   - Energía → observaciones del bloque Energía.
+   - Gas → observaciones del bloque Gas.
+   - Otras Entidades → observaciones de Aseo y/o Alumbrado Público.
+   - Total General → observaciones de conciliación global, ajustes al peso, redondeos o validaciones de sumatoria.
+3. Si una observación aplica a más de un servicio, debe:
+   - Registrarse en cada fila correspondiente, indicando explícitamente la relación.
+4. No se permite mezclar observaciones de servicios distintos en una misma fila sin indicarlo.
+
+### FORMATO DEL CONTENIDO
+- Texto corto y sintético (máx. 250 caracteres por fila).
+- Separar ideas con punto y coma `;`.
+- No usar saltos de línea.
+- No repetir datos numéricos ya capturados en columnas específicas, salvo cuando sea necesario para explicar diferencias.
+- Ejemplos válidos:
+  - `Incluye contribución por estrato 6; tarifa plena; sin subsidios`
+  - `Ajuste al peso aplicado en total general (-0,06)`
+  - `Lectura compartida con Acueducto; mismo periodo de cálculo`
+  - `Bloque Otras Entidades compuesto por Aseo (Emvarias) y Alumbrado Público Medellín`
+
+### VALOR POR DEFECTO
+- Si no se identifican observaciones relevantes para un servicio, se debe colocar:
+  - `Sin observaciones`
+
+### PROHIBICIONES
+- No inferir ni deducir información.
+- No incluir comentarios del analista o del modelo.
+- No usar lenguaje especulativo.
+- No repetir encabezados, títulos ni nombres de bloques.
+
+### CONSISTENCIA CON SALIDA CSV
+- La columna `OBSERVACIONES` debe:
+  - Mantener el mismo nombre.
+  - Mantener la misma posición en todas las ejecuciones.
+  - Aparecer tanto en la TABLA BASE en Markdown como en la SALIDA CSV final.
