@@ -1,6 +1,6 @@
 Bloque General (ENE-2026):
-PERIODO_FACTURA,Documento Electrónico Equivalente SPD N°,Valor total a pagar,Pagar hasta el,Contrato,Referente de pago,Documento No,Cliente,CC/NIT,Dirección de cobro,Ciudad - Departamento,Estrato,Ciclo,Acueducto Consumo,Acueducto Valor a pagar,Alcantarillado Consumo,Alcantarillado Valor a pagar,Energía Consumo,Energía Valor a pagar,Gas Consumo,Gas Valor a pagar,Otras entidades Valor a pagar,Ajuste al peso Valor a pagar,Fecha de generación,Fecha de validación
-'ENE-2026,'DEE38300937,643204,00,21/01/2026,'2651903,'1116279829-25,'148 8335133,Maria Cecilia Zambrano Vesga,33191017,CR 32 CL 6 SUR -295 (INTERIOR 2005 ),Medellín - Antioquia,6,2,15,00,132518,85,15,00,102326,70,219,00,226502,06,30,8,107497,47,74358,98,-0,06,06/01/2026,06/01/2026
+PERIODO_FACTURA,Documento Electrónico Equivalente SPD N°,Valor total a pagar,Pagar hasta el,Contrato,Referente de pago,Documento No,Cliente,CC/NIT,Dirección de cobro,Ciudad - Departamento,Estrato,Ciclo,Acueducto Consumo,Acueducto Valor a pagar,Alcantarillado Consumo,Alcantarillado Valor a pagar,Energía Consumo,Energía Valor a pagar,Gas Consumo,Gas Valor a pagar,Otras entidades Valor a pagar,Ajuste al peso Valor a pagar,Fecha de generación,Fecha de validación,OBSERVACIONES
+'ENE-2026,'DEE38300937,643204,00,21/01/2026,'2651903,'1116279829-25,'148 8335133,Maria Cecilia Zambrano Vesga,33191017,CR 32 CL 6 SUR -295 (INTERIOR 2005 ),Medellín - Antioquia,6,2,15,00,132518,85,15,00,102326,70,219,00,226502,06,30,80,107497,47,74358,98,-0,06,06/01/2026,06/01/2026,Sin observaciones
 
 Bloque Acueducto (ENE-2026):
 PERIODO_FACTURA,Fecha Inicio de Cálculo de Consumo,Fecha Final de Cálculo de Consumo,Días de Cálculo de Consumo,Lectura Actual,Lectura Anterior,Consumo m3,Costo ($),Consumo mmm-yy,Cargo fijo mmm-yy,Contrib Cargo Fijo,Contrib Consumo,Total Acueducto,Producto,Categoría,Medidor,Plan,Cmapac - Cost,Cmpac Unitari,Cmpac Total,Cmt Unitario,Cmt Total
@@ -15,17 +15,28 @@ PERIODO_FACTURA,Fecha Inicio de Cálculo de Consumo,Fecha Final de Cálculo de C
 'ENE-2026,13/11/2025,15/12/2025,32,45074,44855,1,00,219,00,861,88,188751,72,37750,34,226502,06,'105245635,Residencial,'20_et324_8206146-3,Normal residencial,294,50,53,30,307,37,114,66,62,36,29,69,220
 
 Bloque Gas (ENE-2026):
-PERIODO_FACTURA,Fecha Inicio de Cálculo de Consumo,Fecha Final de Cálculo de Consumo,Días de Cálculo de Consumo,Lectura Actual,Lectura Anterior,Constante,Consumo m3,Costo ($),Consumo mmm-yy,Cargo fijo mmm-yy,Contrib consumo,Contrib cargo fijo,Total Gas,Producto,Categoría,Medidor,Plan,Compra,Distribución,Transporte 7,Confiabilidad,Comercializac,Transporte Gn,Compresión 8
-'ENE-2026,13/11/2025,15/12/2025,32,5805,5769,0,858,30,871,2765,58,85376,22,4205,01,17075,24,841,00,107497,47,'106405376,Residencial,'metrex_g1.6_316566-9,Residencial tarifa plena,1277,02,694,28,604,11,0,00,0,00,158,54,31,62
+PERIODO_FACTURA,Fecha Inicio de Cálculo de Consumo,Fecha Final de Cálculo de Consumo,Días de Cálculo de Consumo,Lectura Actual,Lectura Anterior,Constante,Consumo m3,Costo ($),Consumo mmm-yy,Cargo fijo mmm-yy,Contrib consumo,Contrib cargo fijo,Total Gas,Producto,Categoría,Medidor,Plan,Compra,Distribución,Transporte 7,Confiabilidad,Comercializac,Transporte Gn,Compresión 8,Comercializac
+'ENE-2026,13/11/2025,15/12/2025,32,5805,5769,0,858,30,871,2765,58,85376,22,4205,01,17075,24,841,00,107497,47,'106405376,Residencial,'metrex_g1.6_316566-9,Residencial tarifa plena,1277,02,694,28,604,11,0,00,0,00,158,54,31,62,0,00
 
-Sub Bloque Aseo (Emvarias) (ENE-2026):
+Sub Bloque Aseo (ENE-2026):
 PERIODO_FACTURA,Periodo de consumo,Cargo fijo,Cargo Variable Aprovechable,Contribución,Cargo Variable,No Aprov - Ordinarios,Barrido y limpieza,Limpieza urbana,Rechazados,Total Aseo
-'ENE-2026,'NOV-2025,15137,83,1830,06,27679,49,10711,60,0,01605,0,002,0,00013,0,00007,55358,98
+'ENE-2026,'NOV-25,15137,83,1830,06,27679,49,10711,60,0,01605,0,002,0,00013,0,00007,55358,98
 
 Sub Bloque Alumbrado Público (ENE-2026):
-PERIODO_FACTURA,Alumbrado Público,Total Alumbrado Público
-'ENE-2026,19000,00,19000,00
+PERIODO_FACTURA,Alumbrado Público,Total Alumbrado Público,Total Otras Entidades
+'ENE-2026,19000,00,19000,00,74358,98
 
 Bloque Otras Entidades (ENE-2026):
 PERIODO_FACTURA,Total Otras Entidades
 'ENE-2026,74358,98
+
+Tabla Base (ENE-2026):
+PERIODO_FACTURA,ID_Servicio,PERÍODO,SERVICIO,FECHA_GENERACIÓN,FECHA_LIMITE_PAGO,CONSUMO,CONSTANTE,COSTO ($),VALOR_A_PAGAR,PORCENTAJE_DEL_TOTAL,OTROS_CARGOS,OBSERVACIONES
+'ENE-2026,'ENE-2026_ACUE_2651903,'ENE-2026,Acueducto,06/01/2026,21/01/2026,15,00,0,00,4864,82,132518,85,=132518,85/643204,00,0,00,Periodo facturado 13/11/2025–15/12/2025 (32 días); contribución consumo min %60; producto y medidor presentes
+'ENE-2026,'ENE-2026_ALCA_2651903,'ENE-2026,Alcantarillado,06/01/2026,21/01/2026,15,00,0,00,3885,68,102326,70,=102326,70/643204,00,0,00,Periodo facturado 13/11/2025–15/12/2025 (32 días); contribución consumo min %60; sin medidor explícito en bloque
+'ENE-2026,'ENE-2026_ENER_2651903,'ENE-2026,Energía,06/01/2026,21/01/2026,219,00,1,00,861,88,226502,06,=226502,06/643204,00,0,00,Componentes del costo listados (generación, transmisión, distribución, etc.); contribución activa %20; N. tensión 220
+'ENE-2026,'ENE-2026_GAS_2651903,'ENE-2026,Gas,06/01/2026,21/01/2026,30,871,0,858,2765,58,107497,47,=107497,47/643204,00,0,00,Componentes variables y fijas presentes; confiabilidad y comercializac en variables aparecen en 0,00; transporte Gn y compresión fijas presentes
+'ENE-2026,'ENE-2026_ASEO_2651903,'ENE-2026,Aseo,06/01/2026,21/01/2026,0,00,0,00,0,00,55358,98,=55358,98/643204,00,0,00,Sub-bloque Emvarias; periodo de consumo Noviembre 2025; incluye residuos (ton) y pago periodo anterior
+'ENE-2026,'ENE-2026_ALUM_2651903,'ENE-2026,Alumbrado Público,06/01/2026,21/01/2026,0,00,0,00,0,00,19000,00,=19000,00/643204,00,0,00,Sub-bloque Municipio de Medellín; “Alumbrado Público” y total iguales
+'ENE-2026,'ENE-2026_OTRAS_2651903,'ENE-2026,Otras Entidades,06/01/2026,21/01/2026,0,00,0,00,0,00,74358,98,=74358,98/643204,00,0,00,Total Otras Entidades incluye Aseo (Emvarias) + Alumbrado Público Medellín
+'ENE-2026,'ENE-2026_TOTAL_2651903,'ENE-2026,Total General,06/01/2026,21/01/2026,0,00,0,00,0,00,643204,00,=643204,00/643204,00,0,00,Ajuste al peso aplicado (-0,06); fechas generación/validación 06/01/2026
