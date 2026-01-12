@@ -13,17 +13,19 @@ EL UCMS define las instrucciones en cada módulo de proveedor que se encuentra e
 
 ## 📂 Estructura Orgánica del Proyecto
 
-```../UCMS_Project/
+```UCMS_Project/
 ├── CONFIG
 │   ├── ACUACAR.md
 │   ├── AFINIA.md
-│   ├── EPM.md
+│   ├── EPM_FICHA_2651903.md
 │   ├── SURTIGAS.md
 │   └── TIGO.md
 ├── DATA
 │   ├── ACUACAR.csv
 │   ├── AFINIA.csv
-│   ├── EPM.csv
+│   ├── EPM_2651903
+│   │   ├── EPM_2025.csv
+│   │   └── EPM_2026.csv
 │   ├── SURTIGAS.csv
 │   └── TIGO.csv
 ├── README.md
@@ -35,3 +37,5 @@ EL UCMS define las instrucciones en cada módulo de proveedor que se encuentra e
     ├── TIgo Hogar Octubre 2025 900092385_18764098297031_BOPU126974439_01.pdf
     ├── Tigo Nov2025 900092385_18764098297031_BOPU128229461_01.pdf
     └── nov2025 epm_110598289621.pdf
+
+5 directories, 19 files
