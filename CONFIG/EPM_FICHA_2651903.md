@@ -385,7 +385,7 @@ en **salidas CSV normalizadas**, diseñadas para almacenamiento histórico, audi
    - Aparecer como **última columna** de la TABLA BASE.
    - Estar incluida tanto en la **tabla en Markdown** como en la **SALIDA CSV** de la TABLA BASE.
 3. `OBSERVACIONES` debe contener un **resumen textual breve y estructurado** de:
-   - Texto, notas, leyendas, aclaraciones o secciones de la factura **no capturadas explícitamente** en las demás columnas.
+   - Texto, notas, leyendas, aclaraciones, secciones de la factura y mensajes de alerta al usuario principalmente **no capturadas explícitamente** en las demás columnas.
    - Información relevante para interpretación, auditoría o conciliación del servicio.
    - Referencias a bloques, sub-bloques o cargos especiales asociados al servicio.
 4. El contenido de `OBSERVACIONES` debe:
