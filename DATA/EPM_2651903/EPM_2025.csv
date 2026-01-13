@@ -29,3 +29,46 @@ PERIODO_FACTURA,Alumbrado Público,Total Alumbrado
 Bloque Otras Entidades (DIC-2025):
 PERIODO_FACTURA,Total Otras Entidades
 'DIC-2025,74835,72
+
+Bloque General (NOV-2025):
+PERIODO_FACTURA,Documento Electrónico Equivalente SPD N°,Valor total a pagar,Pagar hasta el,Contrato,Referente de pago,Documento No,Cliente,CC/NIT,Dirección de cobro,Ciudad - Departamento,Estrato,Ciclo,Acueducto Consumo,Acueducto Valor a pagar,Alcantarillado Consumo,Alcantarillado Valor a pagar,Energía Consumo,Energía Valor a pagar,Gas Consumo,Gas Valor a pagar,Otras entidades Valor a pagar,Ajuste al peso Valor a pagar,Fecha de generación,Fecha de validación,OBSERVACIONES
+'NOV-2025,'DEE32785713,"777751,00",20/11/2025,'2651903,'1105982896-21,'147 8251840,Maria Cecilia Zambrano Vesga,33191017,CR 32 CL 6 SUR -295 (INTERIOR 2005 ),Medellín - Antioquia,6,2,21,"183207,76",21,"137081,34",241,"257414,03","36,1","123453,37","76594,12","0,38",04/11/2025,04/11/2025,Incluye línea Aporte Voluntario Comparto mi Energía
+
+Bloque Acueducto (NOV-2025):
+PERIODO_FACTURA,Fecha Inicio de Cálculo de Consumo,Fecha Final de Cálculo de Consumo,Días de Cálculo de Consumo,Lectura Actual,Lectura Anterior,Consumo m3,Costo ($),Consumo mmm-yy,Cargo fijo mmm-yy,Contrib Cargo Fijo,Contrib Consumo,Total Acueducto,Producto,Categoría,Medidor,Plan,Cmapac - Cost,Cmpac Unitari,Cmpac Total,Cmt Unitario,Cmt Total
+'NOV-2025,13/09/2025,15/10/2025,32,3359,3338,21,"4983,47","104652,87","9851,98","5911,19","62791,72","183207,76",'104497386,Residencial,'142_1940_20113054889-7,Residencial,"0,00","2,25","47,25","27,66","580,86"
+
+Bloque Alcantarillado (NOV-2025):
+PERIODO_FACTURA,Fecha Inicio de Cálculo de Consumo,Fecha Final de Cálculo de Consumo,Días de Cálculo de Consumo,Lectura Actual,Lectura Anterior,Consumo m3,Costo ($),Consumo mmm-yy,Cargo fijo mmm-yy,Contrib Cargo Fijo,Contrib Consumo,Total Alcantarillado,Producto,Categoría,Plan,Cmt Unitario,Cmt Total
+'NOV-2025,13/09/2025,15/10/2025,32,0,0,21,"3809,85","80006,85","5668,99","3401,39","48004,11","137081,34",'104496317,Residencial,Residencial,"47,15","990,15"
+
+Bloque Energía (NOV-2025):
+PERIODO_FACTURA,Fecha Inicio de Cálculo de Consumo,Fecha Final de Cálculo de Consumo,Días de Cálculo de Consumo,Lectura Actual,Lectura Anterior,Constante,Consumo kWh,Costo ($),Energía mmm-yy,Contribución activa,Total Energía,Producto,Categoría,Medidor,Plan,Generación,Transmisión,Distribución,Comercializac,Perdidas,Restricciones,N. tensión
+'NOV-2025,13/09/2025,15/10/2025,32,44659,44418,1,241,"890,09","214511,69","42902,34","257414,03",'105245635,Residencial,'20_et324_8206146-3,Normal residencial,"302,77","51,66","325,33","116,29","63,58","30,46",220
+
+Bloque Gas (NOV-2025):
+PERIODO_FACTURA,Fecha Inicio de Cálculo de Consumo,Fecha Final de Cálculo de Consumo,Días de Cálculo de Consumo,Lectura Actual,Lectura Anterior,Constante,Consumo m3,Consumo mmm-yy,Cargo fijo mmm-yy,Contrib consumo,Contrib cargo fijo,Total Gas,Producto,Categoría,Medidor,Plan,Compra,Distribución,Transporte,Confiabilidad,Comercializac,Transporte Gn,Compresión,Comercializac
+'NOV-2025,13/09/2025,15/10/2025,32,5737,5695,"0,862","36,194","98683,66","4194,15","19736,73","838,83","123453,37",'106405376,Residencial,'metrex_g1.6_316566-9,Residencial tarifa plena,"1268,41","686,86","577,04","0,00","0,00","162,01","32,18","0,00"
+
+Sub Bloque Aseo (NOV-2025):
+PERIODO_FACTURA,Periodo de consumo,Cargo fijo,Cargo Variable Aprovechable,Contribución,Cargo Variable,No Aprov - Ordinarios,Barrido y limpieza,Limpieza urbana,Rechazados,Total Aseo
+'NOV-2025,'SEP-2025,"15250,44","2835,02","28797,06","10711,60","0,01605","0,002","0,00013","0,00007","57594,12"
+
+Sub Bloque Alumbrado Público (NOV-2025):
+PERIODO_FACTURA,Alumbrado Público,Total Alumbrado Público
+'NOV-2025,"19000,00","19000,00"
+
+Bloque Otras Entidades (NOV-2025):
+PERIODO_FACTURA,Total Otras Entidades
+'NOV-2025,"76594,12"
+
+TABLA BASE (NOV-2025):
+ID_Servicio,PERÍODO,SERVICIO,FECHA_GENERACIÓN,FECHA_LIMITE_PAGO,CONSUMO,CONSTANTE,COSTO ($),VALOR_A_PAGAR,PORCENTAJE_DEL_TOTAL,OTROS_CARGOS,OBSERVACIONES
+'NOV-2025_ACUE_2651903,'NOV-2025,Acueducto,04/11/2025,20/11/2025,21,"0,00","4983,47","183207,76","=183207,76/777751,00","0,00",Incluye contribución mi % 60; componentes Cmapac/Cmt; dirección prestación servicio
+'NOV-2025_ALCA_2651903,'NOV-2025,Alcantarillado,04/11/2025,20/11/2025,21,"0,00","3809,85","137081,34","=137081,34/777751,00","0,00",Incluye contribución mi % 60; componentes Cmt; mismo consumo 21 m3
+'NOV-2025_ENER_2651903,'NOV-2025,Energía,04/11/2025,20/11/2025,241,1,"890,09","257414,03","=257414,03/777751,00","0,00",Incluye contribución activa % 20; N. tensión 220; componentes generación/transmisión/distribución
+'NOV-2025_GAS_2651903,'NOV-2025,Gas,04/11/2025,20/11/2025,"36,194","0,862","2726,52","123453,37","=123453,37/777751,00","0,00",Observación 30-desviación significativa; aviso revisión periódica red interna (CREG 059/2012)
+'NOV-2025_ASEO_2651903,'NOV-2025,Aseo,04/11/2025,20/11/2025,"0,00","0,00","0,00","57594,12","=57594,12/777751,00","0,00",Periodo de consumo: Septiembre 2025; residuos del periodo (ton) reportados
+'NOV-2025_ALUM_2651903,'NOV-2025,Alumbrado Público,04/11/2025,20/11/2025,"0,00","0,00","0,00","19000,00","=19000,00/777751,00","0,00",Acuerdo 066 de 2017; pago periodo anterior
+'NOV-2025_OTRAS_2651903,'NOV-2025,Otras Entidades,04/11/2025,20/11/2025,"0,00","0,00","0,00","76594,12","=76594,12/777751,00","0,00",Bloque compuesto por Aseo (Emvarias) y Alumbrado Público Medellín
+'NOV-2025_TOTAL_2651903,'NOV-2025,Total General,04/11/2025,20/11/2025,"0,00","0,00","0,00","777751,00","=777751,00/777751,00","0,00",Conciliación: suma servicios + ajuste al peso; incluye línea aporte voluntario
