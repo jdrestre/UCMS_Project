@@ -72,3 +72,35 @@ ID_Servicio,PERÍODO,SERVICIO,FECHA_GENERACIÓN,FECHA_LIMITE_PAGO,CONSUMO,CONSTA
 'NOV-2025_ALUM_2651903,'NOV-2025,Alumbrado Público,04/11/2025,20/11/2025,"0,00","0,00","0,00","19000,00","=19000,00/777751,00","0,00",Acuerdo 066 de 2017; pago periodo anterior
 'NOV-2025_OTRAS_2651903,'NOV-2025,Otras Entidades,04/11/2025,20/11/2025,"0,00","0,00","0,00","76594,12","=76594,12/777751,00","0,00",Bloque compuesto por Aseo (Emvarias) y Alumbrado Público Medellín
 'NOV-2025_TOTAL_2651903,'NOV-2025,Total General,04/11/2025,20/11/2025,"0,00","0,00","0,00","777751,00","=777751,00/777751,00","0,00",Conciliación: suma servicios + ajuste al peso; incluye línea aporte voluntario
+
+Bloque General (OCT-2025):
+PERIODO_FACTURA,Documento Electrónico Equivalente SPD N°,Valor total a pagar,Pagar hasta el,Contrato,Referente de pago,Documento No,Cliente,CC/NIT,Dirección de cobro,Ciudad - Departamento,Estrato,Ciclo,Acueducto Consumo,Acueducto Valor a pagar,Alcantarillado Consumo,Alcantarillado Valor a pagar,Energía Consumo,Energía Valor a pagar,Gas Consumo,Gas Valor a pagar,Otras entidades Valor a pagar,Ajuste al peso Valor a pagar,Fecha de generación,Fecha de validación,OBSERVACIONES
+'OCT-2025,'DEE30095045,648813,00,20/10/2025,'2651903,'1100612930-67,'147 3563670,Maria Cecilia Zambrano Vesga,33191017,CR 32 CL 6 SUR -295 (INTERIOR 2005 ),Medellín - Antioquia,6,2,17,146819,11,17,108570,94,199,215247,16,30,162,104694,67,73481,48,-0,36,02/10/2025,02/10/2025,INDICADORES DE CALIDAD DEL SERVICIO DE GAS 100% TODOS; Software facturación: Open SmartFlex; Fabricante: OPEN SYSTEMS COLOMBIA S.A.S; Vigila: Superservicios
+
+Bloque Acueducto (OCT-2025):
+PERIODO_FACTURA,Fecha Inicio de Cálculo de Consumo,Fecha Final de Cálculo de Consumo,Días de Cálculo de Consumo,Lectura Actual,Lectura Anterior,Consumo m3,Costo ($),Consumo mmm-yy,Cargo fijo mmm-yy,Contrib Cargo Fijo,Contrib Consumo,Total Acueducto,Producto,Categoría,Medidor,Plan,Cmapac - Cost,Cmpac Unitari,Cmpac Total,Cmt Unitario,Cmt Total
+'OCT-2025,13/08/2025,13/09/2025,31,3338,3321,17,4835,44,82202,48,9559,46,5735,68,49321,49,146819,11,'104497386,Residencial,'142_1940_20113054889,Residencial,0,00,2,18,37,06,26,78,455,26
+
+Bloque Alcantarillado (OCT-2025):
+PERIODO_FACTURA,Fecha Inicio de Cálculo de Consumo,Fecha Final de Cálculo de Consumo,Días de Cálculo de Consumo,Lectura Actual,Lectura Anterior,Consumo m3,Costo ($),Consumo mmm-yy,Cargo fijo mmm-yy,Contrib Cargo Fijo,Contrib Consumo,Total Alcantarillado,Producto,Categoría,Plan,Cmt Unitario,Cmt Total
+'OCT-2025,13/08/2025,13/09/2025,31,3338,3321,17,3668,01,62356,17,5500,67,3300,40,37413,70,108570,94,'104496317,Residencial,Residencial,17,03,289,51
+
+Bloque Energía (OCT-2025):
+PERIODO_FACTURA,Fecha Inicio de Cálculo de Consumo,Fecha Final de Cálculo de Consumo,Días de Cálculo de Consumo,Lectura Actual,Lectura Anterior,Constante,Consumo kWh,Costo ($),Energía mmm-yy,Contribución activa,Total Energía,Producto,Categoría,Medidor,Plan,Generación,Transmisión,Distribución,Comercializac,Perdidas,Restricciones,N. tensión
+'OCT-2025,13/08/2025,13/09/2025,31,44418,44219,1,00,199,901,37,179372,63,35874,53,215247,16,'105245635,Residencial,'20_et324_8206146,Normal residencial,298,75,56,93,320,89,115,70,62,27,46,81,220
+
+Bloque Gas (OCT-2025):
+PERIODO_FACTURA,Fecha Inicio de Cálculo de Consumo,Fecha Final de Cálculo de Consumo,Días de Cálculo de Consumo,Lectura Actual,Lectura Anterior,Constante,Consumo m3,Consumo mmm-yy,Cargo fijo mmm-yy,Contrib consumo,Contrib cargo fijo,Total Gas,Producto,Categoría,Medidor,Plan,Compra,Distribución,Transporte 7,Confiabilidad,Comercializac,Transporte Gn,Compresión 8,Comercializac
+'OCT-2025,13/08/2025,13/09/2025,31,5695,5660,0,862,30,162,83060,12,4185,44,16612,02,837,09,104694,67,'106405376,Residencial,'metrex_g1.6_316566,Residencial tarifa plena,1315,18,673,11,575,36,0,00,0,00,158,74,31,39,0,00
+
+Sub Bloque Aseo (OCT-2025):
+PERIODO_FACTURA,Periodo de consumo,Cargo fijo,Cargo Variable Aprovechable,Contribucion,Cargo Variable,No Aprov - Ordinarios,Barrido y limpieza,Limpieza urbana,Rechazados,Total Aseo
+'OCT-2025,'AGO-2025,15119,11,1410,03,27240,74,10711,60,0,01605,0,002,0,00013,0,00007,54481,48
+
+Sub Bloque Alumbrado Público (OCT-2025):
+PERIODO_FACTURA,Alumbrado Público,Total Alumbrado Público
+'OCT-2025,19000,00,19000,00
+
+Bloque Otras Entidades (OCT-2025):
+PERIODO_FACTURA,Total Otras Entidades
+'OCT-2025,73481,48
