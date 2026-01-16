@@ -31,7 +31,7 @@ Se puede identificar por el letrero del logo de la empresa en la parte superior 
 ---
 
 ## 1. Bloque Acueducto
-Se puede identificar por el letrero vertical con la palabra "Acueducto" y la información del bloque se cubre a la derecha de ese letrero, puede excluir la zona gráfica para quitar ruido de la extracción. Arriba empieza con `Cálculo Consumo` y abajo finaliza con `Total Acueducto` de esta zona se sacará toda la información del Bloque Acueducto.
+Se puede identificar por el letrero vertical con la palabra "Acueducto" y la información del bloque se cubre a la derecha de ese letrero, puede excluir la zona gráfica para quitar ruido de la extracción. Arriba empieza con `Cálculo Consumo` o `Periodo Facturado` y abajo finaliza con `Total Acueducto` de esta zona se sacará toda la información del Bloque Acueducto.
 Una vez tengas identificada esta zona necesito realizar la extracción de toda la información de este Bloque Acueducto para realizar seguimiento histórico para cualquier factura.
 - Fecha Inicio de Cálculo de Consumo (utilizar este formato siempre dd/mm/yyyy)
 - Fecha Final de Cálculo de Consumo (utilizar este formato siempre dd/mm/yyyy)
@@ -58,7 +58,7 @@ Una vez tengas identificada esta zona necesito realizar la extracción de toda l
 ---
 
 ## 2. Bloque Alcantarillado
-Se puede identificar por el letrero vertical con la palabra "Alcantarillado" y la información del bloque se cubre a la derecha de ese letrero, puede excluir la zona gráfica para quitar ruido de la extracción. Arriba empieza con `Cálculo Consumo` y abajo finaliza con `Total Alcantarillado` de esta zona se sacará toda la información del Bloque Alcantarillado.
+Se puede identificar por el letrero vertical con la palabra "Alcantarillado" y la información del bloque se cubre a la derecha de ese letrero, puede excluir la zona gráfica para quitar ruido de la extracción. Arriba empieza con `Cálculo Consumo` o `Periodo Facturado` y abajo finaliza con `Total Alcantarillado` de esta zona se sacará toda la información del Bloque Alcantarillado.
 Una vez tengas identificada esta zona necesito realizar la extracción de toda la información de este Bloque Alcantarillado para realizar seguimiento histórico para cualquier factura.
 - Fecha Inicio de Cálculo de Consumo (utilizar este formato siempre dd/mm/yyyy)
 - Fecha Final de Cálculo de Consumo (utilizar este formato siempre dd/mm/yyyy)
@@ -81,7 +81,7 @@ Una vez tengas identificada esta zona necesito realizar la extracción de toda l
 ---
 
 ## 3. Bloque Energía
-Se puede identificar por el letrero vertical con la palabra "Energía" y la información del bloque se cubre a la derecha de ese letrero, puede excluir la zona gráfica para quitar ruido de la extracción. Arriba empieza con `Cálculo Consumo` y abajo finaliza con `Total Energía` de esta zona se sacará toda la información del Bloque Energía.
+Se puede identificar por el letrero vertical con la palabra "Energía" y la información del bloque se cubre a la derecha de ese letrero, puede excluir la zona gráfica para quitar ruido de la extracción. Arriba empieza con `Cálculo Consumo` o `Periodo Facturado` y abajo finaliza con `Total Energía` de esta zona se sacará toda la información del Bloque Energía.
 Una vez tengas identificada esta zona necesito realizar la extracción de toda la información de este Bloque Energía para realizar seguimiento histórico para cualquier factura.
 - Fecha Inicio de Cálculo de Consumo (utilizar este formato siempre dd/mm/yyyy)
 - Fecha Final de Cálculo de Consumo (utilizar este formato siempre dd/mm/yyyy)
@@ -109,7 +109,7 @@ Una vez tengas identificada esta zona necesito realizar la extracción de toda l
 ---
 
 ## 4. Bloque Gas
-Se puede identificar por el letrero vertical con la palabra "Gas" y la información del bloque se cubre a la derecha de ese letrero, puede excluir la zona gráfica para quitar ruido de la extracción. Arriba empieza con `Cálculo Consumo` y abajo finaliza con `Total Gas` de esta zona se sacará toda la información del Bloque Gas.
+Se puede identificar por el letrero vertical con la palabra "Gas" y la información del bloque se cubre a la derecha de ese letrero, puede excluir la zona gráfica para quitar ruido de la extracción. Arriba empieza con `Cálculo Consumo` o `Periodo Facturado` y abajo finaliza con `Total Gas` de esta zona se sacará toda la información del Bloque Gas.
 Una vez tengas identificada esta zona necesito realizar la extracción de toda la información de este Bloque Gas para realizar seguimiento histórico para cualquier factura.
 - Fecha Inicio de Cálculo de Consumo (utilizar este formato siempre dd/mm/yyyy)
 - Fecha Final de Cálculo de Consumo (utilizar este formato siempre dd/mm/yyyy)

@@ -104,3 +104,35 @@ PERIODO_FACTURA,Alumbrado Público,Total Alumbrado Público
 Bloque Otras Entidades (OCT-2025):
 PERIODO_FACTURA,Total Otras Entidades
 'OCT-2025,73481,48
+
+Bloque General (SEP-2025):
+PERIODO_FACTURA,Documento Electrónico Equivalente SPD N°,Valor total a pagar,Pagar hasta el,Contrato,Referente de pago,Documento No,Cliente,CC/NIT,Dirección de cobro,Ciudad - Departamento,Estrato,Ciclo,Acueducto Consumo,Acueducto Valor a pagar,Alcantarillado Consumo,Alcantarillado Valor a pagar,Energía Consumo,Energía Valor a pagar,Gas Consumo,Gas Valor a pagar,Otras entidades Valor a pagar,Ajuste al peso Valor a pagar,Fecha de generación,Fecha de validación,OBSERVACIONES
+'SEP-2025,'DEE27317150,689668,00,18/09/2025,'2651903,'1095638764-31,'146 8878177,Maria Cecilia Zambrano Vesga,33191017,CR 32 CL 6 SUR -295 (INTERIOR 2005 ),Medellín - Antioquia,6,2,18,154555,81,18,114439,76,229,244258,73,29,30,101846,14,74567,22,0,34,03/09/2025,03/09/2025,Indicadores de calidad del servicio de gas reportados en 100%; Software facturación: Open SmartFlex; Fabricante: OPEN SYSTEMS COLOMBIA S.A.S; Vigila: Superservicios
+
+Bloque Acueducto (SEP-2025):
+PERIODO_FACTURA,Fecha Inicio de Cálculo de Consumo,Fecha Final de Cálculo de Consumo,Días de Cálculo de Consumo,Lectura Actual,Lectura Anterior,Consumo m3,Costo ($),Consumo mmm-yy,Cargo fijo mmm-yy,Contrib Cargo Fijo,Contrib Consumo,Total Acueducto,Producto,Categoría,Medidor,Plan,Cmapac - Cost,Cmpac Unitari,Cmpac Total,Cmt Unitario,Cmt Total
+'SEP-2025,14/07/2025,13/08/2025,30,3321,3303,18,4835,44,87037,92,9559,46,5735,68,52222,75,154555,81,'104496317,Residencial,'0,Residencial,0,00,0,00,0,00,17,03,306,54
+
+Bloque Alcantarillado (SEP-2025):
+PERIODO_FACTURA,Fecha Inicio de Cálculo de Consumo,Fecha Final de Cálculo de Consumo,Días de Cálculo de Consumo,Lectura Actual,Lectura Anterior,Consumo m3,Costo ($),Consumo mmm-yy,Cargo fijo mmm-yy,Contrib Cargo Fijo,Contrib Consumo,Total Alcantarillado,Producto,Categoría,Plan,Cmt Unitario,Cmt Total
+'SEP-2025,14/07/2025,13/08/2025,30,3321,3303,18,3668,01,66024,18,5500,67,3300,40,39614,51,114439,76,'104497386,Residencial,Residencial,26,78,482,04
+
+Bloque Energía (SEP-2025):
+PERIODO_FACTURA,Fecha Inicio de Cálculo de Consumo,Fecha Final de Cálculo de Consumo,Días de Cálculo de Consumo,Lectura Actual,Lectura Anterior,Constante,Consumo kWh,Costo ($),Energía mmm-yy,Contribución activa,Total Energía,Producto,Categoría,Medidor,Plan,Generación,Transmisión,Distribución,Comercializac,Perdidas,Restricciones,N. tensión
+'SEP-2025,14/07/2025,13/08/2025,30,44219,43990,1,229,888,86,203548,94,40709,79,244258,73,'105245635,Residencial,'20_et324_8206146,Normal residencial,298,27,53,84,308,58,116,70,62,29,49,18,220
+
+Bloque Gas (SEP-2025):
+PERIODO_FACTURA,Fecha Inicio de Cálculo de Consumo,Fecha Final de Cálculo de Consumo,Días de Cálculo de Consumo,Lectura Actual,Lectura Anterior,Constante,Consumo m3,Consumo mmm-yy,Cargo fijo mmm-yy,Contrib consumo,Contrib cargo fijo,Total Gas,Producto,Categoría,Medidor,Plan,Compra,Distribución,Transporte 7,Confiabilidad,Comercializac,Transporte Gn,Compresión 8,Comercializac
+'SEP-2025,14/07/2025,13/08/2025,30,5660,5626,0,862,29,30,80686,34,4185,44,16137,27,837,09,101846,14,'106405376,Residencial,'metrex_g1.6_316566,Residencial tarifa plena,1315,18,673,11,575,36,0,00,0,00,158,74,31,39,0,00
+
+Sub Bloque Aseo (SEP-2025):
+PERIODO_FACTURA,Periodo de consumo,Cargo fijo,Cargo Variable Aprovechable,Contribucion,Cargo Variable,No Aprov - Ordinarios,Barrido y limpieza,Limpieza urbana,Rechazados,Total Aseo
+'SEP-2025,'JUL-2025,15365,40,1706,61,27783,61,10711,60,0,01605,0,002,0,00013,0,00007,55567,22
+
+Sub Bloque Alumbrado Público (SEP-2025):
+PERIODO_FACTURA,Alumbrado Público,Total Alumbrado Público
+'SEP-2025,19000,00,19000,00
+
+Bloque Otras Entidades (SEP-2025):
+PERIODO_FACTURA,Total Otras Entidades
+'SEP-2025,74567,22
