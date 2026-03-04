@@ -1,3 +1,4 @@
 Período,Factura,Fecha Emisión,Fecha Inicio,Fecha Final,# Días,Lectura Ant,Lectura Act,Consumo M3,Valor M3,Factor Corrección,Valor $ Gas,Cargo Fijo $,Contrib/Sub$,Brilla $,Ajustes $,Valor Factura,Fecha Suspensión,Último Pago Fecha,Cupo Brilla,Estado Revisión,Observación Lectura
-ENE-2026,STG17418400,02-ene-2026,25-nov-2025,26-dic-2025,"31,00",713,724,11,"2.887,00","0,9775",31.757,3.776,7.107,0,0,42.640,16-ene-2026,,8.600.000,Al día,Normal
-FEB-2026,2127XXXXXX,03-feb-2026,26-dic-2025,26-ene-2026,"31,00",724,734,10,"2.832,00","0,9775",28.320,3.774,6.419,0,0,38.513,14-feb-2026,16-ene-2026,,Al día,Normal
+ENE_2026,STG17418400,02-ene-2026,25-nov-2025,26-dic-2025,"31,00",713,724,11,"2.887,00","0,9775",31.757,3.776,7.107,0,0,42.640,16-ene-2026,,8.600.000,Al día,Normal
+FEB_2026,2127XXXXXX,03-feb-2026,26-dic-2025,26-ene-2026,"31,00",724,734,10,"2.832,00","0,9775",28.320,3.774,6.419,0,0,38.513,14-feb-2026,16-ene-2026,,Al día,Normal
+MAR_2026,STG19296887,03-mar-2026,26-ene-2026,26-feb-2026,"31,00",734,742.46,8,"2.694,00","0,9818",21.552,3.779,5.066,0,0,30.397,14-mar-2026,14-feb-2026,8.600.000,Al día,Normal
